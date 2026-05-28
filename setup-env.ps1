@@ -115,7 +115,7 @@ Invoke-Checked $uvPath @(
     "run",
     "python",
     "-c",
-    "import sys; print('python', sys.version.split()[0]); print('executable', sys.executable); import torch; print('torch', torch.__version__); print('cuda_available', torch.cuda.is_available())"
+    "import sys; print('python', sys.version.split()[0]); print('executable', sys.executable); import torch; print('torch', torch.__version__); print('cuda_available', torch.cuda.is_available()); print('cuda_arch_list', torch.cuda.get_arch_list() if torch.cuda.is_available() else [])"
 )
 
 Write-Host ""
