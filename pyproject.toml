@@ -1,4 +1,4 @@
-[project]
+﻿[project]
 name = "remote-train"
 version = "0.1.0"
 description = "Standalone 2DCNN training and evaluation project migrated from Sur-Mod."
@@ -23,3 +23,4 @@ explicit = true
 [tool.uv.sources]
 torch = { index = "pytorch-cu128" }
 torchvision = { index = "pytorch-cu128" }
+
