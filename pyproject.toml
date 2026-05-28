@@ -1,4 +1,4 @@
-[project]
+﻿[project]
 name = "remote-train"
 version = "0.1.0"
 description = "Standalone 2DCNN training and evaluation project migrated from Sur-Mod."
@@ -10,16 +10,17 @@ dependencies = [
     "pandas>=3.0.0",
     "pillow>=12.1.0",
     "scikit-learn>=1.8.0",
-    "torch",
-    "torchvision",
+    "torch>=2.7.0",
+    "torchvision>=0.22.0",
     "tqdm>=4.67.3",
 ]
 
 [[tool.uv.index]]
-name = "pytorch-cu124"
-url = "https://download.pytorch.org/whl/cu124"
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
 explicit = true
 
 [tool.uv.sources]
-torch = { index = "pytorch-cu124" }
-torchvision = { index = "pytorch-cu124" }
+torch = { index = "pytorch-cu128" }
+torchvision = { index = "pytorch-cu128" }
+
