@@ -195,7 +195,7 @@ class Config:
     TIME_FREQ_MASK_FILL_VALUE = 0.5
 
     DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    NUM_WORKERS = 0
+    NUM_WORKERS = 8
 
     USE_WEIGHTED_SAMPLER = True
     TARGET_BIN_COUNT = 8
