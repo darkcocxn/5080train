@@ -160,9 +160,7 @@ class Config:
     LOSS_WEIGHT_MIN = 0.5
     LOSS_WEIGHT_MAX = 14.0
     LOSS_WEIGHT_GE_005 = 1.5
-    LOSS_WEIGHT_GE_0075 = 2.4
-    LOSS_WEIGHT_GE_010 = 4.2
-    LOSS_WEIGHT_GE_015 = 7.0
+    LOSS_WEIGHT_GE_010 = 3.8
     LOSS_WEIGHT_GE_020 = 14.0
     USE_SMOOTH_TAIL_WEIGHTS = True
     TAIL_WEIGHT_TRANSITION_WIDTH = 0.003
@@ -181,8 +179,8 @@ class Config:
     VAL_FOCUS_EXTREME_TAIL_MAE_WEIGHT = 0.45
     VAL_FOCUS_TAIL_UNDER_WEIGHT = 0.10
     VAL_FOCUS_EXTREME_TAIL_UNDER_WEIGHT = 0.20
-    USE_EMA = True
-    EMA_DECAY = 0.995
+    USE_EMA = False
+    EMA_DECAY = 0.98
 
     USE_AMP = True
     CACHE_IMAGES = True
@@ -203,10 +201,8 @@ class Config:
     SAMPLER_MIN_WEIGHT = 0.35
     SAMPLER_MAX_WEIGHT = 15.0
     SAMPLER_TAIL_BOOST_GE_005 = 1.0
-    SAMPLER_TAIL_BOOST_GE_0075 = 1.2
-    SAMPLER_TAIL_BOOST_GE_010 = 1.7
-    SAMPLER_TAIL_BOOST_GE_015 = 2.6
-    SAMPLER_TAIL_BOOST_GE_020 = 5.0
+    SAMPLER_TAIL_BOOST_GE_010 = 1.5
+    SAMPLER_TAIL_BOOST_GE_020 = 4.0
     SAMPLER_NUM_SAMPLES_MULTIPLIER = 1.10
 
     CNN_BACKBONE = "scalar_film_residual"
@@ -235,16 +231,14 @@ class Config:
     TAIL_CORRECTION_INIT_BIAS = -4.0
     TAIL_CORRECTION_GATE_INIT_BIAS = -1.5
     USE_TAIL_CLASSIFICATION_AUX = True
-    TAIL_CLASSIFICATION_THRESHOLDS = [0.0075, 0.010, 0.015, 0.020]
-    TAIL_CLASSIFICATION_LOSS_WEIGHTS = [0.015, 0.025, 0.040, 0.070]
+    TAIL_CLASSIFICATION_THRESHOLDS = [0.010, 0.020]
+    TAIL_CLASSIFICATION_LOSS_WEIGHTS = [0.025, 0.050]
     TAIL_CLASSIFICATION_HIDDEN_DIM = 64
     TAIL_CLASSIFICATION_DROPOUT = 0.05
     TAIL_CLASSIFICATION_INIT_BIAS = -3.0
     TAIL_CLASSIFICATION_POS_WEIGHT_MAX = 30.0
     TAIL_CLASSIFICATION_RAMP_EPOCHS = 8
     OPTIMIZER_NO_DECAY_NORM_AND_BIAS = True
-    MODEL_SELECTION_SMOOTHING_WINDOW = 2
-    SCHEDULER_SMOOTHING_WINDOW = 3
     SAVE_ALTERNATE_BEST_CHECKPOINTS = True
 
 
@@ -1205,9 +1199,7 @@ def build_train_sampler(train_df: pd.DataFrame):
 
     label_values = labels.to_numpy(dtype=np.float64)
     weights *= _smooth_tail_boost_np(label_values, 0.005, Config.SAMPLER_TAIL_BOOST_GE_005)
-    weights *= _smooth_tail_boost_np(label_values, 0.0075, Config.SAMPLER_TAIL_BOOST_GE_0075)
     weights *= _smooth_tail_boost_np(label_values, 0.010, Config.SAMPLER_TAIL_BOOST_GE_010)
-    weights *= _smooth_tail_boost_np(label_values, 0.015, Config.SAMPLER_TAIL_BOOST_GE_015)
     weights *= _smooth_tail_boost_np(label_values, 0.020, Config.SAMPLER_TAIL_BOOST_GE_020)
     weights = np.clip(weights, Config.SAMPLER_MIN_WEIGHT, Config.SAMPLER_MAX_WEIGHT)
     sampler_num_samples = max(1, int(round(len(weights) * Config.SAMPLER_NUM_SAMPLES_MULTIPLIER)))
@@ -1225,14 +1217,10 @@ def build_train_sampler(train_df: pd.DataFrame):
         "num_samples": int(sampler_num_samples),
         "num_samples_multiplier": float(Config.SAMPLER_NUM_SAMPLES_MULTIPLIER),
         "tail_count_ge_0p005": int(np.sum(label_values >= 0.005)),
-        "tail_count_ge_0p0075": int(np.sum(label_values >= 0.0075)),
         "tail_count_ge_0p010": int(np.sum(label_values >= 0.010)),
-        "tail_count_ge_0p015": int(np.sum(label_values >= 0.015)),
         "tail_count_ge_0p020": int(np.sum(label_values >= 0.020)),
         "tail_boost_ge_0p005": float(Config.SAMPLER_TAIL_BOOST_GE_005),
-        "tail_boost_ge_0p0075": float(Config.SAMPLER_TAIL_BOOST_GE_0075),
         "tail_boost_ge_0p010": float(Config.SAMPLER_TAIL_BOOST_GE_010),
-        "tail_boost_ge_0p015": float(Config.SAMPLER_TAIL_BOOST_GE_015),
         "tail_boost_ge_0p020": float(Config.SAMPLER_TAIL_BOOST_GE_020),
         "smooth_tail_weights": bool(Config.USE_SMOOTH_TAIL_WEIGHTS),
         "tail_weight_transition_width": float(Config.TAIL_WEIGHT_TRANSITION_WIDTH),
@@ -1302,9 +1290,7 @@ def apply_tail_loss_multipliers(labels_scaled: torch.Tensor, weights: torch.Tens
 
     labels_raw = labels_scaled / float(Config.LABEL_SCALE) if Config.SCALE_TARGET else labels_scaled
     weights = torch.maximum(weights, _smooth_tail_boost_torch(labels_raw, 0.005, Config.LOSS_WEIGHT_GE_005))
-    weights = torch.maximum(weights, _smooth_tail_boost_torch(labels_raw, 0.0075, Config.LOSS_WEIGHT_GE_0075))
     weights = torch.maximum(weights, _smooth_tail_boost_torch(labels_raw, 0.010, Config.LOSS_WEIGHT_GE_010))
-    weights = torch.maximum(weights, _smooth_tail_boost_torch(labels_raw, 0.015, Config.LOSS_WEIGHT_GE_015))
     weights = torch.maximum(weights, _smooth_tail_boost_torch(labels_raw, 0.020, Config.LOSS_WEIGHT_GE_020))
     weights = torch.clamp(weights, min=Config.LOSS_WEIGHT_MIN, max=Config.LOSS_WEIGHT_MAX)
     return weights
@@ -1530,6 +1516,7 @@ def prepare_data():
         "scalar_feature_names": list(scalar_feature_names),
         "num_scalar_features": int(len(scalar_feature_names)),
         "best_weights_name": "best_2dcnn_model.pth",
+        "best_weights_metric": "val_mae_raw",
         "last_weights_name": "multimodal_2dcnn_model.pth",
         "final_weights_name": "multimodal_2dcnn_model.pth",
         "wavelet_image_dir": str(Config.WAVELET_IMAGE_DIR),
@@ -1617,7 +1604,9 @@ def train():
         {
             "model_family": "multimodal_2dcnn",
             "best_weights_name": "best_2dcnn_model.pth",
+            "best_weights_metric": "val_mae_raw",
             "best_weights_are_ema": Config.USE_EMA,
+            "selection_weights_name": "best_2dcnn_focus_model.pth",
             "last_weights_name": "multimodal_2dcnn_model.pth",
             "ema_weights_name": "ema_2dcnn_model.pth" if Config.USE_EMA else None,
             "total_params": int(total_params),
@@ -1643,9 +1632,7 @@ def train():
                 "weight_min": Config.LOSS_WEIGHT_MIN,
                 "weight_max": Config.LOSS_WEIGHT_MAX,
                 "ge_0p005": Config.LOSS_WEIGHT_GE_005,
-                "ge_0p0075": Config.LOSS_WEIGHT_GE_0075,
                 "ge_0p010": Config.LOSS_WEIGHT_GE_010,
-                "ge_0p015": Config.LOSS_WEIGHT_GE_015,
                 "ge_0p020": Config.LOSS_WEIGHT_GE_020,
                 "smooth_tail_weights": Config.USE_SMOOTH_TAIL_WEIGHTS,
                 "tail_weight_transition_width": Config.TAIL_WEIGHT_TRANSITION_WIDTH,
@@ -1661,7 +1648,8 @@ def train():
                 "max_loss": Config.TAIL_UNDERPREDICTION_MAX_LOSS,
             },
             "validation_selection": {
-                "metric": "focus_score",
+                "metric": "val_mae_raw",
+                "tie_breaker": "focus_score",
                 "tail_threshold": Config.VAL_TAIL_THRESHOLD,
                 "extreme_tail_threshold": Config.VAL_EXTREME_TAIL_THRESHOLD,
                 "rmse_weight": Config.VAL_FOCUS_RMSE_WEIGHT,
@@ -1669,8 +1657,6 @@ def train():
                 "extreme_tail_mae_weight": Config.VAL_FOCUS_EXTREME_TAIL_MAE_WEIGHT,
                 "tail_under_weight": Config.VAL_FOCUS_TAIL_UNDER_WEIGHT,
                 "extreme_tail_under_weight": Config.VAL_FOCUS_EXTREME_TAIL_UNDER_WEIGHT,
-                "selection_smoothing_window": Config.MODEL_SELECTION_SMOOTHING_WINDOW,
-                "scheduler_smoothing_window": Config.SCHEDULER_SMOOTHING_WINDOW,
             },
             "warmup": {
                 "epochs": Config.WARMUP_EPOCHS,
@@ -1687,7 +1673,7 @@ def train():
             },
             "scheduler": {
                 "type": "ReduceLROnPlateau",
-                "monitor": "val_focus_score",
+                "monitor": "val_mae_raw",
                 "factor": Config.SCHEDULER_FACTOR,
                 "patience": Config.SCHEDULER_PATIENCE,
                 "min_lr": Config.MIN_LR,
@@ -1698,9 +1684,7 @@ def train():
                 "min_weight": Config.SAMPLER_MIN_WEIGHT,
                 "max_weight": Config.SAMPLER_MAX_WEIGHT,
                 "tail_boost_ge_0p005": Config.SAMPLER_TAIL_BOOST_GE_005,
-                "tail_boost_ge_0p0075": Config.SAMPLER_TAIL_BOOST_GE_0075,
                 "tail_boost_ge_0p010": Config.SAMPLER_TAIL_BOOST_GE_010,
-                "tail_boost_ge_0p015": Config.SAMPLER_TAIL_BOOST_GE_015,
                 "tail_boost_ge_0p020": Config.SAMPLER_TAIL_BOOST_GE_020,
                 "num_samples_multiplier": Config.SAMPLER_NUM_SAMPLES_MULTIPLIER,
                 "smooth_tail_weights": Config.USE_SMOOTH_TAIL_WEIGHTS,
@@ -1791,7 +1775,6 @@ def train():
         "val_extreme_tail_under_mae_raw": [],
         "val_extreme_tail_count": [],
         "val_selection_score": [],
-        "val_scheduler_score": [],
         "lr": [],
     }
 
@@ -1884,15 +1867,9 @@ def train():
         if ema is not None:
             ema.restore(model)
 
-        previous_scores = history["val_focus_score"]
-        selection_window = max(1, int(Config.MODEL_SELECTION_SMOOTHING_WINDOW))
-        recent_selection_scores = previous_scores[-(selection_window - 1) :] if selection_window > 1 else []
-        selection_score = float(np.mean([*recent_selection_scores, focus_metrics["focus_score"]]))
-        scheduler_window = max(1, int(Config.SCHEDULER_SMOOTHING_WINDOW))
-        recent_scheduler_scores = previous_scores[-(scheduler_window - 1) :] if scheduler_window > 1 else []
-        scheduler_score = float(np.mean([*recent_scheduler_scores, focus_metrics["focus_score"]]))
+        selection_score = float(metrics["mae"])
         if epoch + 1 > Config.WARMUP_EPOCHS:
-            scheduler.step(scheduler_score)
+            scheduler.step(selection_score)
 
         history["train_loss"].append(float(epoch_train_loss))
         history["val_loss"].append(float(epoch_val_loss))
@@ -1909,11 +1886,11 @@ def train():
         history["val_extreme_tail_under_mae_raw"].append(focus_metrics["extreme_tail_under_mae"])
         history["val_extreme_tail_count"].append(focus_metrics["extreme_tail_count"])
         history["val_selection_score"].append(float(selection_score))
-        history["val_scheduler_score"].append(float(scheduler_score))
         history["lr"].append(current_lr)
 
-        improved = (selection_score < best_val_focus_score) or (
-            np.isclose(selection_score, best_val_focus_score) and metrics["mae"] < best_val_mae_raw
+        improved = (metrics["mae"] < best_val_mae_raw) or (
+            np.isclose(metrics["mae"], best_val_mae_raw)
+            and focus_metrics["focus_score"] < best_val_focus_score
         )
         if Config.SAVE_ALTERNATE_BEST_CHECKPOINTS:
             if focus_metrics["focus_score"] < best_raw_focus_score:
@@ -1930,7 +1907,7 @@ def train():
                 torch.save(checkpoint_state, Config.SAVE_DIR / "best_2dcnn_extreme_under_model.pth")
 
         if improved:
-            best_val_focus_score = selection_score
+            best_val_focus_score = focus_metrics["focus_score"]
             best_val_mae_raw = metrics["mae"]
             best_val_loss = epoch_val_loss
             best_val_tail_mae_raw = focus_metrics["tail_mae"]
@@ -1942,7 +1919,7 @@ def train():
             torch.save(checkpoint_state, Config.SAVE_DIR / "best_2dcnn_model.pth")
             tqdm.write(
                 "  >> Best model saved "
-                f"(Selection score: {best_val_focus_score:.6f}, "
+                f"(Selection MAE: {selection_score:.6f}, "
                 f"Focus score: {focus_metrics['focus_score']:.6f}, "
                 f"MAE: {best_val_mae_raw:.6f}, "
                 f"tail MAE: {best_val_tail_mae_raw:.6f}, "
@@ -1961,8 +1938,7 @@ def train():
             f"Val RMSE={metrics['rmse']:.6f} | "
             f"Val R2={metrics['r2']:.4f} | "
             f"Val Score={focus_metrics['focus_score']:.6f} | "
-            f"Selection Score={selection_score:.6f} | "
-            f"Scheduler Score={scheduler_score:.6f} | "
+            f"Selection MAE={selection_score:.6f} | "
                 f"Tail MAE={focus_metrics['tail_mae']:.6f} | "
                 f"Tail Bias={focus_metrics['tail_bias']:.6f} | "
                 f"Tail Under={focus_metrics['tail_under_mae']:.6f} | "
@@ -2024,8 +2000,8 @@ def train():
 
     print(f"\n>>> Training Complete. Model saved to {final_model_path}")
     print(
-        f">>> Best model saved with Val score: {best_val_focus_score:.6f}, "
-        f"MAE: {best_val_mae_raw:.6f}, "
+        f">>> Best model saved with Val MAE: {best_val_mae_raw:.6f}, "
+        f"Focus score: {best_val_focus_score:.6f}, "
         f"Tail MAE: {best_val_tail_mae_raw:.6f}, "
         f"Tail Under: {best_val_tail_under_mae_raw:.6f}, "
         f"Extreme Tail MAE: {best_val_extreme_tail_mae_raw:.6f}, "
@@ -2051,9 +2027,7 @@ def plot_results(history):
     if "val_focus_score" in history:
         plt.plot(history["val_focus_score"], label="Val Focus Score", color="green", alpha=0.8)
     if "val_selection_score" in history:
-        plt.plot(history["val_selection_score"], label="Selection Score", color="black", alpha=0.65)
-    if "val_scheduler_score" in history:
-        plt.plot(history["val_scheduler_score"], label="Scheduler Score", color="gray", alpha=0.55)
+        plt.plot(history["val_selection_score"], label="Selection MAE", color="black", alpha=0.65)
     if "val_tail_mae_raw" in history:
         plt.plot(history["val_tail_mae_raw"], label="Tail MAE", color="red", alpha=0.8)
     if "val_extreme_tail_mae_raw" in history:
