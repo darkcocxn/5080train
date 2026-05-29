@@ -2,7 +2,5 @@
 setlocal
 cd /d "%~dp0"
 
-set "PROJECT_ROOT=%CD%"
-
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$ErrorActionPreference='Stop'; $root=(Resolve-Path -LiteralPath $env:PROJECT_ROOT).Path; $scripts=@(Get-ChildItem -LiteralPath $root -Filter '2DCNN*.py'); if($scripts.Count -lt 1){ throw 'Test script not found.' }; $script=$scripts[0]; $python=Join-Path $root '.venv\Scripts\python.exe'; $useVenv=Test-Path -LiteralPath $python; if(-not $useVenv){ $uv=Get-Command uv -ErrorAction SilentlyContinue; if(-not $uv){ throw 'Neither .venv Python nor uv was found. Run setup-env.cmd first.' } }; Write-Host ('Test script: ' + $script.Name); if($env:REMOTE_TRAIN_DRY_RUN -eq '1'){ if($useVenv){ Write-Host ('Would run: ' + $python + ' ' + $script.FullName) } else { Write-Host ('Would run: uv run python ' + $script.FullName) }; exit 0 }; if($useVenv){ & $python $script.FullName } else { & uv run python $script.FullName }; exit $LASTEXITCODE"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$ErrorActionPreference='Stop'; $root=(Resolve-Path -LiteralPath '%~dp0').Path; $script=Get-ChildItem -LiteralPath $root -Filter '2DCNN*.py' | Where-Object { (($_.BaseName.ToCharArray() | Where-Object { $_ -eq '-' }).Count -ge 3) } | Sort-Object LastWriteTime -Descending | Select-Object -First 1; if(-not $script){ throw 'Strong scalar fusion test script not found.' }; $python=Join-Path $root '.venv\Scripts\python.exe'; if(Test-Path -LiteralPath $python){ & $python $script.FullName } else { & uv run python $script.FullName }; exit $LASTEXITCODE"
 exit /b %ERRORLEVEL%
