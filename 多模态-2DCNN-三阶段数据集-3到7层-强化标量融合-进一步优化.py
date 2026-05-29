@@ -1447,13 +1447,14 @@ def cmixup_batch(
     lam = np.random.beta(alpha, alpha)
     lam = max(lam, 1.0 - lam)
 
-    label_vals = labels.detach().cpu().numpy().reshape(-1)
+    label_vals = labels.detach().cpu().numpy().astype(np.float64).reshape(-1)
     dist_sq = (label_vals[:, None] - label_vals[None, :]) ** 2
     similarity = np.exp(-dist_sq / (2.0 * sigma * sigma))
     np.fill_diagonal(similarity, 0.0)
     row_sums = similarity.sum(axis=1, keepdims=True)
     row_sums = np.maximum(row_sums, 1e-12)
     prob_matrix = similarity / row_sums
+    prob_matrix = prob_matrix / prob_matrix.sum(axis=1, keepdims=True)
 
     indices = np.array([
         np.random.choice(batch_size, p=prob_matrix[i])
