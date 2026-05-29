@@ -1,6 +1,6 @@
 @echo off
 cd /d "%~dp0"
 
-git pull origin main
+git pull 5080train master
 
 pause
