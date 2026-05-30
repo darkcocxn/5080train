@@ -1,7 +1,6 @@
 .venv/
 __pycache__/
-*.py[cod]
+
 
 model-2dcnn-3stage-rf-3to7/run-logs/
 
-*.pth
