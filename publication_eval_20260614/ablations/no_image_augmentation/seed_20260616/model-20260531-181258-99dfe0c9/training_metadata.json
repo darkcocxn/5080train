@@ -1,0 +1,522 @@
+{
+  "dataset_base": "opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258",
+  "model_run_name": "model-20260531-181258-99dfe0c9",
+  "unique_model_run_dir": false,
+  "train_csv_path": "C:\\Users\\jiaotong1\\5080train\\newdata\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258_train.csv",
+  "val_csv_path": "C:\\Users\\jiaotong1\\5080train\\newdata\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258_val.csv",
+  "dataset_search_dirs": [
+    "C:\\Users\\jiaotong1\\5080train\\数据集"
+  ],
+  "model_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\ablations\\no_image_augmentation\\seed_20260616\\model-20260531-181258-99dfe0c9",
+  "image_col": "image_path",
+  "txt_col": "txt_path",
+  "damper_layout_col": "damper_layout",
+  "layout_feature_width": 7,
+  "label_col": "max_drift_ratio_raw",
+  "scale_target": true,
+  "label_scale": 1000.0,
+  "base_scalar_cols": [
+    "num_floors",
+    "floor_mass",
+    "floor_height",
+    "k_base_1_4",
+    "Fy_add"
+  ],
+  "wave_feature_cols": [
+    "period_1_sec",
+    "wave_pga",
+    "wave_rms",
+    "wave_mean_abs",
+    "wave_cav",
+    "wave_arias_proxy",
+    "wave_duration_5_95",
+    "wave_zero_crossing_rate",
+    "wave_dominant_freq",
+    "wave_spectral_centroid",
+    "wave_predominant_period",
+    "wave_intensity_score"
+  ],
+  "wave_derived_features_enabled": true,
+  "wave_log_feature_cols": [
+    "period_1_sec",
+    "wave_pga",
+    "wave_rms",
+    "wave_mean_abs",
+    "wave_cav",
+    "wave_arias_proxy",
+    "wave_duration_5_95",
+    "wave_zero_crossing_rate",
+    "wave_dominant_freq",
+    "wave_spectral_centroid",
+    "wave_predominant_period",
+    "wave_intensity_score"
+  ],
+  "scalar_feature_names": [
+    "num_floors",
+    "floor_mass",
+    "floor_height",
+    "k_base_1_4",
+    "Fy_add",
+    "period_1_sec",
+    "wave_pga",
+    "wave_rms",
+    "wave_mean_abs",
+    "wave_cav",
+    "wave_arias_proxy",
+    "wave_duration_5_95",
+    "wave_zero_crossing_rate",
+    "wave_dominant_freq",
+    "wave_spectral_centroid",
+    "wave_predominant_period",
+    "wave_intensity_score",
+    "log1p_period_1_sec",
+    "log1p_wave_pga",
+    "log1p_wave_rms",
+    "log1p_wave_mean_abs",
+    "log1p_wave_cav",
+    "log1p_wave_arias_proxy",
+    "log1p_wave_duration_5_95",
+    "log1p_wave_zero_crossing_rate",
+    "log1p_wave_dominant_freq",
+    "log1p_wave_spectral_centroid",
+    "log1p_wave_predominant_period",
+    "log1p_wave_intensity_score",
+    "wave_to_structure_period_ratio",
+    "structure_to_wave_period_ratio",
+    "wave_structure_period_log_gap",
+    "wave_dominant_freq_x_period",
+    "wave_spectral_centroid_x_period",
+    "wave_pga_x_period",
+    "wave_cav_x_period",
+    "wave_arias_proxy_x_period",
+    "wave_intensity_score_x_period",
+    "inv_k_base_1_4",
+    "inv_Fy_add",
+    "mass_to_stiffness",
+    "height_to_stiffness",
+    "period_squared",
+    "num_floors_x_period",
+    "floor_mass_x_period",
+    "floor_height_x_period",
+    "flexibility_x_period",
+    "strength_inverse_x_period",
+    "damper_story_1",
+    "damper_story_2",
+    "damper_story_3",
+    "damper_story_4",
+    "damper_story_5",
+    "damper_story_6",
+    "damper_story_7",
+    "damper_install_count",
+    "damper_install_ratio",
+    "damper_sparse_ratio",
+    "tail_risk_proxy",
+    "log1p_tail_risk_proxy",
+    "wave_intensity_tail_risk",
+    "wave_arias_tail_risk",
+    "wave_cav_tail_risk"
+  ],
+  "num_scalar_features": 63,
+  "best_weights_name": "best_2dcnn_model.pth",
+  "best_weights_metric": "val_mae_plus_focus_blend",
+  "last_weights_name": "multimodal_2dcnn_model.pth",
+  "final_weights_name": "multimodal_2dcnn_model.pth",
+  "wavelet_image_dir": "C:\\Users\\jiaotong1\\5080train\\newdata\\Newdatabase\\Scalogram\\rare_waves-20260531-140353",
+  "force_wavelet_image_dir": true,
+  "image_size": [
+    192,
+    192
+  ],
+  "image_normalize_mean": [
+    0.5,
+    0.5,
+    0.5
+  ],
+  "image_normalize_std": [
+    0.5,
+    0.5,
+    0.5
+  ],
+  "train_rows": 67260,
+  "val_rows": 3420,
+  "train_unique_waves": 163,
+  "val_unique_waves": 17,
+  "train_unique_images": 163,
+  "val_unique_images": 17,
+  "train_loss_weight_summary": {
+    "min": 0.7927564382553101,
+    "max": 2.405381679534912,
+    "mean": 1.0
+  },
+  "adaptive_tail_policy": {
+    "enabled": true,
+    "mode": "fallback_mid_tail",
+    "reason": "train count >= 0.0100 is 0, min required 96",
+    "engineering_thresholds": [
+      0.005,
+      0.01,
+      0.02
+    ],
+    "fallback_thresholds": [
+      0.003,
+      0.005,
+      0.007
+    ],
+    "active_thresholds": [
+      0.003,
+      0.005,
+      0.007
+    ],
+    "train_counts": [
+      27180,
+      9268,
+      2054
+    ],
+    "val_counts": [
+      888,
+      422,
+      259
+    ],
+    "classification_loss_weights": [
+      0.01,
+      0.024,
+      0.044
+    ],
+    "tail_underprediction_threshold": 0.005,
+    "extreme_tail_underprediction_threshold": 0.007,
+    "val_mid_tail_range": [
+      0.003,
+      0.005
+    ]
+  },
+  "tail_classification": {
+    "enabled": true,
+    "thresholds": [
+      0.003,
+      0.005,
+      0.007
+    ],
+    "loss_weights": [
+      0.01,
+      0.024,
+      0.044
+    ],
+    "positive_counts": [
+      27180,
+      9268,
+      2054
+    ],
+    "total_count": 67260,
+    "pos_weights": [
+      1.214336726997177,
+      2.5014454172854097,
+      5.634346611028071
+    ],
+    "pos_weight_max": 26.0,
+    "ramp_epochs": 10
+  },
+  "use_weighted_sampler": true,
+  "sampler_summary": {
+    "enabled": true,
+    "target_bin_count": 8,
+    "joint_group_count": 40,
+    "num_samples": 75331,
+    "num_samples_multiplier": 1.12,
+    "active_tail_thresholds": [
+      0.003,
+      0.005,
+      0.007
+    ],
+    "active_tail_counts": [
+      27180,
+      9268,
+      2054
+    ],
+    "active_tail_boosts": [
+      1.08,
+      1.35,
+      1.8
+    ],
+    "tail_count_ge_0p005": 9268,
+    "tail_count_ge_0p010": 0,
+    "tail_count_ge_0p020": 0,
+    "tail_boost_ge_0p005": 1.0,
+    "tail_boost_ge_0p010": 1.5,
+    "tail_boost_ge_0p020": 4.0,
+    "smooth_tail_weights": true,
+    "tail_weight_transition_width": 0.003,
+    "weight_min": 0.5175144489928462,
+    "weight_max": 7.397836783616461,
+    "weight_mean": 1.326128539656412
+  },
+  "train_drop_last": false,
+  "model_family": "multimodal_2dcnn_calibrated_scalar_fusion",
+  "architecture_revision": "v11_adaptive_midtail_capacity_v2_base",
+  "best_weights_are_ema": true,
+  "selection_weights_name": "best_2dcnn_model.pth",
+  "ema_weights_name": "ema_2dcnn_model.pth",
+  "total_params": 3290588,
+  "trainable_params": 3290588,
+  "optimizer": "AdamW",
+  "optimizer_no_decay_norm_and_bias": true,
+  "loss": "SmoothL1Loss",
+  "smooth_l1_beta": 1.0,
+  "learning_rate": 0.00010292554784232322,
+  "weight_decay": 2.0990882814751085e-06,
+  "batch_size": 96,
+  "grad_clip_norm": 0.5,
+  "use_amp": true,
+  "use_ema": true,
+  "ema_decay": 0.998,
+  "target_weighted_loss": {
+    "enabled": true,
+    "density_enabled": true,
+    "density_bin_count": 40,
+    "density_smooth_kernel_size": 7,
+    "density_smooth_sigma": 1.35,
+    "density_alpha": 0.58,
+    "weight_min": 0.5,
+    "weight_max": 14.0,
+    "ge_0p005": 1.5,
+    "ge_0p010": 3.8,
+    "ge_0p020": 14.0,
+    "active_tail_thresholds": [
+      0.003,
+      0.005,
+      0.007
+    ],
+    "active_tail_weights": [
+      1.2,
+      1.65,
+      2.4
+    ],
+    "smooth_tail_weights": true,
+    "tail_weight_transition_width": 0.003
+  },
+  "tail_underprediction_loss": {
+    "enabled": true,
+    "start_epoch": 6,
+    "ramp_epochs": 12,
+    "tail_threshold": 0.005,
+    "tail_weight": 0.14,
+    "extreme_tail_threshold": 0.007,
+    "extreme_tail_weight": 0.34,
+    "relative_under_loss": true,
+    "tail_relative_under_weight": 0.018,
+    "extreme_tail_relative_under_weight": 0.04,
+    "pinball_loss": true,
+    "tail_pinball_tau": 0.58,
+    "extreme_tail_pinball_tau": 0.64,
+    "tail_pinball_weight": 0.008,
+    "extreme_tail_pinball_weight": 0.016,
+    "max_loss": 2.4
+  },
+  "validation_selection": {
+    "metric": "val_mae_plus_focus_blend",
+    "mae_component": "val_mae_raw",
+    "focus_component": "focus_score",
+    "focus_blend_weight": 0.022,
+    "mid_tail_component": "mid_tail_mae",
+    "mid_tail_blend_weight": 0.055,
+    "mid_tail_low": 0.003,
+    "mid_tail_high": 0.005,
+    "tail_threshold": 0.005,
+    "extreme_tail_threshold": 0.007,
+    "rmse_weight": 0.18,
+    "tail_mae_weight": 0.25,
+    "extreme_tail_mae_weight": 0.45,
+    "tail_under_weight": 0.1,
+    "extreme_tail_under_weight": 0.2
+  },
+  "warmup": {
+    "epochs": 5,
+    "start_factor": 0.25
+  },
+  "image_augmentation": {
+    "enabled": false,
+    "time_freq_mask_prob": 0.0,
+    "time_mask_count": 0,
+    "time_mask_max_fraction": 0.08,
+    "freq_mask_count": 0,
+    "freq_mask_max_fraction": 0.06,
+    "fill_value": 0.5
+  },
+  "scheduler": {
+    "type": "ReduceLROnPlateau",
+    "monitor": "val_mae_plus_focus_blend",
+    "factor": 0.5,
+    "patience": 5,
+    "min_lr": 3e-07
+  },
+  "sampler_params": {
+    "target_bin_count": 8,
+    "power": 0.85,
+    "min_weight": 0.35,
+    "max_weight": 12.0,
+    "tail_boost_ge_0p005": 1.0,
+    "tail_boost_ge_0p010": 1.5,
+    "tail_boost_ge_0p020": 4.0,
+    "active_tail_thresholds": [
+      0.003,
+      0.005,
+      0.007
+    ],
+    "active_tail_boosts": [
+      1.08,
+      1.35,
+      1.8
+    ],
+    "num_samples_multiplier": 1.12,
+    "smooth_tail_weights": true,
+    "tail_weight_transition_width": 0.003
+  },
+  "architecture": {
+    "cnn_backbone": "scalar_film_residual",
+    "channels": [
+      40,
+      80,
+      160,
+      256
+    ],
+    "kernel_size": 3,
+    "pool_sizes": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "cnn_norm": "group",
+    "cnn_group_norm_max_groups": 8,
+    "cnn_dropout": 0.16305683463325332,
+    "pool_output": [
+      4,
+      4
+    ],
+    "projector_dim": 384,
+    "projector_dropout": 0.1813424484001427,
+    "film_identity_init": true,
+    "film_gate_init_bias": 3.0,
+    "scalar_encoder": "residual",
+    "scalar_embed_dim": 192,
+    "scalar_layers": [
+      96,
+      192
+    ],
+    "scalar_norm": "layer",
+    "scalar_dropout": 0.1,
+    "scalar_input_dropout": 0.09,
+    "scalar_res_blocks": 5,
+    "scalar_res_hidden_mult": 2,
+    "scalar_res_dropout": 0.23841749953941138,
+    "scalar_residual_scale_init": 0.1,
+    "fusion_mode": "gated_bilinear",
+    "fusion_bilinear_dim": 64,
+    "fusion_output_dim": 256,
+    "fusion_dropout": 0.09605029463485952,
+    "fusion_interaction_scale_init": 0.32,
+    "head_hidden_dims": [
+      384,
+      128
+    ],
+    "head_dropout": 0.17642293255094516,
+    "tail_correction_head": true,
+    "tail_correction_gate": true,
+    "tail_correction_hidden_dim": 96,
+    "tail_correction_dropout": 0.1,
+    "tail_correction_init_bias": -4.2,
+    "tail_correction_gate_init_bias": -1.7,
+    "tail_prob_gated_correction": true,
+    "tail_prob_gate_index": 1,
+    "tail_prob_gate_detach": true,
+    "tail_prob_gate_power": 1.1,
+    "extreme_prob_gate_blend": true,
+    "tail_extreme_prob_gate_index": 2,
+    "tail_extreme_prob_gate_floor": 0.65,
+    "tail_classification_aux": true,
+    "tail_classification_thresholds": [
+      0.003,
+      0.005,
+      0.007
+    ],
+    "tail_classification_loss_weights": [
+      0.01,
+      0.024,
+      0.044
+    ],
+    "tail_classification_hidden_dim": 96,
+    "tail_classification_dropout": 0.1,
+    "tail_classification_init_bias": -3.0,
+    "tail_classification_pos_weight_max": 26.0,
+    "tail_classification_ramp_epochs": 10
+  },
+  "best_epoch": 40,
+  "best_val_selection_score": 0.0005576020429795608,
+  "best_val_mae_raw": 0.0004610742616932839,
+  "best_val_loss": 0.24437836753694633,
+  "best_val_focus_score": 0.003122742663836107,
+  "best_val_tail_mae_raw": 0.0019553827587515116,
+  "best_val_extreme_tail_mae_raw": 0.002783791394904256,
+  "best_val_tail_under_mae_raw": 0.0019211380276829004,
+  "best_val_extreme_tail_under_mae_raw": 0.0027755415067076683,
+  "alternate_best_checkpoints": {
+    "enabled": false,
+    "focus": {
+      "weights_name": "best_2dcnn_focus_model.pth",
+      "epoch": 0,
+      "score": Infinity
+    },
+    "mae": {
+      "weights_name": "best_2dcnn_mae_model.pth",
+      "epoch": 0,
+      "mae": Infinity
+    },
+    "extreme_under": {
+      "weights_name": "best_2dcnn_extreme_under_model.pth",
+      "epoch": 0,
+      "mae": Infinity
+    }
+  },
+  "total_train_minutes": 103.17053776582082,
+  "history_keys": [
+    "train_loss",
+    "val_loss",
+    "val_mae_raw",
+    "val_rmse_raw",
+    "val_r2",
+    "val_focus_score",
+    "val_mid_tail_mae_raw",
+    "val_mid_tail_bias_raw",
+    "val_mid_tail_under_mae_raw",
+    "val_mid_tail_count",
+    "val_tail_mae_raw",
+    "val_tail_bias_raw",
+    "val_tail_under_mae_raw",
+    "val_tail_count",
+    "val_extreme_tail_mae_raw",
+    "val_extreme_tail_bias_raw",
+    "val_extreme_tail_under_mae_raw",
+    "val_extreme_tail_count",
+    "val_selection_score",
+    "lr"
+  ],
+  "ablation": {
+    "name": "no_image_augmentation",
+    "description": "关闭训练期小波图 time-frequency masking 增强。",
+    "config_overrides": {
+      "USE_TRAIN_IMAGE_AUGMENTATION": false,
+      "TIME_FREQ_MASK_PROB": 0.0,
+      "TIME_MASK_COUNT": 0,
+      "FREQ_MASK_COUNT": 0
+    },
+    "input_patch": {
+      "input_patch": "none"
+    },
+    "seed": 20260616,
+    "batch_size": 96,
+    "num_epochs": 40,
+    "early_stopping_patience": 8,
+    "num_workers": 4,
+    "device": "cuda",
+    "peak_memory_mib": 9313.98291015625
+  }
+}

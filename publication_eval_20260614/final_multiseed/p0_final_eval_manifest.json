@@ -1,0 +1,332 @@
+{
+  "run_name": "todo5_p0_baseline_final_eval",
+  "generated_at": "2026-06-14T15:16:58",
+  "protocol_json": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\protocol\\protocol_lock.json",
+  "train_csv": "C:\\Users\\jiaotong1\\5080train\\newdata\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258_train.csv",
+  "val_csv": "C:\\Users\\jiaotong1\\5080train\\newdata\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258_val.csv",
+  "test_csv": "C:\\Users\\jiaotong1\\5080train\\newdata\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258_test.csv",
+  "models": [
+    "dummy_mean",
+    "dummy_median",
+    "ridge",
+    "elasticnet",
+    "extratrees",
+    "histgradientboosting"
+  ],
+  "seeds": [
+    20260614,
+    20260615,
+    20260616,
+    20260617,
+    20260618
+  ],
+  "target_column": "max_drift_ratio_raw",
+  "numeric_features": [
+    "num_floors",
+    "floor_mass",
+    "floor_height",
+    "k_base_1_4",
+    "k_add",
+    "Fy_add",
+    "frame_b",
+    "frame_yield_drift_ratio",
+    "period_1_sec",
+    "period_limit_sec",
+    "wave_dt",
+    "wave_length",
+    "wave_pga",
+    "wave_rms",
+    "wave_mean_abs",
+    "wave_cav",
+    "wave_arias_proxy",
+    "wave_duration_5_95",
+    "wave_zero_crossing_rate",
+    "wave_dominant_freq",
+    "wave_spectral_centroid",
+    "wave_predominant_period",
+    "wave_intensity_score"
+  ],
+  "categorical_features": [
+    "damper_layout",
+    "period_compliant",
+    "period_check_status",
+    "wave_cluster"
+  ],
+  "non_interference_policy": [
+    "CPU-only sklearn baselines.",
+    "No Optuna, no torch import, no GPU model training.",
+    "Existing HPO/deep learning artifacts are not modified."
+  ],
+  "runs": [
+    {
+      "model": "dummy_mean",
+      "seed": 20260614,
+      "fit_seconds": 0.21646520000649616,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\dummy_mean\\seed_20260614",
+      "test_mae": 0.0014042940511002982,
+      "test_rmse": 0.0016132807631576067,
+      "test_r2": -0.41278018513672143
+    },
+    {
+      "model": "dummy_mean",
+      "seed": 20260615,
+      "fit_seconds": 0.1729602999985218,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\dummy_mean\\seed_20260615",
+      "test_mae": 0.0014042940511002982,
+      "test_rmse": 0.0016132807631576067,
+      "test_r2": -0.41278018513672143
+    },
+    {
+      "model": "dummy_mean",
+      "seed": 20260616,
+      "fit_seconds": 0.17505910000181757,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\dummy_mean\\seed_20260616",
+      "test_mae": 0.0014042940511002982,
+      "test_rmse": 0.0016132807631576067,
+      "test_r2": -0.41278018513672143
+    },
+    {
+      "model": "dummy_mean",
+      "seed": 20260617,
+      "fit_seconds": 0.169499600015115,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\dummy_mean\\seed_20260617",
+      "test_mae": 0.0014042940511002982,
+      "test_rmse": 0.0016132807631576067,
+      "test_r2": -0.41278018513672143
+    },
+    {
+      "model": "dummy_mean",
+      "seed": 20260618,
+      "fit_seconds": 0.17638520000036806,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\dummy_mean\\seed_20260618",
+      "test_mae": 0.0014042940511002982,
+      "test_rmse": 0.0016132807631576067,
+      "test_r2": -0.41278018513672143
+    },
+    {
+      "model": "dummy_median",
+      "seed": 20260614,
+      "fit_seconds": 0.16987859999062493,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\dummy_median\\seed_20260614",
+      "test_mae": 0.0012103991327509355,
+      "test_rmse": 0.0014583448624688256,
+      "test_r2": -0.15445007576640357
+    },
+    {
+      "model": "dummy_median",
+      "seed": 20260615,
+      "fit_seconds": 0.16873859998304397,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\dummy_median\\seed_20260615",
+      "test_mae": 0.0012103991327509355,
+      "test_rmse": 0.0014583448624688256,
+      "test_r2": -0.15445007576640357
+    },
+    {
+      "model": "dummy_median",
+      "seed": 20260616,
+      "fit_seconds": 0.16717899998184294,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\dummy_median\\seed_20260616",
+      "test_mae": 0.0012103991327509355,
+      "test_rmse": 0.0014583448624688256,
+      "test_r2": -0.15445007576640357
+    },
+    {
+      "model": "dummy_median",
+      "seed": 20260617,
+      "fit_seconds": 0.17243460001191124,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\dummy_median\\seed_20260617",
+      "test_mae": 0.0012103991327509355,
+      "test_rmse": 0.0014583448624688256,
+      "test_r2": -0.15445007576640357
+    },
+    {
+      "model": "dummy_median",
+      "seed": 20260618,
+      "fit_seconds": 0.16856150000239722,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\dummy_median\\seed_20260618",
+      "test_mae": 0.0012103991327509355,
+      "test_rmse": 0.0014583448624688256,
+      "test_r2": -0.15445007576640357
+    },
+    {
+      "model": "ridge",
+      "seed": 20260614,
+      "fit_seconds": 0.2862574000027962,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\ridge\\seed_20260614",
+      "test_mae": 0.0006733017597752381,
+      "test_rmse": 0.0008615442506363347,
+      "test_r2": 0.5970883159310665
+    },
+    {
+      "model": "ridge",
+      "seed": 20260615,
+      "fit_seconds": 0.2763132000109181,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\ridge\\seed_20260615",
+      "test_mae": 0.0006733017597752381,
+      "test_rmse": 0.0008615442506363347,
+      "test_r2": 0.5970883159310665
+    },
+    {
+      "model": "ridge",
+      "seed": 20260616,
+      "fit_seconds": 0.2729865000001155,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\ridge\\seed_20260616",
+      "test_mae": 0.0006733017597752381,
+      "test_rmse": 0.0008615442506363347,
+      "test_r2": 0.5970883159310665
+    },
+    {
+      "model": "ridge",
+      "seed": 20260617,
+      "fit_seconds": 0.2911006000067573,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\ridge\\seed_20260617",
+      "test_mae": 0.0006733017597752381,
+      "test_rmse": 0.0008615442506363347,
+      "test_r2": 0.5970883159310665
+    },
+    {
+      "model": "ridge",
+      "seed": 20260618,
+      "fit_seconds": 0.2794041000015568,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\ridge\\seed_20260618",
+      "test_mae": 0.0006733017597752381,
+      "test_rmse": 0.0008615442506363347,
+      "test_r2": 0.5970883159310665
+    },
+    {
+      "model": "elasticnet",
+      "seed": 20260614,
+      "fit_seconds": 12.28680559998611,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\elasticnet\\seed_20260614",
+      "test_mae": 0.0007690786471764436,
+      "test_rmse": 0.0009912650481877978,
+      "test_r2": 0.4666230162001024
+    },
+    {
+      "model": "elasticnet",
+      "seed": 20260615,
+      "fit_seconds": 12.029455100011546,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\elasticnet\\seed_20260615",
+      "test_mae": 0.0007690786471764436,
+      "test_rmse": 0.0009912650481877978,
+      "test_r2": 0.4666230162001024
+    },
+    {
+      "model": "elasticnet",
+      "seed": 20260616,
+      "fit_seconds": 12.015624899999239,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\elasticnet\\seed_20260616",
+      "test_mae": 0.0007690786471764436,
+      "test_rmse": 0.0009912650481877978,
+      "test_r2": 0.4666230162001024
+    },
+    {
+      "model": "elasticnet",
+      "seed": 20260617,
+      "fit_seconds": 13.13057020000997,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\elasticnet\\seed_20260617",
+      "test_mae": 0.0007690786471764436,
+      "test_rmse": 0.0009912650481877978,
+      "test_r2": 0.4666230162001024
+    },
+    {
+      "model": "elasticnet",
+      "seed": 20260618,
+      "fit_seconds": 13.213035599997966,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\elasticnet\\seed_20260618",
+      "test_mae": 0.0007690786471764436,
+      "test_rmse": 0.0009912650481877978,
+      "test_r2": 0.4666230162001024
+    },
+    {
+      "model": "extratrees",
+      "seed": 20260614,
+      "fit_seconds": 51.19857810001122,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\extratrees\\seed_20260614",
+      "test_mae": 0.0005375733517676149,
+      "test_rmse": 0.0007799358159793099,
+      "test_r2": 0.6698035397837963
+    },
+    {
+      "model": "extratrees",
+      "seed": 20260615,
+      "fit_seconds": 50.51237390001188,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\extratrees\\seed_20260615",
+      "test_mae": 0.0005398774023097078,
+      "test_rmse": 0.0007813021722555116,
+      "test_r2": 0.668645595266911
+    },
+    {
+      "model": "extratrees",
+      "seed": 20260616,
+      "fit_seconds": 51.31868240001495,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\extratrees\\seed_20260616",
+      "test_mae": 0.0005371924400448711,
+      "test_rmse": 0.0007795576521708524,
+      "test_r2": 0.6701236637637751
+    },
+    {
+      "model": "extratrees",
+      "seed": 20260617,
+      "fit_seconds": 51.11133729998255,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\extratrees\\seed_20260617",
+      "test_mae": 0.0005398388993846952,
+      "test_rmse": 0.0007818919216523943,
+      "test_r2": 0.6681451747634877
+    },
+    {
+      "model": "extratrees",
+      "seed": 20260618,
+      "fit_seconds": 50.593925000022864,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\extratrees\\seed_20260618",
+      "test_mae": 0.0005387459668862312,
+      "test_rmse": 0.0007811649485158123,
+      "test_r2": 0.6687619796804478
+    },
+    {
+      "model": "histgradientboosting",
+      "seed": 20260614,
+      "fit_seconds": 2.477714200009359,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\histgradientboosting\\seed_20260614",
+      "test_mae": 0.0007648079343277918,
+      "test_rmse": 0.0009809909165958328,
+      "test_r2": 0.4776222665411616
+    },
+    {
+      "model": "histgradientboosting",
+      "seed": 20260615,
+      "fit_seconds": 1.2064483000140171,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\histgradientboosting\\seed_20260615",
+      "test_mae": 0.0007503008730568028,
+      "test_rmse": 0.0009669590134089104,
+      "test_r2": 0.49245936756517295
+    },
+    {
+      "model": "histgradientboosting",
+      "seed": 20260616,
+      "fit_seconds": 1.2489394999865908,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\histgradientboosting\\seed_20260616",
+      "test_mae": 0.0007726238959067013,
+      "test_rmse": 0.0009853011520771504,
+      "test_r2": 0.4730217805815393
+    },
+    {
+      "model": "histgradientboosting",
+      "seed": 20260617,
+      "fit_seconds": 1.204916399990907,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\histgradientboosting\\seed_20260617",
+      "test_mae": 0.0007661053897493283,
+      "test_rmse": 0.0009817677620868118,
+      "test_r2": 0.4767945983968329
+    },
+    {
+      "model": "histgradientboosting",
+      "seed": 20260618,
+      "fit_seconds": 1.263632599991979,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\histgradientboosting\\seed_20260618",
+      "test_mae": 0.0007838656684222728,
+      "test_rmse": 0.0009959566190331718,
+      "test_r2": 0.46156221500547623
+    }
+  ]
+}

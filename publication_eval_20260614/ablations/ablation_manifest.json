@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-06-16T10:37:51",
+  "protocol": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\protocol\\protocol_lock.json",
+  "best_params": "C:\\Users\\jiaotong1\\5080train\\update\\2dcnn\\best_params.json",
+  "selected_ablations": [
+    "no_ema"
+  ],
+  "seeds": [
+    20260614,
+    20260615,
+    20260616
+  ],
+  "num_epochs": 40,
+  "early_stopping_patience": 8,
+  "batch_candidates": [
+    96,
+    64,
+    48,
+    32
+  ],
+  "eval_batch_size": 64,
+  "num_workers": 4,
+  "eval_num_workers": 0,
+  "device": "cuda",
+  "run_count": 3,
+  "gpu_snapshot": {
+    "available": true,
+    "name": "NVIDIA GeForce RTX 5080",
+    "memory_total_mib": 16303.0,
+    "memory_used_mib": 14448.0,
+    "memory_free_mib": 1530.0,
+    "utilization_gpu_pct": 1.0,
+    "temperature_c": 56.0,
+    "power_w": 110.63
+  }
+}

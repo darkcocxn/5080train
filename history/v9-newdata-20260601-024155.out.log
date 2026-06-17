@@ -1,0 +1,257 @@
+Running on device: cuda
+>>> Using dataset run:       opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260601-001319-drop-split-rank-top5drift
+>>> Loading training CSV from: C:\Users\jiaotong1\5080train\newdata\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260601-001319-drop-split-rank-top5drift_train.csv
+>>> Loading validation CSV from: C:\Users\jiaotong1\5080train\newdata\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260601-001319-drop-split-rank-top5drift_val.csv
+>>> Dataset search dirs:    C:\Users\jiaotong1\5080train\newdata, C:\Users\jiaotong1\5080train\Êý¾Ý¼¯
+>>> Wavelet image dir:      C:\Users\jiaotong1\5080train\newdata\Newdatabase\Scalogram\rare_waves-20260531-140353
+>>> Wave metadata DB:       C:\Users\jiaotong1\5080train\newdata\Newdatabase\rare_waves_metadata.db
+>>> Model run name:         model-nostamp-6f475c7d-train20260601-024158
+>>> Model artifacts dir:    C:\Users\jiaotong1\5080train\output\2dcnnv9\model-nostamp-6f475c7d-train20260601-024158
+>>> Using 100% of data: 67260 samples
+>>> Scalar feature columns (63): ['num_floors', 'floor_mass', 'floor_height', 'k_base_1_4', 'Fy_add', 'period_1_sec', 'wave_pga', 'wave_rms', 'wave_mean_abs', 'wave_cav', 'wave_arias_proxy', 'wave_duration_5_95', 'wave_zero_crossing_rate', 'wave_dominant_freq', 'wave_spectral_centroid', 'wave_predominant_period', 'wave_intensity_score', 'log1p_period_1_sec', 'log1p_wave_pga', 'log1p_wave_rms', 'log1p_wave_mean_abs', 'log1p_wave_cav', 'log1p_wave_arias_proxy', 'log1p_wave_duration_5_95', 'log1p_wave_zero_crossing_rate', 'log1p_wave_dominant_freq', 'log1p_wave_spectral_centroid', 'log1p_wave_predominant_period', 'log1p_wave_intensity_score', 'wave_to_structure_period_ratio', 'structure_to_wave_period_ratio', 'wave_structure_period_log_gap', 'wave_dominant_freq_x_period', 'wave_spectral_centroid_x_period', 'wave_pga_x_period', 'wave_cav_x_period', 'wave_arias_proxy_x_period', 'wave_intensity_score_x_period', 'inv_k_base_1_4', 'inv_Fy_add', 'mass_to_stiffness', 'height_to_stiffness', 'period_squared', 'num_floors_x_period', 'floor_mass_x_period', 'floor_height_x_period', 'flexibility_x_period', 'strength_inverse_x_period', 'damper_story_1', 'damper_story_2', 'damper_story_3', 'damper_story_4', 'damper_story_5', 'damper_story_6', 'damper_story_7', 'damper_install_count', 'damper_install_ratio', 'damper_sparse_ratio', 'tail_risk_proxy', 'log1p_tail_risk_proxy', 'wave_intensity_tail_risk', 'wave_arias_tail_risk', 'wave_cav_tail_risk']
+>>> Unique train txt files: 163
+>>> Unique val txt files:   17
+>>> Unique train images:    163
+>>> Unique val images:      17
+>>> Train samples: 67260 | Val samples: 3420
+>>> Train loss weights: min=0.821, max=2.099, mean=1.000
+>>> Fitting StandardScaler on training scalars...
+>>> Scalar scaler saved to C:\Users\jiaotong1\5080train\output\2dcnnv9\model-nostamp-6f475c7d-train20260601-024158\scalar_scaler.pkl
+>>> Pre-loading 163 unique images into memory (total rows: 67260)...
+>>> Image caching complete.
+>>> Dataset size: 67260 samples
+>>> Pre-loading 17 unique images into memory (total rows: 3420)...
+>>> Image caching complete.
+>>> Dataset size: 3420 samples
+
+>>> Model Architecture:
+MultimodalPredictor(
+  (mlp): ScalarFeatureEncoder(
+    (encoder): Sequential(
+      (0): Linear(in_features=63, out_features=160, bias=True)
+      (1): LayerNorm((160,), eps=1e-05, elementwise_affine=True)
+      (2): GELU(approximate='none')
+      (3): Dropout(p=0.08, inplace=False)
+      (4): ScalarResidualBlock(
+        (norm): LayerNorm((160,), eps=1e-05, elementwise_affine=True)
+        (net): Sequential(
+          (0): Linear(in_features=160, out_features=320, bias=True)
+          (1): GELU(approximate='none')
+          (2): Dropout(p=0.17, inplace=False)
+          (3): Linear(in_features=320, out_features=160, bias=True)
+          (4): Dropout(p=0.17, inplace=False)
+        )
+      )
+      (5): ScalarResidualBlock(
+        (norm): LayerNorm((160,), eps=1e-05, elementwise_affine=True)
+        (net): Sequential(
+          (0): Linear(in_features=160, out_features=320, bias=True)
+          (1): GELU(approximate='none')
+          (2): Dropout(p=0.17, inplace=False)
+          (3): Linear(in_features=320, out_features=160, bias=True)
+          (4): Dropout(p=0.17, inplace=False)
+        )
+      )
+      (6): ScalarResidualBlock(
+        (norm): LayerNorm((160,), eps=1e-05, elementwise_affine=True)
+        (net): Sequential(
+          (0): Linear(in_features=160, out_features=320, bias=True)
+          (1): GELU(approximate='none')
+          (2): Dropout(p=0.17, inplace=False)
+          (3): Linear(in_features=320, out_features=160, bias=True)
+          (4): Dropout(p=0.17, inplace=False)
+        )
+      )
+      (7): LayerNorm((160,), eps=1e-05, elementwise_affine=True)
+    )
+  )
+  (cnn_stem): Sequential(
+    (0): Conv2d(3, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (1): GroupNorm(8, 32, eps=1e-05, affine=True)
+    (2): ReLU(inplace=True)
+  )
+  (cnn_blocks): ModuleList(
+    (0): ConditionalResidualConvBlock2D(
+      (conv1): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): GroupNorm(8, 32, eps=1e-05, affine=True)
+      (conv2): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): GroupNorm(8, 32, eps=1e-05, affine=True)
+      (act): ReLU(inplace=True)
+      (pool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (dropout): Dropout2d(p=0.08, inplace=False)
+      (film): Linear(in_features=160, out_features=64, bias=True)
+      (gate): Linear(in_features=160, out_features=32, bias=True)
+      (shortcut): Identity()
+    )
+    (1): ConditionalResidualConvBlock2D(
+      (conv1): Conv2d(32, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): GroupNorm(8, 64, eps=1e-05, affine=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): GroupNorm(8, 64, eps=1e-05, affine=True)
+      (act): ReLU(inplace=True)
+      (pool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (dropout): Dropout2d(p=0.08, inplace=False)
+      (film): Linear(in_features=160, out_features=128, bias=True)
+      (gate): Linear(in_features=160, out_features=64, bias=True)
+      (shortcut): Sequential(
+        (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): GroupNorm(8, 64, eps=1e-05, affine=True)
+      )
+    )
+    (2): ConditionalResidualConvBlock2D(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): GroupNorm(8, 128, eps=1e-05, affine=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): GroupNorm(8, 128, eps=1e-05, affine=True)
+      (act): ReLU(inplace=True)
+      (pool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (dropout): Dropout2d(p=0.08, inplace=False)
+      (film): Linear(in_features=160, out_features=256, bias=True)
+      (gate): Linear(in_features=160, out_features=128, bias=True)
+      (shortcut): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): GroupNorm(8, 128, eps=1e-05, affine=True)
+      )
+    )
+    (3): ConditionalResidualConvBlock2D(
+      (conv1): Conv2d(128, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): GroupNorm(8, 192, eps=1e-05, affine=True)
+      (conv2): Conv2d(192, 192, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): GroupNorm(8, 192, eps=1e-05, affine=True)
+      (act): ReLU(inplace=True)
+      (pool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (dropout): Dropout2d(p=0.08, inplace=False)
+      (film): Linear(in_features=160, out_features=384, bias=True)
+      (gate): Linear(in_features=160, out_features=192, bias=True)
+      (shortcut): Sequential(
+        (0): Conv2d(128, 192, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): GroupNorm(8, 192, eps=1e-05, affine=True)
+      )
+    )
+  )
+  (avg_pool): AdaptiveAvgPool2d(output_size=1)
+  (max_pool): AdaptiveMaxPool2d(output_size=1)
+  (cnn_projector): Sequential(
+    (0): Linear(in_features=384, out_features=256, bias=True)
+    (1): ReLU()
+    (2): Dropout(p=0.1, inplace=False)
+  )
+  (fusion): GatedBilinearFusionBlock(
+    (img_gate): Linear(in_features=160, out_features=256, bias=True)
+    (scalar_gate): Linear(in_features=256, out_features=160, bias=True)
+    (img_bilinear): Linear(in_features=256, out_features=64, bias=False)
+    (scalar_bilinear): Linear(in_features=160, out_features=64, bias=False)
+    (out): Sequential(
+      (0): Linear(in_features=480, out_features=320, bias=True)
+      (1): LayerNorm((320,), eps=1e-05, elementwise_affine=True)
+      (2): GELU(approximate='none')
+      (3): Dropout(p=0.17, inplace=False)
+    )
+  )
+  (head): Sequential(
+    (0): Linear(in_features=320, out_features=320, bias=True)
+    (1): GELU(approximate='none')
+    (2): Dropout(p=0.23, inplace=False)
+    (3): Linear(in_features=320, out_features=96, bias=True)
+    (4): GELU(approximate='none')
+    (5): Linear(in_features=96, out_features=1, bias=True)
+  )
+  (tail_correction_head): Sequential(
+    (0): Linear(in_features=320, out_features=80, bias=True)
+    (1): GELU(approximate='none')
+    (2): Dropout(p=0.08, inplace=False)
+    (3): Linear(in_features=80, out_features=1, bias=True)
+  )
+  (tail_correction_activation): Softplus(beta=1.0, threshold=20.0)
+  (tail_correction_gate): Linear(in_features=320, out_features=1, bias=True)
+  (tail_classifier_head): Sequential(
+    (0): Linear(in_features=320, out_features=80, bias=True)
+    (1): GELU(approximate='none')
+    (2): Dropout(p=0.08, inplace=False)
+    (3): Linear(in_features=80, out_features=3, bias=True)
+  )
+)
+
+>>> Total parameters: 1,955,178
+>>> Trainable parameters: 1,955,178
+
+>>> Training metadata saved to C:\Users\jiaotong1\5080train\output\2dcnnv9\model-nostamp-6f475c7d-train20260601-024158\training_metadata.json
+
+>>> Start Training for 160 epochs...
+    AMP: ON | Early Stopping patience: 16
+  >> Best model saved (Selection score: 0.005725, Focus score: 0.012329, MAE: 0.001160, mid-tail MAE: 0.003044, tail MAE: 0.006717, tail under: 0.006717, extreme tail MAE: 0.001160, extreme under: 0.001132)
+Ep 1: Train SmoothL1=0.4872 | Val SmoothL1=0.8035 | Val MAE=0.001160 | Val RMSE=0.001911 | Val R2=0.4951 | Val Score=0.012329 | Selection=0.005725 | MidTail MAE=0.003044 | Tail MAE=0.006717 | Tail Bias=-0.006717 | Tail Under=0.006717 | Extreme Tail MAE=0.001160 | Extreme Bias=-0.001105 | Extreme Under=0.001132 | LR=4.00e-05 | EarlyStop=0/16
+  >> Best model saved (Selection score: 0.003367, Focus score: 0.007476, MAE: 0.000687, mid-tail MAE: 0.001299, tail MAE: 0.004522, tail under: 0.004522, extreme tail MAE: 0.000687, extreme under: 0.000624)
+Ep 2: Train SmoothL1=0.2206 | Val SmoothL1=0.3950 | Val MAE=0.000687 | Val RMSE=0.001210 | Val R2=0.7977 | Val Score=0.007476 | Selection=0.003367 | MidTail MAE=0.001299 | Tail MAE=0.004522 | Tail Bias=-0.004522 | Tail Under=0.004522 | Extreme Tail MAE=0.000687 | Extreme Bias=-0.000560 | Extreme Under=0.000624 | LR=5.50e-05 | EarlyStop=0/16
+  >> Best model saved (Selection score: 0.002849, Focus score: 0.006428, MAE: 0.000590, mid-tail MAE: 0.000988, tail MAE: 0.004123, tail under: 0.004123, extreme tail MAE: 0.000590, extreme under: 0.000496)
+Ep 3: Train SmoothL1=0.1744 | Val SmoothL1=0.3205 | Val MAE=0.000590 | Val RMSE=0.001076 | Val R2=0.8399 | Val Score=0.006428 | Selection=0.002849 | MidTail MAE=0.000988 | Tail MAE=0.004123 | Tail Bias=-0.004123 | Tail Under=0.004123 | Extreme Tail MAE=0.000590 | Extreme Bias=-0.000402 | Extreme Under=0.000496 | LR=7.00e-05 | EarlyStop=0/16
+  >> Best model saved (Selection score: 0.002718, Focus score: 0.006178, MAE: 0.000563, mid-tail MAE: 0.000932, tail MAE: 0.004058, tail under: 0.004058, extreme tail MAE: 0.000563, extreme under: 0.000460)
+Ep 4: Train SmoothL1=0.1476 | Val SmoothL1=0.3027 | Val MAE=0.000563 | Val RMSE=0.001050 | Val R2=0.8476 | Val Score=0.006178 | Selection=0.002718 | MidTail MAE=0.000932 | Tail MAE=0.004058 | Tail Bias=-0.004058 | Tail Under=0.004058 | Extreme Tail MAE=0.000563 | Extreme Bias=-0.000357 | Extreme Under=0.000460 | LR=8.50e-05 | EarlyStop=0/16
+  >> Best model saved (Selection score: 0.002698, Focus score: 0.006183, MAE: 0.000549, mid-tail MAE: 0.000962, tail MAE: 0.004132, tail under: 0.004132, extreme tail MAE: 0.000549, extreme under: 0.000452)
+Ep 5: Train SmoothL1=0.1264 | Val SmoothL1=0.2972 | Val MAE=0.000549 | Val RMSE=0.001056 | Val R2=0.8458 | Val Score=0.006183 | Selection=0.002698 | MidTail MAE=0.000962 | Tail MAE=0.004132 | Tail Bias=-0.004132 | Tail Under=0.004132 | Extreme Tail MAE=0.000549 | Extreme Bias=-0.000354 | Extreme Under=0.000452 | LR=1.00e-04 | EarlyStop=0/16
+  >> Best model saved (Selection score: 0.002680, Focus score: 0.006185, MAE: 0.000537, mid-tail MAE: 0.000976, tail MAE: 0.004197, tail under: 0.004197, extreme tail MAE: 0.000537, extreme under: 0.000444)
+Ep 6: Train SmoothL1=0.1099 | Val SmoothL1=0.2920 | Val MAE=0.000537 | Val RMSE=0.001061 | Val R2=0.8445 | Val Score=0.006185 | Selection=0.002680 | MidTail MAE=0.000976 | Tail MAE=0.004197 | Tail Bias=-0.004197 | Tail Under=0.004197 | Extreme Tail MAE=0.000537 | Extreme Bias=-0.000352 | Extreme Under=0.000444 | LR=1.00e-04 | EarlyStop=0/16
+  >> Best model saved (Selection score: 0.002611, Focus score: 0.006041, MAE: 0.000524, mid-tail MAE: 0.000960, tail MAE: 0.004135, tail under: 0.004135, extreme tail MAE: 0.000524, extreme under: 0.000427)
+Ep 7: Train SmoothL1=0.0978 | Val SmoothL1=0.2825 | Val MAE=0.000524 | Val RMSE=0.001042 | Val R2=0.8499 | Val Score=0.006041 | Selection=0.002611 | MidTail MAE=0.000960 | Tail MAE=0.004135 | Tail Bias=-0.004135 | Tail Under=0.004135 | Extreme Tail MAE=0.000524 | Extreme Bias=-0.000330 | Extreme Under=0.000427 | LR=1.00e-04 | EarlyStop=0/16
+  >> Best model saved (Selection score: 0.002562, Focus score: 0.005931, MAE: 0.000513, mid-tail MAE: 0.000954, tail MAE: 0.004065, tail under: 0.004065, extreme tail MAE: 0.000513, extreme under: 0.000418)
+Ep 8: Train SmoothL1=0.0884 | Val SmoothL1=0.2745 | Val MAE=0.000513 | Val RMSE=0.001023 | Val R2=0.8555 | Val Score=0.005931 | Selection=0.002562 | MidTail MAE=0.000954 | Tail MAE=0.004065 | Tail Bias=-0.004065 | Tail Under=0.004065 | Extreme Tail MAE=0.000513 | Extreme Bias=-0.000324 | Extreme Under=0.000418 | LR=1.00e-04 | EarlyStop=0/16
+Ep 9: Train SmoothL1=0.0817 | Val SmoothL1=0.2771 | Val MAE=0.000516 | Val RMSE=0.001034 | Val R2=0.8523 | Val Score=0.005996 | Selection=0.002587 | MidTail MAE=0.000991 | Tail MAE=0.004122 | Tail Bias=-0.004122 | Tail Under=0.004122 | Extreme Tail MAE=0.000516 | Extreme Bias=-0.000325 | Extreme Under=0.000421 | LR=1.00e-04 | EarlyStop=1/16
+  >> Best model saved (Selection score: 0.002537, Focus score: 0.005884, MAE: 0.000506, mid-tail MAE: 0.000964, tail MAE: 0.004051, tail under: 0.004051, extreme tail MAE: 0.000506, extreme under: 0.000412)
+Ep 10: Train SmoothL1=0.0757 | Val SmoothL1=0.2696 | Val MAE=0.000506 | Val RMSE=0.001016 | Val R2=0.8574 | Val Score=0.005884 | Selection=0.002537 | MidTail MAE=0.000964 | Tail MAE=0.004051 | Tail Bias=-0.004051 | Tail Under=0.004051 | Extreme Tail MAE=0.000506 | Extreme Bias=-0.000318 | Extreme Under=0.000412 | LR=1.00e-04 | EarlyStop=0/16
+  >> Best model saved (Selection score: 0.002532, Focus score: 0.005875, MAE: 0.000503, mid-tail MAE: 0.000956, tail MAE: 0.004041, tail under: 0.004041, extreme tail MAE: 0.000503, extreme under: 0.000413)
+Ep 11: Train SmoothL1=0.0720 | Val SmoothL1=0.2682 | Val MAE=0.000503 | Val RMSE=0.001013 | Val R2=0.8582 | Val Score=0.005875 | Selection=0.002532 | MidTail MAE=0.000956 | Tail MAE=0.004041 | Tail Bias=-0.004041 | Tail Under=0.004041 | Extreme Tail MAE=0.000503 | Extreme Bias=-0.000322 | Extreme Under=0.000413 | LR=1.00e-04 | EarlyStop=0/16
+  >> Best model saved (Selection score: 0.002523, Focus score: 0.005842, MAE: 0.000503, mid-tail MAE: 0.000983, tail MAE: 0.004005, tail under: 0.004005, extreme tail MAE: 0.000503, extreme under: 0.000412)
+Ep 12: Train SmoothL1=0.0681 | Val SmoothL1=0.2680 | Val MAE=0.000503 | Val RMSE=0.001007 | Val R2=0.8598 | Val Score=0.005842 | Selection=0.002523 | MidTail MAE=0.000983 | Tail MAE=0.004005 | Tail Bias=-0.004005 | Tail Under=0.004005 | Extreme Tail MAE=0.000503 | Extreme Bias=-0.000321 | Extreme Under=0.000412 | LR=1.00e-04 | EarlyStop=0/16
+  >> Best model saved (Selection score: 0.002507, Focus score: 0.005798, MAE: 0.000500, mid-tail MAE: 0.000982, tail MAE: 0.003959, tail under: 0.003959, extreme tail MAE: 0.000500, extreme under: 0.000411)
+Ep 13: Train SmoothL1=0.0646 | Val SmoothL1=0.2663 | Val MAE=0.000500 | Val RMSE=0.000999 | Val R2=0.8622 | Val Score=0.005798 | Selection=0.002507 | MidTail MAE=0.000982 | Tail MAE=0.003959 | Tail Bias=-0.003959 | Tail Under=0.003959 | Extreme Tail MAE=0.000500 | Extreme Bias=-0.000321 | Extreme Under=0.000411 | LR=1.00e-04 | EarlyStop=0/16
+Ep 14: Train SmoothL1=0.0625 | Val SmoothL1=0.2693 | Val MAE=0.000504 | Val RMSE=0.001007 | Val R2=0.8599 | Val Score=0.005851 | Selection=0.002530 | MidTail MAE=0.001014 | Tail MAE=0.003998 | Tail Bias=-0.003998 | Tail Under=0.003998 | Extreme Tail MAE=0.000504 | Extreme Bias=-0.000324 | Extreme Under=0.000414 | LR=1.00e-04 | EarlyStop=1/16
+Ep 15: Train SmoothL1=0.0599 | Val SmoothL1=0.2722 | Val MAE=0.000508 | Val RMSE=0.001015 | Val R2=0.8576 | Val Score=0.005902 | Selection=0.002553 | MidTail MAE=0.001028 | Tail MAE=0.004028 | Tail Bias=-0.004028 | Tail Under=0.004028 | Extreme Tail MAE=0.000508 | Extreme Bias=-0.000327 | Extreme Under=0.000418 | LR=1.00e-04 | EarlyStop=2/16
+Ep 16: Train SmoothL1=0.0566 | Val SmoothL1=0.2683 | Val MAE=0.000500 | Val RMSE=0.001005 | Val R2=0.8604 | Val Score=0.005828 | Selection=0.002519 | MidTail MAE=0.001019 | Tail MAE=0.003982 | Tail Bias=-0.003982 | Tail Under=0.003982 | Extreme Tail MAE=0.000500 | Extreme Bias=-0.000325 | Extreme Under=0.000412 | LR=1.00e-04 | EarlyStop=3/16
+Ep 17: Train SmoothL1=0.0548 | Val SmoothL1=0.2694 | Val MAE=0.000501 | Val RMSE=0.001010 | Val R2=0.8589 | Val Score=0.005853 | Selection=0.002527 | MidTail MAE=0.001021 | Tail MAE=0.004009 | Tail Bias=-0.004009 | Tail Under=0.004009 | Extreme Tail MAE=0.000501 | Extreme Bias=-0.000324 | Extreme Under=0.000412 | LR=1.00e-04 | EarlyStop=4/16
+Ep 18: Train SmoothL1=0.0485 | Val SmoothL1=0.2676 | Val MAE=0.000499 | Val RMSE=0.001006 | Val R2=0.8601 | Val Score=0.005822 | Selection=0.002513 | MidTail MAE=0.001013 | Tail MAE=0.003990 | Tail Bias=-0.003990 | Tail Under=0.003990 | Extreme Tail MAE=0.000499 | Extreme Bias=-0.000321 | Extreme Under=0.000410 | LR=5.00e-05 | EarlyStop=5/16
+  >> Best model saved (Selection score: 0.002471, Focus score: 0.005736, MAE: 0.000489, mid-tail MAE: 0.000966, tail MAE: 0.003950, tail under: 0.003950, extreme tail MAE: 0.000489, extreme under: 0.000402)
+Ep 19: Train SmoothL1=0.0464 | Val SmoothL1=0.2615 | Val MAE=0.000489 | Val RMSE=0.000993 | Val R2=0.8636 | Val Score=0.005736 | Selection=0.002471 | MidTail MAE=0.000966 | Tail MAE=0.003950 | Tail Bias=-0.003950 | Tail Under=0.003950 | Extreme Tail MAE=0.000489 | Extreme Bias=-0.000315 | Extreme Under=0.000402 | LR=5.00e-05 | EarlyStop=0/16
+Ep 20: Train SmoothL1=0.0451 | Val SmoothL1=0.2631 | Val MAE=0.000492 | Val RMSE=0.000995 | Val R2=0.8633 | Val Score=0.005744 | Selection=0.002478 | MidTail MAE=0.000986 | Tail MAE=0.003941 | Tail Bias=-0.003941 | Tail Under=0.003941 | Extreme Tail MAE=0.000492 | Extreme Bias=-0.000316 | Extreme Under=0.000404 | LR=5.00e-05 | EarlyStop=1/16
+Ep 21: Train SmoothL1=0.0442 | Val SmoothL1=0.2653 | Val MAE=0.000494 | Val RMSE=0.001002 | Val R2=0.8613 | Val Score=0.005798 | Selection=0.002500 | MidTail MAE=0.001004 | Tail MAE=0.003977 | Tail Bias=-0.003977 | Tail Under=0.003977 | Extreme Tail MAE=0.000494 | Extreme Bias=-0.000324 | Extreme Under=0.000409 | LR=5.00e-05 | EarlyStop=2/16
+Ep 22: Train SmoothL1=0.0440 | Val SmoothL1=0.2656 | Val MAE=0.000495 | Val RMSE=0.001001 | Val R2=0.8615 | Val Score=0.005799 | Selection=0.002503 | MidTail MAE=0.001016 | Tail MAE=0.003971 | Tail Bias=-0.003971 | Tail Under=0.003971 | Extreme Tail MAE=0.000495 | Extreme Bias=-0.000324 | Extreme Under=0.000409 | LR=5.00e-05 | EarlyStop=3/16
+Ep 23: Train SmoothL1=0.0431 | Val SmoothL1=0.2643 | Val MAE=0.000493 | Val RMSE=0.000998 | Val R2=0.8623 | Val Score=0.005776 | Selection=0.002492 | MidTail MAE=0.001001 | Tail MAE=0.003961 | Tail Bias=-0.003961 | Tail Under=0.003961 | Extreme Tail MAE=0.000493 | Extreme Bias=-0.000320 | Extreme Under=0.000407 | LR=5.00e-05 | EarlyStop=4/16
+Ep 24: Train SmoothL1=0.0396 | Val SmoothL1=0.2621 | Val MAE=0.000490 | Val RMSE=0.000994 | Val R2=0.8635 | Val Score=0.005735 | Selection=0.002472 | MidTail MAE=0.000980 | Tail MAE=0.003946 | Tail Bias=-0.003946 | Tail Under=0.003946 | Extreme Tail MAE=0.000490 | Extreme Bias=-0.000313 | Extreme Under=0.000402 | LR=2.50e-05 | EarlyStop=5/16
+Ep 25: Train SmoothL1=0.0390 | Val SmoothL1=0.2647 | Val MAE=0.000493 | Val RMSE=0.001001 | Val R2=0.8615 | Val Score=0.005779 | Selection=0.002490 | MidTail MAE=0.000994 | Tail MAE=0.003977 | Tail Bias=-0.003977 | Tail Under=0.003977 | Extreme Tail MAE=0.000493 | Extreme Bias=-0.000316 | Extreme Under=0.000405 | LR=2.50e-05 | EarlyStop=6/16
+Ep 26: Train SmoothL1=0.0388 | Val SmoothL1=0.2660 | Val MAE=0.000496 | Val RMSE=0.001003 | Val R2=0.8610 | Val Score=0.005805 | Selection=0.002505 | MidTail MAE=0.001004 | Tail MAE=0.003979 | Tail Bias=-0.003979 | Tail Under=0.003979 | Extreme Tail MAE=0.000496 | Extreme Bias=-0.000323 | Extreme Under=0.000409 | LR=2.50e-05 | EarlyStop=7/16
+Ep 27: Train SmoothL1=0.0388 | Val SmoothL1=0.2654 | Val MAE=0.000494 | Val RMSE=0.001003 | Val R2=0.8609 | Val Score=0.005800 | Selection=0.002499 | MidTail MAE=0.000994 | Tail MAE=0.003989 | Tail Bias=-0.003989 | Tail Under=0.003989 | Extreme Tail MAE=0.000494 | Extreme Bias=-0.000320 | Extreme Under=0.000407 | LR=2.50e-05 | EarlyStop=8/16
+Ep 28: Train SmoothL1=0.0367 | Val SmoothL1=0.2651 | Val MAE=0.000493 | Val RMSE=0.001003 | Val R2=0.8609 | Val Score=0.005797 | Selection=0.002497 | MidTail MAE=0.000989 | Tail MAE=0.003989 | Tail Bias=-0.003989 | Tail Under=0.003989 | Extreme Tail MAE=0.000493 | Extreme Bias=-0.000321 | Extreme Under=0.000407 | LR=1.25e-05 | EarlyStop=9/16
+Ep 29: Train SmoothL1=0.0358 | Val SmoothL1=0.2636 | Val MAE=0.000491 | Val RMSE=0.000998 | Val R2=0.8623 | Val Score=0.005760 | Selection=0.002482 | MidTail MAE=0.000987 | Tail MAE=0.003964 | Tail Bias=-0.003964 | Tail Under=0.003964 | Extreme Tail MAE=0.000491 | Extreme Bias=-0.000317 | Extreme Under=0.000404 | LR=1.25e-05 | EarlyStop=10/16
+Ep 30: Train SmoothL1=0.0361 | Val SmoothL1=0.2639 | Val MAE=0.000493 | Val RMSE=0.000997 | Val R2=0.8626 | Val Score=0.005757 | Selection=0.002483 | MidTail MAE=0.000988 | Tail MAE=0.003953 | Tail Bias=-0.003953 | Tail Under=0.003953 | Extreme Tail MAE=0.000493 | Extreme Bias=-0.000317 | Extreme Under=0.000405 | LR=1.25e-05 | EarlyStop=11/16
+Ep 31: Train SmoothL1=0.0358 | Val SmoothL1=0.2643 | Val MAE=0.000492 | Val RMSE=0.000999 | Val R2=0.8620 | Val Score=0.005782 | Selection=0.002493 | MidTail MAE=0.000987 | Tail MAE=0.003968 | Tail Bias=-0.003968 | Tail Under=0.003968 | Extreme Tail MAE=0.000492 | Extreme Bias=-0.000323 | Extreme Under=0.000408 | LR=1.25e-05 | EarlyStop=12/16
+Ep 32: Train SmoothL1=0.0355 | Val SmoothL1=0.2627 | Val MAE=0.000489 | Val RMSE=0.000996 | Val R2=0.8630 | Val Score=0.005757 | Selection=0.002481 | MidTail MAE=0.000981 | Tail MAE=0.003953 | Tail Bias=-0.003953 | Tail Under=0.003953 | Extreme Tail MAE=0.000489 | Extreme Bias=-0.000322 | Extreme Under=0.000406 | LR=6.25e-06 | EarlyStop=13/16
+Ep 33: Train SmoothL1=0.0351 | Val SmoothL1=0.2641 | Val MAE=0.000492 | Val RMSE=0.000999 | Val R2=0.8620 | Val Score=0.005786 | Selection=0.002495 | MidTail MAE=0.000992 | Tail MAE=0.003966 | Tail Bias=-0.003966 | Tail Under=0.003966 | Extreme Tail MAE=0.000492 | Extreme Bias=-0.000326 | Extreme Under=0.000409 | LR=6.25e-06 | EarlyStop=14/16
+Ep 34: Train SmoothL1=0.0348 | Val SmoothL1=0.2650 | Val MAE=0.000493 | Val RMSE=0.001002 | Val R2=0.8614 | Val Score=0.005796 | Selection=0.002498 | MidTail MAE=0.000991 | Tail MAE=0.003978 | Tail Bias=-0.003978 | Tail Under=0.003978 | Extreme Tail MAE=0.000493 | Extreme Bias=-0.000324 | Extreme Under=0.000409 | LR=6.25e-06 | EarlyStop=15/16
+Running on device: cuda
+Running on device: cuda
+Running on device: cuda
+Running on device: cuda
+Running on device: cuda
+Running on device: cuda
+Running on device: cuda
+Running on device: cuda
+Running on device: cuda
+Running on device: cuda
+Running on device: cuda
+Running on device: cuda
+Running on device: cuda
+Running on device: cuda
+Running on device: cuda
+Running on device: cuda
+Ep 35: Train SmoothL1=0.0346 | Val SmoothL1=0.2651 | Val MAE=0.000493 | Val RMSE=0.001002 | Val R2=0.8614 | Val Score=0.005793 | Selection=0.002497 | MidTail MAE=0.000990 | Tail MAE=0.003978 | Tail Bias=-0.003978 | Tail Under=0.003978 | Extreme Tail MAE=0.000493 | Extreme Bias=-0.000323 | Extreme Under=0.000408 | LR=6.25e-06 | EarlyStop=16/16
+
+>>> Early stopping triggered at epoch 35.
+>>> Training metadata saved to C:\Users\jiaotong1\5080train\output\2dcnnv9\model-nostamp-6f475c7d-train20260601-024158\training_metadata.json
+>>> Training history saved to: C:\Users\jiaotong1\5080train\output\2dcnnv9\model-nostamp-6f475c7d-train20260601-024158\training_history.json
+
+>>> Training Complete. Model saved to C:\Users\jiaotong1\5080train\output\2dcnnv9\model-nostamp-6f475c7d-train20260601-024158\multimodal_2dcnn_model.pth
+>>> Best model saved with Selection score: 0.002471, Val MAE: 0.000489, Focus score: 0.005736, Tail MAE: 0.003950, Tail Under: 0.003950, Extreme Tail MAE: 0.000489, Extreme Under: 0.000402 at epoch 19
+>>> Total Time: 47.0 mins
+>>> V9 default evaluation weights: best_2dcnn_focus_model.pth (epoch 24, score 0.006823)
+>>> Training curves saved to C:\Users\jiaotong1\5080train\output\2dcnnv9\model-nostamp-6f475c7d-train20260601-024158\training_curves.png
+
+Hint: the model predicts scaled targets and restores drift by dividing by 1000.

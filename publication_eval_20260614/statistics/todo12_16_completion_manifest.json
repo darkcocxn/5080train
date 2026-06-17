@@ -1,0 +1,49 @@
+{
+  "run_name": "todo12_16_completion",
+  "outputs": {
+    "TODO12": {
+      "feature_importance": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\interpretability\\feature_importance.csv",
+      "shap_summary_png": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\interpretability\\shap_summary.png",
+      "pdp_key_features_csv": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\interpretability\\pdp_key_features.csv",
+      "pdp_key_features_png": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\interpretability\\pdp_key_features.png",
+      "deep_ablation_importance": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\interpretability\\deep_ablation_importance.csv",
+      "case_study_index": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\interpretability\\case_studies\\case_study_index.csv",
+      "case_study_panel_png": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\case_study_panel.png",
+      "physical_consistency_summary": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\interpretability\\physical_consistency_summary.md",
+      "todo12_manifest": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\statistics\\todo12_completion_manifest.json"
+    },
+    "TODO13": {
+      "tableS_runtime_complexity": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\tableS_runtime_complexity.csv",
+      "accuracy_cost_pareto_png": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\accuracy_cost_pareto.png",
+      "todo13_report": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\complexity\\TODO13_runtime_complexity_summary.md",
+      "todo13_manifest": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\statistics\\todo13_completion_manifest.json"
+    },
+    "TODO14": {
+      "figure_table_manifest_json": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_assets\\figure_table_manifest.json",
+      "figure_table_manifest_csv": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_assets\\figure_table_manifest.csv",
+      "table1_dataset_statistics": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table1_dataset_statistics.csv",
+      "table5_ablation_study": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table5_ablation_study.csv",
+      "figure1_task_model_schematic": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\figure1_task_model_schematic.png",
+      "figure2_target_distribution": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\figure2_target_distribution_by_split.png",
+      "figure5_ablation_study": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\figure5_ablation_study.png",
+      "todo14_manifest": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\statistics\\todo14_completion_manifest.json"
+    },
+    "TODO15": {
+      "reproducibility_readme": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\reproducibility_package\\README.md",
+      "requirements": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\reproducibility_package\\requirements.txt",
+      "environment_yml": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\reproducibility_package\\environment.yml",
+      "run_commands": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\reproducibility_package\\run_commands.md",
+      "REFORMS_checklist": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\reproducibility_package\\REFORMS_checklist.md",
+      "dataset_card": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\reproducibility_package\\dataset_card.md",
+      "model_card": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\reproducibility_package\\model_card.md",
+      "todo15_manifest": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\statistics\\todo15_completion_manifest.json"
+    },
+    "TODO16": {
+      "supported_claims": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\claim_calibration\\supported_claims.csv",
+      "unsupported_claims": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\claim_calibration\\unsupported_claims.csv",
+      "paper_claims": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\claim_calibration\\paper_claims.md",
+      "todo16_manifest": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\statistics\\todo16_completion_manifest.json"
+    }
+  },
+  "final_summary": "C:\\Users\\jiaotong1\\5080train\\md_files\\02_research_and_paper\\literature_reviews\\全部TODO完成总总结_20260617.md"
+}

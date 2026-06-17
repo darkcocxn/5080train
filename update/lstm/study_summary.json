@@ -1,0 +1,62 @@
+{
+  "algorithm": "lstm",
+  "study_name": "lstm_publication_hpo_lstm-wavenet-5080-20260611-115457",
+  "objective_metric": "selection",
+  "trial_count": 20,
+  "complete_trial_count": 20,
+  "trials_csv": "C:\\Users\\jiaotong1\\5080train\\update\\lstm\\optuna_trials.csv",
+  "updated_at": "2026-06-11 22:15:37",
+  "best_trial_number": 15,
+  "best_value": 0.0006291551262668155,
+  "best_optuna_params": {
+    "SEQ_STEM_CHANNELS_KEY": "48-96",
+    "SEQ_LEN": 4096,
+    "BATCH_SIZE": 32,
+    "LEARNING_RATE": 6.807488845084668e-05,
+    "WEIGHT_DECAY": 5.718841223447505e-05,
+    "GRAD_CLIP_NORM": 0.8,
+    "SEQ_STEM_DROPOUT": 0.05918361323416638,
+    "LSTM_HIDDEN_DIM": 96,
+    "LSTM_NUM_LAYERS": 3,
+    "LSTM_DROPOUT": 0.14079360572731794,
+    "LSTM_ATTENTION_DIM": 64,
+    "SEQUENCE_PROJECTOR_DIM": 256,
+    "SCALAR_EMBED_DIM": 256,
+    "SCALAR_RES_BLOCKS": 3,
+    "SCALAR_RES_DROPOUT": 0.25378532773115253,
+    "FUSION_BILINEAR_DIM": 64,
+    "FUSION_OUTPUT_DIM": 512,
+    "HEAD_DROPOUT": 0.13392932182752296
+  },
+  "best_config_params": {
+    "SEQ_LEN": 4096,
+    "BATCH_SIZE": 128,
+    "LEARNING_RATE": 6.807488845084668e-05,
+    "WEIGHT_DECAY": 5.718841223447505e-05,
+    "GRAD_CLIP_NORM": 0.8,
+    "SEQ_STEM_CHANNELS": [
+      48,
+      96
+    ],
+    "SEQ_STEM_DROPOUT": 0.05918361323416638,
+    "LSTM_HIDDEN_DIM": 96,
+    "LSTM_NUM_LAYERS": 3,
+    "LSTM_DROPOUT": 0.14079360572731794,
+    "LSTM_ATTENTION_DIM": 64,
+    "SEQUENCE_PROJECTOR_DIM": 256,
+    "SCALAR_EMBED_DIM": 256,
+    "SCALAR_RES_BLOCKS": 3,
+    "SCALAR_RES_DROPOUT": 0.25378532773115253,
+    "FUSION_BILINEAR_DIM": 64,
+    "FUSION_OUTPUT_DIM": 512,
+    "HEAD_DROPOUT": 0.13392932182752296
+  },
+  "best_artifact_root": "C:\\Users\\jiaotong1\\5080train\\update\\run_logs\\lstm-wavenet-5080-20260611-115457\\artifacts\\lstm\\trial_0015",
+  "best_model_dir": "C:\\Users\\jiaotong1\\5080train\\update\\run_logs\\lstm-wavenet-5080-20260611-115457\\artifacts\\lstm\\trial_0015\\model-20260531-181258-99dfe0c9-train20260611-202156",
+  "best_metrics": {
+    "best_value": 0.0006291551262668155,
+    "objective_metric": "selection",
+    "best_val_mae_raw": 0.0005239700031289665,
+    "best_val_selection_score": 0.0006291551262668155
+  }
+}

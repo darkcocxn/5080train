@@ -1,0 +1,9 @@
+﻿tail_definition,threshold,true_count,true_rate,coverage_status
+target >= p90,0.0037563492999999996,312,0.10012836970474968,available
+target >= p95,0.0049114533749999995,156,0.05006418485237484,available
+target >= 0.005,0.005,143,0.04589216944801027,available
+target >= 0.010,0.01,0,0.0,absent_in_locked_test
+target >= 0.015,0.015,0,0.0,absent_in_locked_test
+target >= 0.020,0.02,0,0.0,absent_in_locked_test
+steel01_yielded == 1,,0,0.0,absent_in_locked_test
+steel02_yielded == 1,,2048,0.6572528883183568,available

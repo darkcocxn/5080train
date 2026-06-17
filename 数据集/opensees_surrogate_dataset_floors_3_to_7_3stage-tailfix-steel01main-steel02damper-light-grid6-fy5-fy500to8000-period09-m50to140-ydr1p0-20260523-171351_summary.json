@@ -1,0 +1,170 @@
+{
+  "run_tag": "3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to8000-period09-m50to140-ydr1p0-20260523-171351",
+  "paths": {
+    "train": "X:\\pyproject\\Remote-Train\\数据集\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to8000-period09-m50to140-ydr1p0-20260523-171351_train.csv",
+    "val": "X:\\pyproject\\Remote-Train\\数据集\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to8000-period09-m50to140-ydr1p0-20260523-171351_val.csv",
+    "test": "X:\\pyproject\\Remote-Train\\数据集\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to8000-period09-m50to140-ydr1p0-20260523-171351_test.csv",
+    "wave_features": "X:\\pyproject\\Remote-Train\\数据集\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to8000-period09-m50to140-ydr1p0-20260523-171351_wave_features.csv",
+    "wave_split": "X:\\pyproject\\Remote-Train\\数据集\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to8000-period09-m50to140-ydr1p0-20260523-171351_wave_split.csv"
+  },
+  "splits": {
+    "train": {
+      "rows": 75600,
+      "successful_rows": 75009,
+      "failed_rows": 591,
+      "nonconverged_rows": 591,
+      "nonconvergence_ratio_all": 0.007817460317460317,
+      "nonconvergence_ratio_failed": 1.0,
+      "unique_waves": 167,
+      "unique_structures": 15754,
+      "stage_counts": {
+        "stage_a": 40000,
+        "stage_d_tail_topup": 14400,
+        "stage_b": 10800,
+        "stage_c": 10400
+      },
+      "failure_category_counts": {
+        "opensees_nonconvergence": 591
+      },
+      "analysis_return_code_counts": {
+        "-3": 591
+      },
+      "drift_mean": 0.0024267965227104662,
+      "drift_q50": 0.0017123105968019,
+      "drift_q90": 0.005479611466736358,
+      "drift_q95": 0.0068335005389596,
+      "drift_q99": 0.00957967706996789,
+      "drift_max": 0.0300145935371597,
+      "drift_threshold_counts": {
+        "ge_0.005": 9495,
+        "ge_0.010": 572,
+        "ge_0.015": 120,
+        "ge_0.020": 23
+      },
+      "drift_threshold_ratios": {
+        "ge_0.005": 0.12658480982282125,
+        "ge_0.010": 0.007625751576477489,
+        "ge_0.015": 0.0015998080230372356,
+        "ge_0.020": 0.0003066298710821368
+      },
+      "steel01_yielded_count": 572,
+      "steel02_yielded_count": 23749,
+      "steel01_yield_ratio": 0.007625751576477489,
+      "steel02_yield_ratio": 0.31661533949259424,
+      "yield_ratio": 0.31661533949259424,
+      "tail_target_requirements": {
+        "drift_ge_010": 500,
+        "drift_ge_020": 80,
+        "steel01_yielded": 500
+      },
+      "tail_targets_met": false,
+      "period_1_mean": 0.4866511649983486,
+      "period_1_max": 0.8679256988010237,
+      "period_limit_sec": 0.9
+    },
+    "val": {
+      "rows": 4600,
+      "successful_rows": 4564,
+      "failed_rows": 36,
+      "nonconverged_rows": 36,
+      "nonconvergence_ratio_all": 0.00782608695652174,
+      "nonconvergence_ratio_failed": 1.0,
+      "unique_waves": 26,
+      "unique_structures": 1265,
+      "stage_counts": {
+        "val_holdout": 3200,
+        "val_tail_topup": 1400
+      },
+      "failure_category_counts": {
+        "opensees_nonconvergence": 36
+      },
+      "analysis_return_code_counts": {
+        "-3": 36
+      },
+      "drift_mean": 0.003612517871528889,
+      "drift_q50": 0.00157461560354675,
+      "drift_q90": 0.00930128022166931,
+      "drift_q95": 0.011925757936675737,
+      "drift_q99": 0.019720117835535067,
+      "drift_max": 0.0332035815090544,
+      "drift_threshold_counts": {
+        "ge_0.005": 1289,
+        "ge_0.010": 355,
+        "ge_0.015": 133,
+        "ge_0.020": 43
+      },
+      "drift_threshold_ratios": {
+        "ge_0.005": 0.28242769500438214,
+        "ge_0.010": 0.07778264680105171,
+        "ge_0.015": 0.029141104294478526,
+        "ge_0.020": 0.009421560035056967
+      },
+      "steel01_yielded_count": 355,
+      "steel02_yielded_count": 1443,
+      "steel01_yield_ratio": 0.07778264680105171,
+      "steel02_yield_ratio": 0.31617002629272567,
+      "yield_ratio": 0.31617002629272567,
+      "tail_target_requirements": {
+        "drift_ge_010": 80,
+        "drift_ge_020": 16,
+        "steel01_yielded": 80
+      },
+      "tail_targets_met": true,
+      "period_1_mean": 0.4901636494674263,
+      "period_1_max": 0.8679256988010237,
+      "period_limit_sec": 0.9
+    },
+    "test": {
+      "rows": 7400,
+      "successful_rows": 7332,
+      "failed_rows": 68,
+      "nonconverged_rows": 68,
+      "nonconvergence_ratio_all": 0.009189189189189189,
+      "nonconvergence_ratio_failed": 1.0,
+      "unique_waves": 34,
+      "unique_structures": 2393,
+      "stage_counts": {
+        "test_tail_topup": 4200,
+        "test_holdout": 3200
+      },
+      "failure_category_counts": {
+        "opensees_nonconvergence": 68
+      },
+      "analysis_return_code_counts": {
+        "-3": 68
+      },
+      "drift_mean": 0.003997010834128292,
+      "drift_q50": 0.0036033794038376,
+      "drift_q90": 0.008284535229520704,
+      "drift_q95": 0.009476831540667094,
+      "drift_q99": 0.014581080182601997,
+      "drift_max": 0.0480603513232769,
+      "drift_threshold_counts": {
+        "ge_0.005": 2888,
+        "ge_0.010": 271,
+        "ge_0.015": 61,
+        "ge_0.020": 23
+      },
+      "drift_threshold_ratios": {
+        "ge_0.005": 0.3938897981451173,
+        "ge_0.010": 0.03696126568466994,
+        "ge_0.015": 0.008319694489907256,
+        "ge_0.020": 0.003136933987997818
+      },
+      "steel01_yielded_count": 271,
+      "steel02_yielded_count": 2334,
+      "steel01_yield_ratio": 0.03696126568466994,
+      "steel02_yield_ratio": 0.3183306055646481,
+      "yield_ratio": 0.3183306055646481,
+      "tail_target_requirements": {
+        "drift_ge_010": 80,
+        "drift_ge_020": 16,
+        "steel01_yielded": 80
+      },
+      "tail_targets_met": true,
+      "period_1_mean": 0.5675288965146459,
+      "period_1_max": 0.8679256988010237,
+      "period_limit_sec": 0.9
+    }
+  }
+}

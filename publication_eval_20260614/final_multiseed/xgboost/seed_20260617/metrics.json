@@ -1,0 +1,36 @@
+{
+  "model": "xgboost",
+  "seed": 20260617,
+  "fit_seconds": 13.490275200019823,
+  "val_metrics": {
+    "Samples": 3420,
+    "R2": 0.8439324058832212,
+    "MAE": 0.0005967461311128217,
+    "RMSE": 0.0010627536902067358,
+    "MAPE": 26.38391480270729,
+    "Bias": -0.0003182250043050373,
+    "SelectionScore": 0.0027559065692528027,
+    "phase": "val"
+  },
+  "test_metrics": {
+    "Samples": 3116,
+    "R2": 0.7392410964323815,
+    "MAE": 0.0005065204370225291,
+    "RMSE": 0.0006930941443220682,
+    "MAPE": 33.755324139123616,
+    "Bias": 4.459521009423056e-05,
+    "SelectionScore": 0.0007970953969937014,
+    "phase": "test"
+  },
+  "best_params": {
+    "N_ESTIMATORS": 3500,
+    "LEARNING_RATE": 0.0673838196615659,
+    "MAX_DEPTH": 5,
+    "MIN_CHILD_WEIGHT": 4.527917033282544,
+    "SUBSAMPLE": 0.9906438848791574,
+    "COLSAMPLE_BYTREE": 0.7670979788419384,
+    "REG_LAMBDA": 0.0045963207671804816,
+    "REG_ALPHA": 4.1383955997657895e-05,
+    "WAVEFORM_FEATURE_COUNT": 128
+  }
+}

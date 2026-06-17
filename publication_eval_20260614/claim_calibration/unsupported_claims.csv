@@ -1,0 +1,5 @@
+﻿claim_id,needed_evidence,reason,unsupported_claim
+U1,Run TODO10 high_drift_opensees_generation_plan and evaluate frozen models.,Locked test has no target >= 0.010 and no steel01_yielded=1 samples.,"The model is proven reliable for high-drift, near-failure, or steel01-yielded regimes."
+U2,Dedicated TODO13 latency benchmark plus OpenSees runtime baseline.,Controlled inference timing and OpenSees runtime are not measured.,The surrogate has a quantified OpenSees speedup.
+U3,Run SHAP/permutation after resolving h5py/model-loading path.,SHAP/permutation was not run; TODO12 uses model-free association and ablation evidence.,SHAP proves the model learned physically causal mechanisms.
+U4,Independent high-drift stress set with conformal evaluation.,Tail coverage at target >= 0.005 drops and high-drift independent test rows are absent.,2D-CNN has calibrated high-drift uncertainty intervals.

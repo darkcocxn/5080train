@@ -1,0 +1,9 @@
+﻿model,state,count,fraction
+randomforest,COMPLETE,40,1.0
+xgboost,COMPLETE,50,1.0
+lightgbm,COMPLETE,50,1.0
+catboost,COMPLETE,50,1.0
+mlp,COMPLETE,30,1.0
+lstm,COMPLETE,20,1.0
+wavenet,COMPLETE,20,1.0
+2dcnn,COMPLETE,20,1.0

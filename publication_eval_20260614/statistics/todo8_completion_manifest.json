@@ -1,0 +1,72 @@
+{
+  "run_name": "todo8_completion",
+  "generated_at": "2026-06-17",
+  "source_output_root": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614",
+  "main_model": "2dcnn",
+  "strongest_gbdt_reference": "lightgbm",
+  "strongest_tree_reference": "lightgbm",
+  "models": [
+    "2dcnn",
+    "catboost",
+    "dummy_mean",
+    "dummy_median",
+    "elasticnet",
+    "extratrees",
+    "histgradientboosting",
+    "lightgbm",
+    "lstm",
+    "mlp",
+    "randomforest",
+    "ridge",
+    "wavenet",
+    "xgboost"
+  ],
+  "seeds": [
+    20260614,
+    20260615,
+    20260616,
+    20260617,
+    20260618
+  ],
+  "model_count": 14,
+  "seed_count": 5,
+  "bootstrap_iters": 2000,
+  "alignment_policy": "row_order_with_y_true_consistency; fallback sample_id plus occurrence index",
+  "delta_sign_convention": "comparator_minus_main; positive favors main model",
+  "missing_requested_baselines": [
+    "tabm",
+    "realmlp",
+    "autogluon",
+    "automl",
+    "ensemble"
+  ],
+  "friedman_summary": {
+    "friedman_statistic": 64.36000000000001,
+    "friedman_p_value": 8.614461671844178e-09,
+    "n_models": 14,
+    "n_blocks": 5,
+    "block_unit": "seed",
+    "scope_note": "Exploratory because only five seed blocks are available; primary claims should rely on paired bootstrap effect sizes."
+  },
+  "outputs": {
+    "table4_statistical_comparison": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table4_statistical_comparison.csv",
+    "table4_statistical_comparison_md": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table4_statistical_comparison.md",
+    "paired_bootstrap_delta_existing_todo6_8": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\statistics\\paired_bootstrap_delta.csv",
+    "paired_bootstrap_delta_todo8_extended": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\statistics\\paired_bootstrap_delta_todo8_extended.csv",
+    "wilcoxon_tests_existing_todo6_8": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\statistics\\wilcoxon_tests.csv",
+    "wilcoxon_tests_holm": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\statistics\\wilcoxon_tests_holm.csv",
+    "friedman_posthoc_tests": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\statistics\\friedman_posthoc_tests.csv",
+    "critical_difference_ranks": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\statistics\\critical_difference_ranks.csv",
+    "friedman_summary": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\statistics\\friedman_summary.json",
+    "critical_difference_diagram_png": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\critical_difference_diagram.png",
+    "critical_difference_diagram_svg": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\critical_difference_diagram.svg",
+    "todo8_completion_report": "C:\\Users\\jiaotong1\\5080train\\md_files\\02_research_and_paper\\literature_reviews\\TODO8_paired统计检验补齐完成报告_20260617.md"
+  },
+  "completion_notes": [
+    "Primary claims should use hierarchical paired bootstrap effect sizes and confidence intervals.",
+    "Wilcoxon p-values are Holm-corrected across seed-level pairwise tests.",
+    "Friedman/post-hoc and critical-difference style diagram use seed blocks only and are exploratory with five blocks.",
+    "TabM/RealMLP/AutoML/ensemble final runs are not present in the current artifact set, so direct TODO8 comparisons for them remain unavailable.",
+    "High-drift and yielded-regime statistical safety claims still require TODO10."
+  ]
+}

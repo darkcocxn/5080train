@@ -1,0 +1,5 @@
+﻿severity,issue,details
+major,unequal_trial_budget,Trial counts range from 20 to 50; report or normalize budgets before strong model-ranking claims.
+moderate,high_startup_fraction_for_low_trial_models,"Startup/total ratios >=0.35 for lstm:0.40, wavenet:0.40, 2dcnn:0.40"
+major,large_wall_clock_imbalance,Elapsed time ratio is 203.0x across models; report compute budgets separately.
+methodological,validation_only_hpo_results,HPO best values are validation/model-selection results; final paper claims still require frozen-parameter multi-seed locked-test evaluation.

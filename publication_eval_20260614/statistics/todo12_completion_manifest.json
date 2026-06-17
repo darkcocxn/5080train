@@ -1,0 +1,21 @@
+{
+  "run_name": "todo12_interpretability_completion",
+  "status": {
+    "tabular_shap_or_permutation": "not_run_h5py_dll_blocked_fallback_feature_association_completed",
+    "deep_feature_ablation": "complete_from_TODO9_ablation_summary",
+    "pdp_or_ale": "complete_as_binned_observational_physical_trends",
+    "case_studies": "complete",
+    "physical_consistency": "complete_with_claim_boundary"
+  },
+  "outputs": {
+    "feature_importance": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\interpretability\\feature_importance.csv",
+    "shap_summary_png": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\interpretability\\shap_summary.png",
+    "pdp_key_features_csv": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\interpretability\\pdp_key_features.csv",
+    "pdp_key_features_png": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\interpretability\\pdp_key_features.png",
+    "deep_ablation_importance": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\interpretability\\deep_ablation_importance.csv",
+    "case_study_index": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\interpretability\\case_studies\\case_study_index.csv",
+    "case_study_panel_png": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\case_study_panel.png",
+    "physical_consistency_summary": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\interpretability\\physical_consistency_summary.md",
+    "todo12_manifest": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\statistics\\todo12_completion_manifest.json"
+  }
+}

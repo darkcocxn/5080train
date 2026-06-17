@@ -1,0 +1,68 @@
+{
+  "model": "2dcnn",
+  "seed": 20260614,
+  "fit_seconds": 16721.305312395096,
+  "val_metrics": {
+    "Samples": 3420,
+    "R2": 0.8650828560591362,
+    "MAE": 0.0004826064276166667,
+    "RMSE": 0.0009881203035579616,
+    "MAPE": 18.426278695701683,
+    "SMAPE": 17.902049307456057,
+    "Bias": -0.0003130906624476608,
+    "tail_p90_threshold": 0.0056164293,
+    "tail_p90_count": 342,
+    "tail_p90_mae": 0.0023845811397660817,
+    "tail_p90_rmse": 0.002891981660415044,
+    "tail_p95_threshold": 0.0095486935,
+    "tail_p95_count": 171,
+    "tail_p95_mae": 0.0036821609853801163,
+    "tail_p95_rmse": 0.0038718156725024663
+  },
+  "test_metrics": {
+    "Samples": 3116,
+    "R2": 0.8874726928486152,
+    "MAE": 0.00032270429272849806,
+    "RMSE": 0.00045530416107632504,
+    "MAPE": 19.763449791479964,
+    "SMAPE": 18.981157892747543,
+    "Bias": -2.595031346534018e-05,
+    "tail_p90_threshold": 0.0037563492999999996,
+    "tail_p90_count": 312,
+    "tail_p90_mae": 0.0007167388801282051,
+    "tail_p90_rmse": 0.0008620330572969897,
+    "tail_p95_threshold": 0.0049114533749999995,
+    "tail_p95_count": 156,
+    "tail_p95_mae": 0.0008472131371794873,
+    "tail_p95_rmse": 0.0009749327765064333
+  },
+  "best_params": {
+    "IMAGE_SIZE": [
+      192,
+      192
+    ],
+    "BATCH_SIZE": 32,
+    "LEARNING_RATE": 0.00010292554784232322,
+    "WEIGHT_DECAY": 2.0990882814751085e-06,
+    "GRAD_CLIP_NORM": 0.5,
+    "CNN_CHANNELS": [
+      40,
+      80,
+      160,
+      256
+    ],
+    "CNN_DROPOUT": 0.16305683463325332,
+    "CNN_PROJECTOR_DIM": 384,
+    "CNN_PROJECTOR_DROPOUT": 0.1813424484001427,
+    "SCALAR_EMBED_DIM": 192,
+    "SCALAR_RES_BLOCKS": 5,
+    "SCALAR_RES_DROPOUT": 0.23841749953941138,
+    "FUSION_BILINEAR_DIM": 64,
+    "FUSION_OUTPUT_DIM": 256,
+    "FUSION_DROPOUT": 0.09605029463485952,
+    "HEAD_DROPOUT": 0.17642293255094516,
+    "TIME_FREQ_MASK_PROB": 0.3541370626424404
+  },
+  "batch_size": 32,
+  "resume_from_artifacts": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\2dcnn\\seed_20260614\\model-20260531-181258-99dfe0c9"
+}

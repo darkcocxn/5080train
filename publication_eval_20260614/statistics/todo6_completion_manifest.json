@@ -1,0 +1,43 @@
+{
+  "run_name": "todo6_completion",
+  "generated_at": "2026-06-17",
+  "source_output_root": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614",
+  "models": [
+    "2dcnn",
+    "wavenet",
+    "lstm",
+    "lightgbm",
+    "randomforest",
+    "catboost",
+    "xgboost",
+    "extratrees",
+    "mlp",
+    "ridge",
+    "histgradientboosting",
+    "elasticnet",
+    "dummy_median",
+    "dummy_mean"
+  ],
+  "model_count": 14,
+  "seed_count_total": 70,
+  "best_model_by_mae": "2dcnn",
+  "best_mae_mean": 0.0003141888050978,
+  "outputs": {
+    "table2_overall_test_metrics": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table2_overall_test_metrics.csv",
+    "table2_overall_test_metrics_paper_ready": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table2_overall_test_metrics_paper_ready.csv",
+    "table2_overall_test_metrics_paper_ready_md": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table2_overall_test_metrics_paper_ready.md",
+    "tableS_seed_metrics": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\tableS_seed_metrics.csv",
+    "tableS_group_metrics": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\tableS_group_metrics.csv",
+    "tableS_complexity_runtime": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\tableS_complexity_runtime.csv",
+    "tableS_complexity_runtime_by_seed": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\tableS_complexity_runtime_by_seed.csv",
+    "model_performance_bar_ci": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\model_performance_bar_ci.png",
+    "todo6_completion_report": "C:\\Users\\jiaotong1\\5080train\\md_files\\02_research_and_paper\\literature_reviews\\TODO6_论文主指标表补齐完成报告_20260617.md"
+  },
+  "completion_notes": [
+    "Overall locked-test metrics now have paper-ready formatted columns plus original numeric source columns.",
+    "Group metrics and seed-level metrics are linked as supplementary TODO6 evidence.",
+    "Complexity/runtime table reports fit time, available parameter counts, available model artifact sizes, and explicit missingness for inference latency.",
+    "Inference latency was not independently recorded in the frozen final evaluation metrics; do not make latency claims until TODO13 performs a controlled benchmark.",
+    "High-drift and yielded-regime safety claims remain outside TODO6 and require TODO10."
+  ]
+}

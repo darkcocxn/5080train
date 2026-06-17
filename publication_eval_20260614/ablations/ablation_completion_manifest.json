@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-06-16",
+  "source": "update/summarize_completed_ablation_results.py",
+  "completed_prediction_files": 27,
+  "ablations": [
+    "full_model",
+    "scalar_only_blank_image",
+    "image_only_zero_scalar",
+    "no_wave_scalar_features",
+    "concat_fusion",
+    "no_tail_loss",
+    "no_weighted_sampler",
+    "no_image_augmentation",
+    "no_ema"
+  ],
+  "seeds": [
+    20260614,
+    20260615,
+    20260616
+  ],
+  "outputs": {
+    "runs": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\ablations\\ablation_runs.csv",
+    "metrics_by_seed": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\ablations\\ablation_test_metrics_by_seed.csv",
+    "metrics_summary": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\ablations\\ablation_test_metrics_summary.csv",
+    "tail_by_seed": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\ablations\\ablation_tail_metrics_by_seed.csv",
+    "tail_summary": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\ablations\\ablation_tail_metrics_summary.csv",
+    "bootstrap": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\ablations\\ablation_paired_bootstrap_delta.csv",
+    "wilcoxon": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\ablations\\ablation_wilcoxon_tests.csv",
+    "report": "C:\\Users\\jiaotong1\\5080train\\md_files\\02_research_and_paper\\literature_reviews\\TODO9_2DCNN多模态消融实验最终总结_20260616.md"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "friedman_statistic": 64.36000000000001,
+  "friedman_p_value": 8.614461671844178e-09,
+  "n_models": 14,
+  "n_blocks": 5,
+  "block_unit": "seed",
+  "scope_note": "Exploratory because only five seed blocks are available; primary claims should rely on paired bootstrap effect sizes."
+}

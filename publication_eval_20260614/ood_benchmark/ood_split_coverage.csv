@@ -1,0 +1,4 @@
+﻿exact_structure_unseen_vs_train_count,exact_structure_unseen_vs_trainval_count,exact_wave_unseen_vs_train_count,exact_wave_unseen_vs_trainval_count,rows,split,steel01_yielded_count,steel02_yielded_count,target_ge_0.005,target_ge_0.010,target_ge_0.015,target_ge_0.020,target_max,target_p95,unique_structure_signatures,unique_wave_clusters,unique_waves
+0,0,0,0,67260,train,0,44840,9268,0,0,0,0.0082426159884864,0.0064711422927087835,16331,8,163
+3420,0,3420,0,3420,val,152,2111,422,152,0,0,0.0144652856078435,0.009548693514223116,881,5,17
+3116,3116,3116,3116,3116,test,0,2048,143,0,0,0,0.0073621560672471,0.004911453307871724,802,4,14

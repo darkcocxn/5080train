@@ -1,0 +1,19 @@
+{
+  "run_name": "todo13_runtime_complexity_completion",
+  "status": {
+    "model_parameter_count": "complete_for_torch_models_file_size_for_all_models",
+    "single_sample_inference_time": "not_measured_requires_controlled_benchmark",
+    "batch_inference_time": "not_measured_requires_controlled_benchmark",
+    "training_time": "complete_from_final_metadata_table2",
+    "hpo_total_time": "complete_from_TODO3_hpo_audit",
+    "model_file_size": "complete",
+    "opensees_speedup": "not_claimed_without_opensees_runtime",
+    "accuracy_cost_pareto": "complete"
+  },
+  "outputs": {
+    "tableS_runtime_complexity": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\tableS_runtime_complexity.csv",
+    "accuracy_cost_pareto_png": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\accuracy_cost_pareto.png",
+    "todo13_report": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\complexity\\TODO13_runtime_complexity_summary.md",
+    "todo13_manifest": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\statistics\\todo13_completion_manifest.json"
+  }
+}

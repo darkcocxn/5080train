@@ -1,0 +1,323 @@
+{
+  "source_run_tag": "3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260601-001319",
+  "processed_run_tag": "3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260601-001319-drop-split-rank-top5drift",
+  "filter": {
+    "column": "max_drift_ratio_raw",
+    "drop_fraction_per_split": 0.05,
+    "rule": "within each split, rank rows by max_drift_ratio_raw descending, drop exact ceil(split_rows * 0.05) highest-ranked rows, preserve remaining original row order"
+  },
+  "paths": {
+    "train": "C:\\Users\\12200\\project\\Dategeneral\\CSV-dataset\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260601-001319-drop-split-rank-top5drift_train.csv",
+    "val": "C:\\Users\\12200\\project\\Dategeneral\\CSV-dataset\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260601-001319-drop-split-rank-top5drift_val.csv",
+    "test": "C:\\Users\\12200\\project\\Dategeneral\\CSV-dataset\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260601-001319-drop-split-rank-top5drift_test.csv",
+    "wave_features": "C:\\Users\\12200\\project\\Dategeneral\\CSV-dataset\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260601-001319-drop-split-rank-top5drift_wave_features.csv",
+    "wave_split": "C:\\Users\\12200\\project\\Dategeneral\\CSV-dataset\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260601-001319-drop-split-rank-top5drift_wave_split.csv",
+    "summary": "C:\\Users\\12200\\project\\Dategeneral\\CSV-dataset\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260601-001319-drop-split-rank-top5drift_summary.json"
+  },
+  "splits": {
+    "train": {
+      "source_path": "C:\\Users\\12200\\project\\Dategeneral\\CSV-dataset\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260601-001319_train.csv",
+      "output_path": "C:\\Users\\12200\\project\\Dategeneral\\CSV-dataset\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260601-001319-drop-split-rank-top5drift_train.csv",
+      "before": {
+        "rows": 70800,
+        "successful_rows": 70800,
+        "failed_rows": 0,
+        "stage_counts": {
+          "stage_a": 40000,
+          "stage_b": 10800,
+          "stage_c": 10400,
+          "stage_d_tail_topup": 9600
+        },
+        "floor_counts": {
+          "3": 12125,
+          "4": 13289,
+          "5": 14364,
+          "6": 15383,
+          "7": 15639
+        },
+        "drift_mean": 0.0032756050397163674,
+        "drift_q50": 0.0026349019429982,
+        "drift_q90": 0.00640924256987792,
+        "drift_q95": 0.008242619890159505,
+        "drift_q99": 0.013702640854328185,
+        "drift_max": 0.0390770434139634,
+        "drift_threshold_counts": {
+          "ge_0.005": 12808,
+          "ge_0.010": 1853,
+          "ge_0.015": 497,
+          "ge_0.020": 131
+        },
+        "drift_threshold_ratios": {
+          "ge_0.005": 0.18090395480225988,
+          "ge_0.010": 0.026172316384180792,
+          "ge_0.015": 0.007019774011299435,
+          "ge_0.020": 0.0018502824858757062
+        },
+        "steel01_yielded_count": 1853,
+        "steel01_yield_ratio": 0.026172316384180792,
+        "steel02_yielded_count": 47983,
+        "steel02_yield_ratio": 0.677725988700565,
+        "joint_counts": {
+          "none_yielded": 22626,
+          "steel02_only": 46321,
+          "steel01_only": 191,
+          "both_yielded": 1662
+        },
+        "unique_waves": 163,
+        "unique_structures": 16367
+      },
+      "after": {
+        "rows": 67260,
+        "successful_rows": 67260,
+        "failed_rows": 0,
+        "stage_counts": {
+          "stage_a": 39295,
+          "stage_b": 10552,
+          "stage_c": 9757,
+          "stage_d_tail_topup": 7656
+        },
+        "floor_counts": {
+          "3": 12066,
+          "4": 13004,
+          "5": 13633,
+          "6": 14183,
+          "7": 14374
+        },
+        "drift_mean": 0.002842333992669445,
+        "drift_q50": 0.0025037195204498496,
+        "drift_q90": 0.005511900784991559,
+        "drift_q95": 0.0064711422927087835,
+        "drift_q99": 0.007780004299647152,
+        "drift_max": 0.0082426159884864,
+        "drift_threshold_counts": {
+          "ge_0.005": 9268,
+          "ge_0.010": 0,
+          "ge_0.015": 0,
+          "ge_0.020": 0
+        },
+        "drift_threshold_ratios": {
+          "ge_0.005": 0.13779363663395777,
+          "ge_0.010": 0.0,
+          "ge_0.015": 0.0,
+          "ge_0.020": 0.0
+        },
+        "steel01_yielded_count": 0,
+        "steel01_yield_ratio": 0.0,
+        "steel02_yielded_count": 44840,
+        "steel02_yield_ratio": 0.6666666666666666,
+        "joint_counts": {
+          "none_yielded": 22420,
+          "steel02_only": 44840,
+          "steel01_only": 0,
+          "both_yielded": 0
+        },
+        "unique_waves": 163,
+        "unique_structures": 16331
+      },
+      "dropped_rows": 3540,
+      "dropped_ratio_within_split": 0.05,
+      "dropped_min_drift": 0.0082426940219485,
+      "dropped_max_drift": 0.0390770434139634
+    },
+    "val": {
+      "source_path": "C:\\Users\\12200\\project\\Dategeneral\\CSV-dataset\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260601-001319_val.csv",
+      "output_path": "C:\\Users\\12200\\project\\Dategeneral\\CSV-dataset\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260601-001319-drop-split-rank-top5drift_val.csv",
+      "before": {
+        "rows": 3600,
+        "successful_rows": 3600,
+        "failed_rows": 0,
+        "stage_counts": {
+          "val_holdout": 3200,
+          "val_tail_topup": 400
+        },
+        "floor_counts": {
+          "3": 672,
+          "4": 672,
+          "5": 672,
+          "6": 746,
+          "7": 838
+        },
+        "drift_mean": 0.003348859364856373,
+        "drift_q50": 0.0017306458127272,
+        "drift_q90": 0.009062663321826838,
+        "drift_q95": 0.0144652856078435,
+        "drift_q99": 0.0195773960726038,
+        "drift_max": 0.0228941133973981,
+        "drift_threshold_counts": {
+          "ge_0.005": 602,
+          "ge_0.010": 332,
+          "ge_0.015": 169,
+          "ge_0.020": 32
+        },
+        "drift_threshold_ratios": {
+          "ge_0.005": 0.16722222222222222,
+          "ge_0.010": 0.09222222222222222,
+          "ge_0.015": 0.04694444444444444,
+          "ge_0.020": 0.008888888888888889
+        },
+        "steel01_yielded_count": 332,
+        "steel01_yield_ratio": 0.09222222222222222,
+        "steel02_yielded_count": 2268,
+        "steel02_yield_ratio": 0.63,
+        "joint_counts": {
+          "none_yielded": 1291,
+          "steel02_only": 1977,
+          "steel01_only": 41,
+          "both_yielded": 291
+        },
+        "unique_waves": 17,
+        "unique_structures": 920
+      },
+      "after": {
+        "rows": 3420,
+        "successful_rows": 3420,
+        "failed_rows": 0,
+        "stage_counts": {
+          "val_holdout": 3198,
+          "val_tail_topup": 222
+        },
+        "floor_counts": {
+          "3": 672,
+          "4": 672,
+          "5": 665,
+          "6": 682,
+          "7": 729
+        },
+        "drift_mean": 0.002589039932146115,
+        "drift_q50": 0.00164390663547225,
+        "drift_q90": 0.00561642948840803,
+        "drift_q95": 0.009548693514223116,
+        "drift_q99": 0.0128960806902681,
+        "drift_max": 0.0144652856078435,
+        "drift_threshold_counts": {
+          "ge_0.005": 422,
+          "ge_0.010": 152,
+          "ge_0.015": 0,
+          "ge_0.020": 0
+        },
+        "drift_threshold_ratios": {
+          "ge_0.005": 0.12339181286549708,
+          "ge_0.010": 0.044444444444444446,
+          "ge_0.015": 0.0,
+          "ge_0.020": 0.0
+        },
+        "steel01_yielded_count": 152,
+        "steel01_yield_ratio": 0.044444444444444446,
+        "steel02_yielded_count": 2111,
+        "steel02_yield_ratio": 0.617251461988304,
+        "joint_counts": {
+          "none_yielded": 1291,
+          "steel02_only": 1977,
+          "steel01_only": 18,
+          "both_yielded": 134
+        },
+        "unique_waves": 17,
+        "unique_structures": 881
+      },
+      "dropped_rows": 180,
+      "dropped_ratio_within_split": 0.05,
+      "dropped_min_drift": 0.0144652856078435,
+      "dropped_max_drift": 0.0228941133973981
+    },
+    "test": {
+      "source_path": "C:\\Users\\12200\\project\\Dategeneral\\CSV-dataset\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260601-001319_test.csv",
+      "output_path": "C:\\Users\\12200\\project\\Dategeneral\\CSV-dataset\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260601-001319-drop-split-rank-top5drift_test.csv",
+      "before": {
+        "rows": 3280,
+        "successful_rows": 3280,
+        "failed_rows": 0,
+        "stage_counts": {
+          "test_holdout": 3200,
+          "test_tail_topup": 80
+        },
+        "floor_counts": {
+          "3": 646,
+          "4": 646,
+          "5": 646,
+          "6": 658,
+          "7": 684
+        },
+        "drift_mean": 0.0027893695694444372,
+        "drift_q50": 0.0016924889355339002,
+        "drift_q90": 0.00485294162822181,
+        "drift_q95": 0.0073645273871541725,
+        "drift_q99": 0.029681198323716403,
+        "drift_max": 0.0389118257673346,
+        "drift_threshold_counts": {
+          "ge_0.005": 307,
+          "ge_0.010": 97,
+          "ge_0.015": 76,
+          "ge_0.020": 70
+        },
+        "drift_threshold_ratios": {
+          "ge_0.005": 0.09359756097560976,
+          "ge_0.010": 0.029573170731707316,
+          "ge_0.015": 0.023170731707317073,
+          "ge_0.020": 0.021341463414634148
+        },
+        "steel01_yielded_count": 97,
+        "steel01_yield_ratio": 0.029573170731707316,
+        "steel02_yielded_count": 2201,
+        "steel02_yield_ratio": 0.6710365853658536,
+        "joint_counts": {
+          "none_yielded": 1072,
+          "steel02_only": 2111,
+          "steel01_only": 7,
+          "both_yielded": 90
+        },
+        "unique_waves": 14,
+        "unique_structures": 827
+      },
+      "after": {
+        "rows": 3116,
+        "successful_rows": 3116,
+        "failed_rows": 0,
+        "stage_counts": {
+          "test_holdout": 3110,
+          "test_tail_topup": 6
+        },
+        "floor_counts": {
+          "3": 646,
+          "4": 638,
+          "5": 620,
+          "6": 613,
+          "7": 599
+        },
+        "drift_mean": 0.001970302682532855,
+        "drift_q50": 0.0016269505186646501,
+        "drift_q90": 0.0037563493148504,
+        "drift_q95": 0.004911453307871724,
+        "drift_q99": 0.0067342660581259685,
+        "drift_max": 0.0073621560672471,
+        "drift_threshold_counts": {
+          "ge_0.005": 143,
+          "ge_0.010": 0,
+          "ge_0.015": 0,
+          "ge_0.020": 0
+        },
+        "drift_threshold_ratios": {
+          "ge_0.005": 0.04589216944801027,
+          "ge_0.010": 0.0,
+          "ge_0.015": 0.0,
+          "ge_0.020": 0.0
+        },
+        "steel01_yielded_count": 0,
+        "steel01_yield_ratio": 0.0,
+        "steel02_yielded_count": 2048,
+        "steel02_yield_ratio": 0.6572528883183568,
+        "joint_counts": {
+          "none_yielded": 1068,
+          "steel02_only": 2048,
+          "steel01_only": 0,
+          "both_yielded": 0
+        },
+        "unique_waves": 14,
+        "unique_structures": 802
+      },
+      "dropped_rows": 164,
+      "dropped_ratio_within_split": 0.05,
+      "dropped_min_drift": 0.0074095824653888,
+      "dropped_max_drift": 0.0389118257673346
+    }
+  }
+}

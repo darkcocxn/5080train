@@ -1,0 +1,22 @@
+﻿{
+    "seeds":  [
+                  20260614,
+                  20260615,
+                  20260616
+              ],
+    "stdout":  "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\ablations\\logs\\run_ablation_no_ema_20260616_070520_stdout.log",
+    "started_at":  "2026-06-16T07:05:20",
+    "stderr":  "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\ablations\\logs\\run_ablation_no_ema_20260616_070520_stderr.log",
+    "eval_batch_size":  64,
+    "configs":  [
+                    "no_ema"
+                ],
+    "pid":  41512,
+    "train_batch_candidates":  [
+                                   96,
+                                   64,
+                                   48,
+                                   32
+                               ],
+    "resilient_torch_save":  true
+}

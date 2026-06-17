@@ -1,0 +1,76 @@
+{
+  "run_name": "todo11_uncertainty_conformal_completion",
+  "generated_at": "2026-06-17",
+  "status": {
+    "five_seed_ensemble_mean_variance": "complete",
+    "empirical_quantile_5_50_95": "complete_from_seed_ensemble_no_new_training",
+    "dedicated_quantile_regression_training": "not_run_to_avoid_training_interference",
+    "validation_conformal_calibration": "complete_post_hoc_validation_calibration",
+    "locked_test_coverage": "complete",
+    "tail_and_ood_coverage": "complete_with_high_drift_absence_flagged",
+    "error_uncertainty_association": "complete"
+  },
+  "model_count": 14,
+  "models": [
+    "2dcnn",
+    "catboost",
+    "dummy_mean",
+    "dummy_median",
+    "elasticnet",
+    "extratrees",
+    "histgradientboosting",
+    "lightgbm",
+    "lstm",
+    "mlp",
+    "randomforest",
+    "ridge",
+    "wavenet",
+    "xgboost"
+  ],
+  "seed_count_by_model": {
+    "2dcnn": 5,
+    "catboost": 5,
+    "dummy_mean": 5,
+    "dummy_median": 5,
+    "elasticnet": 5,
+    "extratrees": 5,
+    "histgradientboosting": 5,
+    "lightgbm": 5,
+    "lstm": 5,
+    "mlp": 5,
+    "randomforest": 5,
+    "ridge": 5,
+    "wavenet": 5,
+    "xgboost": 5
+  },
+  "seed_count_per_complete_model": [
+    5
+  ],
+  "calibration_split": "val",
+  "calibration_rows": 3420,
+  "test_rows": 3116,
+  "target_coverage": 0.9,
+  "main_interval_method": "split_conformal_adaptive_90",
+  "claim_boundaries": [
+    "Validation was previously used in HPO/early stopping; report intervals as post-hoc validation-calibrated with independent locked-test empirical coverage.",
+    "Dedicated quantile regression models were not trained in this non-interference TODO11 run.",
+    "Locked test has no target >= 0.010 or steel01_yielded=1 samples; high-drift interval coverage requires the TODO10 OpenSees stress plan.",
+    "Raw seed quantile intervals from only five seeds are diagnostic and should not be used as calibrated uncertainty claims without conformal correction."
+  ],
+  "outputs": {
+    "prediction_intervals": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\uncertainty\\prediction_intervals.csv",
+    "coverage_by_group": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\uncertainty\\coverage_by_group.csv",
+    "coverage_by_tail": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\uncertainty\\coverage_by_tail.csv",
+    "uncertainty_error_correlation": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\uncertainty\\uncertainty_error_correlation.csv",
+    "conformal_calibration_params": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\uncertainty\\conformal_calibration_params.json",
+    "calibration_curve_points": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\uncertainty\\calibration_curve_points.csv",
+    "interval_width_vs_error_points": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\uncertainty\\interval_width_vs_error_points.csv",
+    "table7_uncertainty_calibration": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table7_uncertainty_calibration.csv",
+    "table7_uncertainty_calibration_md": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table7_uncertainty_calibration.md",
+    "calibration_curve_png": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\calibration_curve.png",
+    "calibration_curve_svg": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\calibration_curve.svg",
+    "interval_width_vs_error_png": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\interval_width_vs_error.png",
+    "interval_width_vs_error_svg": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\interval_width_vs_error.svg",
+    "todo11_completion_report": "C:\\Users\\jiaotong1\\5080train\\md_files\\02_research_and_paper\\literature_reviews\\TODO11_不确定性与conformal校准完成报告_20260617.md"
+  }
+}

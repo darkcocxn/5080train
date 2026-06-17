@@ -1,0 +1,7 @@
+﻿group,train_unique,val_unique,test_unique,train_val_overlap,train_test_overlap,val_test_overlap,all_three_overlap,risk_level,examples
+sample_id,66755,3280,3112,0,0,0,0,low,
+txt_path,163,17,14,0,0,0,0,low,
+image_path,0,0,0,0,0,0,0,low,
+wave_cluster,8,5,4,5,4,3,3,review,0 ; 2 ; 4 ; 6
+structure_signature,16331,881,802,0,0,0,0,low,
+scenario_signature,66755,3280,3112,0,0,0,0,low,

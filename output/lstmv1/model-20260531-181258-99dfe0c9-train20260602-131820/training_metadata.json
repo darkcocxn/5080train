@@ -1,0 +1,202 @@
+{
+  "dataset_base": "opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258",
+  "model_run_name": "model-20260531-181258-99dfe0c9-train20260602-131820",
+  "train_csv_path": "C:\\Users\\jiaotong1\\5080train\\newdata\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258_train.csv",
+  "val_csv_path": "C:\\Users\\jiaotong1\\5080train\\newdata\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258_val.csv",
+  "dataset_search_dirs": [
+    "C:\\Users\\jiaotong1\\5080train\\newdata",
+    "C:\\Users\\jiaotong1\\5080train\\数据集"
+  ],
+  "model_dir": "C:\\Users\\jiaotong1\\5080train\\output\\lstmv1\\model-20260531-181258-99dfe0c9-train20260602-131820",
+  "model_family": "wave_sequence_lstm_scalar_fusion",
+  "architecture_revision": "lstmv1_convstem_bilstm_attention_tailaware",
+  "txt_col": "txt_path",
+  "sample_id_col": "sample_id",
+  "wave_dt_col": "wave_dt",
+  "label_col": "max_drift_ratio_raw",
+  "scale_target": true,
+  "label_scale": 1000.0,
+  "layout_feature_width": 7,
+  "base_scalar_cols": [
+    "num_floors",
+    "floor_mass",
+    "floor_height",
+    "k_base_1_4",
+    "Fy_add"
+  ],
+  "wave_feature_cols": [
+    "period_1_sec",
+    "wave_pga",
+    "wave_rms",
+    "wave_mean_abs",
+    "wave_cav",
+    "wave_arias_proxy",
+    "wave_duration_5_95",
+    "wave_zero_crossing_rate",
+    "wave_dominant_freq",
+    "wave_spectral_centroid",
+    "wave_predominant_period",
+    "wave_intensity_score"
+  ],
+  "scalar_feature_names": [
+    "num_floors",
+    "floor_mass",
+    "floor_height",
+    "k_base_1_4",
+    "Fy_add",
+    "period_1_sec",
+    "wave_pga",
+    "wave_rms",
+    "wave_mean_abs",
+    "wave_cav",
+    "wave_arias_proxy",
+    "wave_duration_5_95",
+    "wave_zero_crossing_rate",
+    "wave_dominant_freq",
+    "wave_spectral_centroid",
+    "wave_predominant_period",
+    "wave_intensity_score",
+    "log1p_period_1_sec",
+    "log1p_wave_pga",
+    "log1p_wave_rms",
+    "log1p_wave_mean_abs",
+    "log1p_wave_cav",
+    "log1p_wave_arias_proxy",
+    "log1p_wave_duration_5_95",
+    "log1p_wave_zero_crossing_rate",
+    "log1p_wave_dominant_freq",
+    "log1p_wave_spectral_centroid",
+    "log1p_wave_predominant_period",
+    "log1p_wave_intensity_score",
+    "wave_to_structure_period_ratio",
+    "structure_to_wave_period_ratio",
+    "wave_structure_period_log_gap",
+    "wave_dominant_freq_x_period",
+    "wave_spectral_centroid_x_period",
+    "wave_pga_x_period",
+    "wave_cav_x_period",
+    "wave_arias_proxy_x_period",
+    "wave_intensity_score_x_period",
+    "inv_k_base_1_4",
+    "inv_Fy_add",
+    "mass_to_stiffness",
+    "height_to_stiffness",
+    "period_squared",
+    "num_floors_x_period",
+    "floor_mass_x_period",
+    "floor_height_x_period",
+    "flexibility_x_period",
+    "strength_inverse_x_period",
+    "damper_story_1",
+    "damper_story_2",
+    "damper_story_3",
+    "damper_story_4",
+    "damper_story_5",
+    "damper_story_6",
+    "damper_story_7",
+    "damper_install_count",
+    "damper_install_ratio",
+    "damper_sparse_ratio",
+    "tail_risk_proxy",
+    "log1p_tail_risk_proxy",
+    "wave_intensity_tail_risk",
+    "wave_arias_tail_risk",
+    "wave_cav_tail_risk"
+  ],
+  "num_scalar_features": 63,
+  "sequence_config": {
+    "seq_len": 2048,
+    "target_dt": 0.01,
+    "channels": [
+      "acc_scaled",
+      "abs_acc_scaled"
+    ],
+    "num_channels": 2,
+    "clip_value": 8.0
+  },
+  "sequence_scaler": {
+    "mean": -9.080073356824392e-07,
+    "std": 0.046487059368963225,
+    "max_abs": 0.35587170720100403,
+    "target_dt": 0.01,
+    "seq_len": 2048,
+    "channels": [
+      "acc_scaled",
+      "abs_acc_scaled"
+    ],
+    "clip_value": 8.0
+  },
+  "best_weights_name": "best_lstm_model.pth",
+  "last_weights_name": "lstm_model.pth",
+  "best_weights_are_ema": true,
+  "train_rows": 67260,
+  "val_rows": 3420,
+  "train_unique_waves": 163,
+  "val_unique_waves": 17,
+  "train_loss_weight_summary": {
+    "min": 0.7927564382553101,
+    "max": 2.405381679534912,
+    "mean": 1.0
+  },
+  "adaptive_tail_policy": {
+    "enabled": true,
+    "mode": "fallback_mid_tail",
+    "reason": "train count >= 0.0100 is 0, min required 96",
+    "engineering_thresholds": [
+      0.005,
+      0.01,
+      0.02
+    ],
+    "fallback_thresholds": [
+      0.003,
+      0.005,
+      0.007
+    ],
+    "active_thresholds": [
+      0.003,
+      0.005,
+      0.007
+    ],
+    "train_counts": [
+      27180,
+      9268,
+      2054
+    ],
+    "val_counts": [
+      888,
+      422,
+      259
+    ],
+    "classification_loss_weights": [
+      0.01,
+      0.024,
+      0.044
+    ]
+  },
+  "tail_classification": {
+    "enabled": true,
+    "thresholds": [
+      0.003,
+      0.005,
+      0.007
+    ],
+    "loss_weights": [
+      0.01,
+      0.024,
+      0.044
+    ],
+    "positive_counts": [
+      27180,
+      9268,
+      2054
+    ],
+    "total_count": 67260,
+    "pos_weights": [
+      1.214336726997177,
+      2.5014454172854097,
+      5.634346611028071
+    ],
+    "pos_weight_max": 26.0,
+    "ramp_epochs": 10
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "run_name": "todo6_8_tables_and_statistics",
+  "source_final_multiseed_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed",
+  "models": [
+    "2dcnn",
+    "catboost",
+    "dummy_mean",
+    "dummy_median",
+    "elasticnet",
+    "extratrees",
+    "histgradientboosting",
+    "lightgbm",
+    "lstm",
+    "mlp",
+    "randomforest",
+    "ridge",
+    "wavenet",
+    "xgboost"
+  ],
+  "seeds": [
+    20260614,
+    20260615,
+    20260616,
+    20260617,
+    20260618
+  ],
+  "run_count": 70,
+  "reference_model_for_paired_tests": "lightgbm",
+  "bootstrap_iters": 2000,
+  "outputs": {
+    "final_summary_metrics_by_seed": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\summary_metrics_by_seed.csv",
+    "final_summary_metrics_mean_std_ci": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\summary_metrics_mean_std_ci.csv",
+    "table2_overall_test_metrics": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table2_overall_test_metrics.csv",
+    "tableS_seed_metrics": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\tableS_seed_metrics.csv",
+    "table3_tail_safety_metrics": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table3_tail_safety_metrics.csv",
+    "table3_tail_safety_metrics_by_seed": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table3_tail_safety_metrics_by_seed.csv",
+    "tableS_group_metrics": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\tableS_group_metrics.csv",
+    "tableS_group_metrics_by_seed": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\tableS_group_metrics_by_seed.csv",
+    "paired_bootstrap_delta": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\statistics\\paired_bootstrap_delta.csv",
+    "wilcoxon_tests": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\statistics\\wilcoxon_tests.csv",
+    "model_performance_bar_ci": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\model_performance_bar_ci.png"
+  },
+  "notes": [
+    "Prediction files are aligned by sample_id for paired tests.",
+    "Paired tests use per-sample errors on the locked test split; TODO2 found repeated scenarios, so paper text should state this and optionally report scenario-aggregated sensitivity.",
+    "The locked test split has no >=0.010 drift samples and no steel01_yielded=1 samples; high-drift safety claims still require TODO10."
+  ]
+}

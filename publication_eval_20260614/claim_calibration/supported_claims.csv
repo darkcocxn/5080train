@@ -1,0 +1,6 @@
+﻿claim,claim_id,evidence,support_level
+The 2D-CNN achieves the lowest locked-test MAE among completed models: 0.000314189.,C1,Table 2; TODO6 multi-seed final evaluation,strong
+2D-CNN significantly improves MAE over LightGBM by 0.000145828 with positive bootstrap CI.,C2,Table 4 paired hierarchical bootstrap,strong
+Locked test is exact unseen-wave and exact unseen-structure relative to train+val; 2D-CNN remains the best model on this locked OOD benchmark.,C3,Table 6; TODO10,moderate_strong_with_scope_limit
+Validation-calibrated adaptive conformal intervals give global locked-test 90% interval coverage of 0.958922.,C4,Table 7; TODO11,moderate_with_calibration_split_caveat
+Tail p95 MAE is best for wavenet; 2D-CNN is competitive but not best on p95 tail MAE.,C5,Table 3; TODO7,strong_for_cautious_tail_comparison

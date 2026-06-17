@@ -1,0 +1,152 @@
+{
+  "run_name": "todo5_deep_frozen_best_params_multiseed_eval",
+  "protocol_path": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\protocol\\protocol_lock.json",
+  "models": [
+    "lstm",
+    "wavenet",
+    "2dcnn"
+  ],
+  "seeds": [
+    20260614,
+    20260615,
+    20260616,
+    20260617,
+    20260618
+  ],
+  "num_epochs": 40,
+  "early_stopping_patience": null,
+  "train_num_workers": 0,
+  "eval_num_workers": 0,
+  "eval_batch_size": 64,
+  "device": "cuda",
+  "output_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed",
+  "summary_metrics_deep_by_seed": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\summary_metrics_deep_by_seed.csv",
+  "summary_metrics_deep_mean_std_ci": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\summary_metrics_deep_mean_std_ci.csv",
+  "run_records": [
+    {
+      "model": "lstm",
+      "seed": 20260614,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\lstm\\seed_20260614",
+      "test_mae": 0.00037409051955211806,
+      "test_rmse": 0.0005268776145534242,
+      "test_r2": 0.8493135569201238
+    },
+    {
+      "model": "lstm",
+      "seed": 20260615,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\lstm\\seed_20260615",
+      "test_mae": 0.0003528217144085366,
+      "test_rmse": 0.0005187484618649752,
+      "test_r2": 0.8539275439958143
+    },
+    {
+      "model": "lstm",
+      "seed": 20260616,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\lstm\\seed_20260616",
+      "test_mae": 0.00039904075188690633,
+      "test_rmse": 0.0005600351504135681,
+      "test_r2": 0.8297507294575712
+    },
+    {
+      "model": "lstm",
+      "seed": 20260617,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\lstm\\seed_20260617",
+      "test_mae": 0.00039031344931482676,
+      "test_rmse": 0.000556158936654581,
+      "test_r2": 0.8320992919661931
+    },
+    {
+      "model": "lstm",
+      "seed": 20260618,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\lstm\\seed_20260618",
+      "test_mae": 0.00032265957879731703,
+      "test_rmse": 0.0004454024369759747,
+      "test_r2": 0.8923138463138817
+    },
+    {
+      "model": "wavenet",
+      "seed": 20260614,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\wavenet\\seed_20260614",
+      "test_mae": 0.00033757002554781775,
+      "test_rmse": 0.00046638453489717427,
+      "test_r2": 0.8819290739933061
+    },
+    {
+      "model": "wavenet",
+      "seed": 20260615,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\wavenet\\seed_20260615",
+      "test_mae": 0.00034335167725266366,
+      "test_rmse": 0.00048037260814548543,
+      "test_r2": 0.8747403604912618
+    },
+    {
+      "model": "wavenet",
+      "seed": 20260616,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\wavenet\\seed_20260616",
+      "test_mae": 0.0003642681139011553,
+      "test_rmse": 0.0005058404508099637,
+      "test_r2": 0.8611065392795515
+    },
+    {
+      "model": "wavenet",
+      "seed": 20260617,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\wavenet\\seed_20260617",
+      "test_mae": 0.0003339017812485558,
+      "test_rmse": 0.000468326131500884,
+      "test_r2": 0.8809439500159675
+    },
+    {
+      "model": "wavenet",
+      "seed": 20260618,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\wavenet\\seed_20260618",
+      "test_mae": 0.00033339815357766366,
+      "test_rmse": 0.00047417277737092097,
+      "test_r2": 0.877952771499009
+    },
+    {
+      "model": "2dcnn",
+      "seed": 20260614,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\2dcnn\\seed_20260614",
+      "test_mae": 0.00032270429272849806,
+      "test_rmse": 0.00045530416107632504,
+      "test_r2": 0.8874726928486152
+    },
+    {
+      "model": "2dcnn",
+      "seed": 20260615,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\2dcnn\\seed_20260615",
+      "test_mae": 0.00029002092393164315,
+      "test_rmse": 0.0004221651426175502,
+      "test_r2": 0.9032570268010871
+    },
+    {
+      "model": "2dcnn",
+      "seed": 20260616,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\2dcnn\\seed_20260616",
+      "test_mae": 0.00032833657204139926,
+      "test_rmse": 0.00046380058354260914,
+      "test_r2": 0.883233767249885
+    },
+    {
+      "model": "2dcnn",
+      "seed": 20260617,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\2dcnn\\seed_20260617",
+      "test_mae": 0.00031226719080551985,
+      "test_rmse": 0.00044633618811664355,
+      "test_r2": 0.8918618619771256
+    },
+    {
+      "model": "2dcnn",
+      "seed": 20260618,
+      "run_dir": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed\\2dcnn\\seed_20260618",
+      "test_mae": 0.00031761504598234915,
+      "test_rmse": 0.0004491963140555731,
+      "test_r2": 0.8904715214040557
+    }
+  ],
+  "notes": [
+    "No Optuna search is performed in this runner.",
+    "Each run retrains from scratch using frozen best_params.json and one final protocol seed.",
+    "Validation and locked-test predictions are exported with stable filenames for TODO6-TODO8."
+  ]
+}

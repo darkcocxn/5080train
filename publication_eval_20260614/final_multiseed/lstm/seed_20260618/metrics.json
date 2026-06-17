@@ -1,0 +1,63 @@
+{
+  "model": "lstm",
+  "seed": 20260618,
+  "fit_seconds": 1172.7810539000202,
+  "val_metrics": {
+    "Samples": 3420,
+    "R2": 0.857863107460654,
+    "MAE": 0.0005306221708377193,
+    "RMSE": 0.0010142141437998354,
+    "MAPE": 21.73852204419752,
+    "SMAPE": 23.057446474990652,
+    "Bias": -0.00030971506215233917,
+    "tail_p90_threshold": 0.0056164293,
+    "tail_p90_count": 342,
+    "tail_p90_mae": 0.00228195535497076,
+    "tail_p90_rmse": 0.002861897766746442,
+    "tail_p95_threshold": 0.0095486935,
+    "tail_p95_count": 171,
+    "tail_p95_mae": 0.0036798629894736834,
+    "tail_p95_rmse": 0.003890533354769424
+  },
+  "test_metrics": {
+    "Samples": 3116,
+    "R2": 0.8923138463138817,
+    "MAE": 0.00032265957879731703,
+    "RMSE": 0.0004454024369759747,
+    "MAPE": 18.966335773937686,
+    "SMAPE": 19.50161027503446,
+    "Bias": -2.368146972992298e-05,
+    "tail_p90_threshold": 0.0037563492999999996,
+    "tail_p90_count": 312,
+    "tail_p90_mae": 0.000664065889423077,
+    "tail_p90_rmse": 0.0008171436986782795,
+    "tail_p95_threshold": 0.0049114533749999995,
+    "tail_p95_count": 156,
+    "tail_p95_mae": 0.0007058618307692308,
+    "tail_p95_rmse": 0.0008325592143655563
+  },
+  "best_params": {
+    "SEQ_LEN": 4096,
+    "BATCH_SIZE": 128,
+    "LEARNING_RATE": 6.807488845084668e-05,
+    "WEIGHT_DECAY": 5.718841223447505e-05,
+    "GRAD_CLIP_NORM": 0.8,
+    "SEQ_STEM_CHANNELS": [
+      48,
+      96
+    ],
+    "SEQ_STEM_DROPOUT": 0.05918361323416638,
+    "LSTM_HIDDEN_DIM": 96,
+    "LSTM_NUM_LAYERS": 3,
+    "LSTM_DROPOUT": 0.14079360572731794,
+    "LSTM_ATTENTION_DIM": 64,
+    "SEQUENCE_PROJECTOR_DIM": 256,
+    "SCALAR_EMBED_DIM": 256,
+    "SCALAR_RES_BLOCKS": 3,
+    "SCALAR_RES_DROPOUT": 0.25378532773115253,
+    "FUSION_BILINEAR_DIM": 64,
+    "FUSION_OUTPUT_DIM": 512,
+    "HEAD_DROPOUT": 0.13392932182752296
+  },
+  "batch_size": 128
+}

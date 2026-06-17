@@ -1,0 +1,37 @@
+{
+  "model": "mlp",
+  "seed": 20260618,
+  "fit_seconds": 17.938208499981556,
+  "val_metrics": {
+    "Samples": 3420,
+    "R2": 0.8628629901489401,
+    "MAE": 0.0005867732427294235,
+    "RMSE": 0.000996216181804158,
+    "MAPE": 26.453002745384193,
+    "Bias": -0.0003398988905733029,
+    "SelectionScore": 0.0025536695196781574,
+    "phase": "val"
+  },
+  "test_metrics": {
+    "Samples": 3116,
+    "R2": 0.5740059786829008,
+    "MAE": 0.0006670523059008315,
+    "RMSE": 0.0008858790036607709,
+    "MAPE": 39.97557094390508,
+    "Bias": -0.00012707425380391877,
+    "SelectionScore": 0.0010443437984032351,
+    "phase": "test"
+  },
+  "best_params": {
+    "BATCH_SIZE": 512,
+    "LEARNING_RATE": 0.0027064562512491962,
+    "WEIGHT_DECAY": 0.00040698425512740915,
+    "SMOOTH_L1_BETA": 0.3,
+    "EARLY_STOPPING_PATIENCE": 15,
+    "MLP_HIDDEN_DIM": 512,
+    "MLP_BLOCK_COUNT": 3,
+    "MLP_HIDDEN_MULT": 2,
+    "MLP_DROPOUT": 0.2947761830760372,
+    "WAVEFORM_FEATURE_COUNT": 128
+  }
+}

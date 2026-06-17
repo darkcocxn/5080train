@@ -1,0 +1,33 @@
+{
+  "model": "randomforest",
+  "seed": 20260618,
+  "fit_seconds": 75.38913330002106,
+  "val_metrics": {
+    "Samples": 3420,
+    "R2": 0.791645644754318,
+    "MAE": 0.0006653727301773758,
+    "RMSE": 0.0012279411272977084,
+    "MAPE": 28.60584070978773,
+    "Bias": -0.00028799765146814344,
+    "SelectionScore": 0.0032880358659647096,
+    "phase": "val"
+  },
+  "test_metrics": {
+    "Samples": 3116,
+    "R2": 0.7499606804195781,
+    "MAE": 0.00047834541668464754,
+    "RMSE": 0.0006786983771685475,
+    "MAPE": 26.724844417578442,
+    "Bias": 3.207293269863329e-05,
+    "SelectionScore": 0.0007575887171237513,
+    "phase": "test"
+  },
+  "best_params": {
+    "N_ESTIMATORS": 800,
+    "MAX_DEPTH": 20,
+    "MIN_SAMPLES_LEAF": 4,
+    "MIN_SAMPLES_SPLIT": 2,
+    "MAX_FEATURES": 0.5,
+    "WAVEFORM_FEATURE_COUNT": 128
+  }
+}

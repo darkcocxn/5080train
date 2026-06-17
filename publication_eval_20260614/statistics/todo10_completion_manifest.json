@@ -1,0 +1,111 @@
+{
+  "run_name": "todo10_ood_benchmark_completion",
+  "generated_at": "2026-06-17",
+  "source_output_root": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614",
+  "prediction_source": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\final_multiseed",
+  "models": [
+    "2dcnn",
+    "catboost",
+    "dummy_mean",
+    "dummy_median",
+    "elasticnet",
+    "extratrees",
+    "histgradientboosting",
+    "lightgbm",
+    "lstm",
+    "mlp",
+    "randomforest",
+    "ridge",
+    "wavenet",
+    "xgboost"
+  ],
+  "seeds": [
+    20260614,
+    20260615,
+    20260616,
+    20260617,
+    20260618
+  ],
+  "status": {
+    "unseen_wave": "complete_independent_locked_test",
+    "unseen_structure": "complete_independent_locked_test_exact_signature",
+    "high_drift_independent": "not_available_requires_new_opensees_labels",
+    "high_drift_diagnostic": "completed_on_validation_only_not_claimworthy"
+  },
+  "locked_test_coverage": {
+    "split": "test",
+    "rows": 3116,
+    "unique_waves": 14,
+    "unique_wave_clusters": 4,
+    "unique_structure_signatures": 802,
+    "target_max": 0.0073621560672471,
+    "target_p95": 0.004911453307871724,
+    "target_ge_0.005": 143,
+    "target_ge_0.010": 0,
+    "target_ge_0.015": 0,
+    "target_ge_0.020": 0,
+    "steel01_yielded_count": 0,
+    "steel02_yielded_count": 2048,
+    "exact_wave_unseen_vs_train_count": 3116,
+    "exact_wave_unseen_vs_trainval_count": 3116,
+    "exact_structure_unseen_vs_train_count": 3116,
+    "exact_structure_unseen_vs_trainval_count": 3116
+  },
+  "validation_coverage": {
+    "split": "val",
+    "rows": 3420,
+    "unique_waves": 17,
+    "unique_wave_clusters": 5,
+    "unique_structure_signatures": 881,
+    "target_max": 0.0144652856078435,
+    "target_p95": 0.009548693514223116,
+    "target_ge_0.005": 422,
+    "target_ge_0.010": 152,
+    "target_ge_0.015": 0,
+    "target_ge_0.020": 0,
+    "steel01_yielded_count": 152,
+    "steel02_yielded_count": 2111,
+    "exact_wave_unseen_vs_train_count": 3420,
+    "exact_wave_unseen_vs_trainval_count": 0,
+    "exact_structure_unseen_vs_train_count": 3420,
+    "exact_structure_unseen_vs_trainval_count": 0
+  },
+  "independent_high_drift_blocker": {
+    "locked_test_target_ge_0.010": 0,
+    "locked_test_target_ge_0.015": 0,
+    "locked_test_target_ge_0.020": 0,
+    "locked_test_steel01_yielded_count": 0,
+    "required_next_artifact": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\ood_benchmark\\high_drift_opensees_generation_plan.csv",
+    "note": "Run these candidate cases in OpenSees to create a new labeled stress CSV, then re-run this script without retraining models."
+  },
+  "generation_plan": {
+    "validation_high_drift_structures_available": 59,
+    "validation_high_drift_rows": 152,
+    "wave_split_candidates_found": 233,
+    "unused_wave_candidates_found": 39,
+    "generated_plan_rows": 200,
+    "claim_note": "This is a generation plan, not evaluated evidence. Metrics require running OpenSees and evaluating frozen models on the new labeled CSV."
+  },
+  "outputs": {
+    "unseen_wave_metrics": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\ood_benchmark\\unseen_wave_metrics.csv",
+    "unseen_structure_metrics": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\ood_benchmark\\unseen_structure_metrics.csv",
+    "high_drift_stress_metrics": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\ood_benchmark\\high_drift_stress_metrics.csv",
+    "ood_benchmark_metrics": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\ood_benchmark\\ood_benchmark_metrics.csv",
+    "ood_benchmark_metrics_by_seed": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\ood_benchmark\\ood_benchmark_metrics_by_seed.csv",
+    "ood_benchmark_sample_index": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\ood_benchmark\\ood_benchmark_sample_index.csv",
+    "ood_split_coverage": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\ood_benchmark\\ood_split_coverage.csv",
+    "high_drift_opensees_generation_plan": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\ood_benchmark\\high_drift_opensees_generation_plan.csv",
+    "table6_ood_generalization": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table6_ood_generalization.csv",
+    "table6_ood_generalization_md": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table6_ood_generalization.md",
+    "ood_performance_drop_png": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\ood_performance_drop.png",
+    "ood_performance_drop_svg": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\ood_performance_drop.svg",
+    "todo10_completion_report": "C:\\Users\\jiaotong1\\5080train\\md_files\\02_research_and_paper\\literature_reviews\\TODO10_OOD与高漂移benchmark补齐完成报告_20260617.md"
+  },
+  "claim_boundaries": [
+    "Locked test is 100% exact unseen-wave and exact unseen-structure relative to train+val.",
+    "Unseen-structure means exact structural signature, not extrapolation to unseen floors or parameter ranges.",
+    "Locked test has no target >= 0.010, >= 0.015, >= 0.020, or steel01_yielded=1 samples.",
+    "Validation high-drift diagnostics are not independent final evidence because validation was used during HPO/early stopping.",
+    "Strong high-drift/yielded safety claims require running the generated OpenSees stress plan and evaluating frozen models on the new labeled CSV."
+  ]
+}

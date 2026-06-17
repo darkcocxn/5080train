@@ -1,0 +1,38 @@
+{
+  "algorithm": "randomforest",
+  "study_name": "randomforest_publication_hpo_publication-hpo-20260611-005517",
+  "objective_metric": "selection",
+  "trial_count": 40,
+  "complete_trial_count": 40,
+  "trials_csv": "C:\\Users\\jiaotong1\\5080train\\update\\randomforest\\optuna_trials.csv",
+  "updated_at": "2026-06-11 01:43:23",
+  "best_trial_number": 17,
+  "best_value": 0.0032879971261076434,
+  "best_optuna_params": {
+    "N_ESTIMATORS": 800,
+    "MAX_DEPTH": 20,
+    "MIN_SAMPLES_LEAF": 4,
+    "MIN_SAMPLES_SPLIT": 2,
+    "MAX_FEATURES": 0.5,
+    "WAVEFORM_FEATURE_COUNT": 128
+  },
+  "best_config_params": {
+    "N_ESTIMATORS": 800,
+    "MAX_DEPTH": 20,
+    "MIN_SAMPLES_LEAF": 4,
+    "MIN_SAMPLES_SPLIT": 2,
+    "MAX_FEATURES": 0.5,
+    "WAVEFORM_FEATURE_COUNT": 128
+  },
+  "best_artifact_root": "C:\\Users\\jiaotong1\\5080train\\update\\run_logs\\publication-hpo-20260611-005517\\artifacts\\randomforest\\trial_0017",
+  "best_model_dir": "C:\\Users\\jiaotong1\\5080train\\update\\run_logs\\publication-hpo-20260611-005517\\artifacts\\randomforest\\trial_0017\\model-20260531-181258-99dfe0c9-train20260611-011208",
+  "best_metrics": {
+    "Samples": 3420,
+    "R2": 0.791233826005674,
+    "MAE": 0.0006680078404581216,
+    "RMSE": 0.001229154059820691,
+    "MAPE": 28.68994242361327,
+    "Bias": -0.0002910441526703925,
+    "SelectionScore": 0.0032879971261076434
+  }
+}

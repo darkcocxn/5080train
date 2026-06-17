@@ -1,0 +1,30 @@
+.venv/
+__pycache__/
+.idea/
+
+
+model-2dcnn-3stage-rf-3to7/run-logs/
+output/randomforestv1/**/best_randomforest_model.pkl
+
+# Generated optimization artifacts and large model files.
+update/**/runs/
+update/run_logs/
+update/test_runs/
+update/**/*.pth
+update/**/*.pt
+update/**/*.ckpt
+update/**/*.pkl
+update/**/*.joblib
+update/**/*.db
+update/**/*.log
+
+# Publication evaluation artifacts: keep tables/figures/reports, skip heavy model/log binaries.
+publication_eval_*/**/*.pth
+publication_eval_*/**/*.pt
+publication_eval_*/**/*.ckpt
+publication_eval_*/**/*.pkl
+publication_eval_*/**/*.joblib
+publication_eval_*/**/*.db
+publication_eval_*/**/*.log
+publication_eval_*/uncertainty/prediction_intervals.csv
+

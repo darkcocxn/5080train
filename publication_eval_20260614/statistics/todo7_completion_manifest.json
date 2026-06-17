@@ -1,0 +1,67 @@
+{
+  "run_name": "todo7_completion",
+  "generated_at": "2026-06-17",
+  "source_output_root": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614",
+  "model_count": 14,
+  "seed_count_total": 70,
+  "models": [
+    "wavenet",
+    "2dcnn",
+    "lstm",
+    "extratrees",
+    "mlp",
+    "xgboost",
+    "histgradientboosting",
+    "randomforest",
+    "lightgbm",
+    "ridge",
+    "elasticnet",
+    "catboost",
+    "dummy_mean",
+    "dummy_median"
+  ],
+  "absolute_thresholds": [
+    0.005,
+    0.01,
+    0.015,
+    0.02
+  ],
+  "drift_bin_quantiles": [
+    0.0,
+    0.5,
+    0.75,
+    0.9,
+    0.95,
+    1.0
+  ],
+  "best_model_by_p95_mae": "wavenet",
+  "best_p95_mae_mean": 0.0007204756479487,
+  "threshold_coverage_absent": [
+    "target >= 0.010",
+    "target >= 0.015",
+    "target >= 0.020",
+    "steel01_yielded == 1"
+  ],
+  "outputs": {
+    "table3_tail_safety_metrics": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table3_tail_safety_metrics.csv",
+    "table3_tail_safety_metrics_by_seed": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table3_tail_safety_metrics_by_seed.csv",
+    "table3_tail_safety_metrics_paper_ready": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table3_tail_safety_metrics_paper_ready.csv",
+    "table3_tail_safety_metrics_paper_ready_md": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table3_tail_safety_metrics_paper_ready.md",
+    "tableS_tail_threshold_coverage": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\tableS_tail_threshold_coverage.csv",
+    "tableS_tail_error_by_bin": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\tableS_tail_error_by_bin.csv",
+    "tableS_tail_error_by_bin_by_seed": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\tableS_tail_error_by_bin_by_seed.csv",
+    "tableS_dangerous_underprediction_by_threshold": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\tableS_dangerous_underprediction_by_threshold.csv",
+    "tableS_dangerous_underprediction_by_threshold_by_seed": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\tableS_dangerous_underprediction_by_threshold_by_seed.csv",
+    "tail_error_by_bin_png": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\tail_error_by_bin.png",
+    "tail_error_by_bin_svg": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\tail_error_by_bin.svg",
+    "dangerous_underprediction_rate_png": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\dangerous_underprediction_rate.png",
+    "dangerous_underprediction_rate_svg": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\dangerous_underprediction_rate.svg",
+    "todo7_completion_report": "C:\\Users\\jiaotong1\\5080train\\md_files\\02_research_and_paper\\literature_reviews\\TODO7_尾部工程安全指标补齐完成报告_20260617.md"
+  },
+  "completion_notes": [
+    "Tail/safety metrics are computed on the locked test split after frozen-parameter final retraining.",
+    "Dangerous underprediction is defined as y_true >= threshold and y_pred < threshold.",
+    "target >= 0.010, 0.015, and 0.020 are absent in the locked test split; high-drift safety claims still require TODO10.",
+    "Figure data sources are saved alongside the paper tables so plotted values are auditable."
+  ]
+}

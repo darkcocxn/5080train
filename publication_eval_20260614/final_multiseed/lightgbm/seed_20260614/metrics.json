@@ -1,0 +1,37 @@
+{
+  "model": "lightgbm",
+  "seed": 20260614,
+  "fit_seconds": 7.891689400014002,
+  "val_metrics": {
+    "Samples": 3420,
+    "R2": 0.8211554980747198,
+    "MAE": 0.0006365820063383009,
+    "RMSE": 0.0011376640918864453,
+    "MAPE": 29.067333921846192,
+    "Bias": -0.0003441093588345166,
+    "SelectionScore": 0.0029744664002541057,
+    "phase": "val"
+  },
+  "test_metrics": {
+    "Samples": 3116,
+    "R2": 0.7649829981344085,
+    "MAE": 0.00045719483554299163,
+    "RMSE": 0.0006579945513421468,
+    "MAPE": 28.89023127942007,
+    "Bias": -6.632839447879241e-05,
+    "SelectionScore": 0.0007259521964743185,
+    "phase": "test"
+  },
+  "best_params": {
+    "N_ESTIMATORS": 4750,
+    "LEARNING_RATE": 0.0542243504052007,
+    "NUM_LEAVES": 117,
+    "MAX_DEPTH": 4,
+    "MIN_CHILD_SAMPLES": 162,
+    "SUBSAMPLE": 0.7761135824011032,
+    "COLSAMPLE_BYTREE": 0.750235902687964,
+    "REG_LAMBDA": 0.016525248037295284,
+    "REG_ALPHA": 6.899718394832332e-06,
+    "WAVEFORM_FEATURE_COUNT": 128
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "model": "2dcnn",
+  "seed": 20260615,
+  "fit_seconds": 17013.498279499996,
+  "val_metrics": {
+    "Samples": 3420,
+    "R2": 0.8662833708846268,
+    "MAE": 0.0004916459990573099,
+    "RMSE": 0.0009837142521333573,
+    "MAPE": 19.339898997627703,
+    "SMAPE": 18.69401144241544,
+    "Bias": -0.00031070078254502923,
+    "tail_p90_threshold": 0.0056164293,
+    "tail_p90_count": 342,
+    "tail_p90_mae": 0.0023625035432748537,
+    "tail_p90_rmse": 0.0028612458332811165,
+    "tail_p95_threshold": 0.0095486935,
+    "tail_p95_count": 171,
+    "tail_p95_mae": 0.003637560611111111,
+    "tail_p95_rmse": 0.003830426904618779
+  },
+  "test_metrics": {
+    "Samples": 3116,
+    "R2": 0.9032570268010871,
+    "MAE": 0.00029002092393164315,
+    "RMSE": 0.0004221651426175502,
+    "MAPE": 18.78947425308232,
+    "SMAPE": 16.851423438785957,
+    "Bias": 4.240363989409501e-06,
+    "tail_p90_threshold": 0.0037563492999999996,
+    "tail_p90_count": 312,
+    "tail_p90_mae": 0.0006945064532051282,
+    "tail_p90_rmse": 0.0008537702394917142,
+    "tail_p95_threshold": 0.0049114533749999995,
+    "tail_p95_count": 156,
+    "tail_p95_mae": 0.0007849155249999999,
+    "tail_p95_rmse": 0.0009079557618219514
+  },
+  "best_params": {
+    "IMAGE_SIZE": [
+      192,
+      192
+    ],
+    "BATCH_SIZE": 32,
+    "LEARNING_RATE": 0.00010292554784232322,
+    "WEIGHT_DECAY": 2.0990882814751085e-06,
+    "GRAD_CLIP_NORM": 0.5,
+    "CNN_CHANNELS": [
+      40,
+      80,
+      160,
+      256
+    ],
+    "CNN_DROPOUT": 0.16305683463325332,
+    "CNN_PROJECTOR_DIM": 384,
+    "CNN_PROJECTOR_DROPOUT": 0.1813424484001427,
+    "SCALAR_EMBED_DIM": 192,
+    "SCALAR_RES_BLOCKS": 5,
+    "SCALAR_RES_DROPOUT": 0.23841749953941138,
+    "FUSION_BILINEAR_DIM": 64,
+    "FUSION_OUTPUT_DIM": 256,
+    "FUSION_DROPOUT": 0.09605029463485952,
+    "HEAD_DROPOUT": 0.17642293255094516,
+    "TIME_FREQ_MASK_PROB": 0.3541370626424404
+  },
+  "batch_size": 32
+}

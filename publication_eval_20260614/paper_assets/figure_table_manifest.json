@@ -1,0 +1,117 @@
+{
+  "run_name": "todo14_figure_table_manifest",
+  "items": [
+    {
+      "kind": "table",
+      "id": "Table 1",
+      "path": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table1_dataset_statistics.csv",
+      "source": "protocol CSVs",
+      "generation_command": "python update/complete_remaining_todos.py"
+    },
+    {
+      "kind": "table",
+      "id": "Table 2",
+      "path": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table2_overall_test_metrics_paper_ready.csv",
+      "source": "TODO6",
+      "generation_command": "python update/complete_todo6_publication_tables.py"
+    },
+    {
+      "kind": "table",
+      "id": "Table 3",
+      "path": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table3_tail_safety_metrics_paper_ready.csv",
+      "source": "TODO7",
+      "generation_command": "python update/complete_todo7_tail_safety.py"
+    },
+    {
+      "kind": "table",
+      "id": "Table 4",
+      "path": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table4_statistical_comparison.csv",
+      "source": "TODO8",
+      "generation_command": "python update/compare_models_statistics.py"
+    },
+    {
+      "kind": "table",
+      "id": "Table 5",
+      "path": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table5_ablation_study.csv",
+      "source": "TODO9 ablation",
+      "generation_command": "python update/complete_remaining_todos.py"
+    },
+    {
+      "kind": "table",
+      "id": "Table 6",
+      "path": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table6_ood_generalization.csv",
+      "source": "TODO10",
+      "generation_command": "python update/complete_todo10_ood_benchmark.py"
+    },
+    {
+      "kind": "table",
+      "id": "Table 7",
+      "path": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table7_uncertainty_calibration.csv",
+      "source": "TODO11",
+      "generation_command": "python update/complete_todo11_uncertainty.py"
+    },
+    {
+      "kind": "figure",
+      "id": "Figure 1",
+      "path": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\figure1_task_model_schematic.png",
+      "source": "protocol/workflow",
+      "generation_command": "python update/complete_remaining_todos.py"
+    },
+    {
+      "kind": "figure",
+      "id": "Figure 2",
+      "path": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\figure2_target_distribution_by_split.png",
+      "source": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table1_dataset_statistics.csv",
+      "generation_command": "python update/complete_remaining_todos.py"
+    },
+    {
+      "kind": "figure",
+      "id": "Figure 3",
+      "path": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\model_performance_bar_ci.png",
+      "source": "Table 2",
+      "generation_command": "python update/complete_todo6_publication_tables.py"
+    },
+    {
+      "kind": "figure",
+      "id": "Figure 4a",
+      "path": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\tail_error_by_bin.png",
+      "source": "TODO7 tail bins",
+      "generation_command": "python update/complete_todo7_tail_safety.py"
+    },
+    {
+      "kind": "figure",
+      "id": "Figure 4b",
+      "path": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\dangerous_underprediction_rate.png",
+      "source": "TODO7 thresholds",
+      "generation_command": "python update/complete_todo7_tail_safety.py"
+    },
+    {
+      "kind": "figure",
+      "id": "Figure 5",
+      "path": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\figure5_ablation_study.png",
+      "source": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_tables\\table5_ablation_study.csv",
+      "generation_command": "python update/complete_remaining_todos.py"
+    },
+    {
+      "kind": "figure",
+      "id": "Figure 6",
+      "path": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\ood_performance_drop.png",
+      "source": "TODO10",
+      "generation_command": "python update/complete_todo10_ood_benchmark.py"
+    },
+    {
+      "kind": "figure",
+      "id": "Figure 7",
+      "path": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\calibration_curve.png",
+      "source": "TODO11",
+      "generation_command": "python update/complete_todo11_uncertainty.py"
+    },
+    {
+      "kind": "figure",
+      "id": "Figure 8",
+      "path": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\paper_figures\\case_study_panel.png",
+      "source": "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614\\interpretability\\case_studies\\case_study_index.csv",
+      "generation_command": "python update/complete_remaining_todos.py"
+    }
+  ]
+}

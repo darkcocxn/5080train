@@ -1,0 +1,593 @@
+protocol_name: "publication_evaluation_protocol_lock"
+protocol_status: "locked_candidate"
+generated_at: "2026-06-14T14:00:50"
+generated_by:
+  script: "C:\\Users\\jiaotong1\\5080train\\update\\lock_publication_protocol.py"
+  project_root: "C:\\Users\\jiaotong1\\5080train"
+  output_root: "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614"
+  non_interference_policy:
+    - "No training entrypoints are executed."
+    - "No running Python processes are stopped or modified."
+    - "Dataset/image directories are read-only; directory recursive hashing is skipped."
+    - "Only protocol files under the output protocol directory are written."
+git:
+  commit: "7077b9ee424ddd24a2a08d9d97346244774db9b9"
+  branch: "master"
+  dirty_status_short: "?? \"md_files/02_research_and_paper/literature_reviews/TODO1_\\345\\215\\217\\350\\256\\256\\351\\224\\201\\345\\256\\232\\350\\204\\232\\346\\234\\254\\344\\270\\216\\345\\267\\245\\344\\275\\234\\346\\200\\273\\347\\273\\223_20260614.md\"\n?? \"md_files/02_research_and_paper/literature_reviews/TODO2_\\346\\225\\260\\346\\215\\256\\345\\256\\241\\350\\256\\241\\350\\204\\232\\346\\234\\254\\344\\270\\216\\345\\267\\245\\344\\275\\234\\346\\200\\273\\347\\273\\223_20260614.md\"\n?? publication_eval_20260614/\n?? update/audit_dataset_protocol.py\n?? update/lock_publication_protocol.py"
+dataset:
+  dataset_base: "opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258"
+  target_column: "max_drift_ratio_raw"
+  data_dir: "C:\\Users\\jiaotong1\\5080train\\newdata"
+  train_csv:
+    path: "C:\\Users\\jiaotong1\\5080train\\newdata\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258_train.csv"
+    exists: true
+    type: "file"
+    bytes: 35893289
+    last_modified: "2026-06-01T00:38:32"
+    sha256: "c9e884866321e2399a8edc989e64a8ee31cd71aa64f3f868fa56f9d32bccbe11"
+    rows_excluding_header: 67260
+    columns:
+      - "sample_id"
+      - "split"
+      - "stage"
+      - "round_idx"
+      - "txt_path"
+      - "image_path"
+      - "num_floors"
+      - "floor_mass"
+      - "floor_height"
+      - "k_base_1_4"
+      - "k_add"
+      - "Fy_add"
+      - "damper_layout"
+      - "frame_b"
+      - "frame_yield_drift_ratio"
+      - "period_1_sec"
+      - "period_limit_sec"
+      - "period_compliant"
+      - "period_check_status"
+      - "wave_cluster"
+      - "wave_dt"
+      - "wave_length"
+      - "wave_pga"
+      - "wave_rms"
+      - "wave_mean_abs"
+      - "wave_cav"
+      - "wave_arias_proxy"
+      - "wave_duration_5_95"
+      - "wave_zero_crossing_rate"
+      - "wave_dominant_freq"
+      - "wave_spectral_centroid"
+      - "wave_predominant_period"
+      - "wave_intensity_score"
+      - "max_drift_ratio_raw"
+      - "max_drift_ratio_q1e4"
+      - "steel01_yielded"
+      - "steel02_yielded"
+      - "peak_damper_force"
+      - "yield_margin"
+      - "peak_story_id"
+      - "analysis_status"
+      - "failure_reason"
+      - "failure_category"
+      - "analysis_return_code"
+      - "analysis_failed_step"
+      - "analysis_failed_time"
+      - "nonconvergence_flag"
+    target_column_present: true
+  val_csv:
+    path: "C:\\Users\\jiaotong1\\5080train\\newdata\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258_val.csv"
+    exists: true
+    type: "file"
+    bytes: 1823552
+    last_modified: "2026-06-01T00:38:32"
+    sha256: "a4c9ba436c4f0c1c2000cf274280b57b6d1dfc91fdb20e4167b9e9999635ead3"
+    rows_excluding_header: 3420
+    columns:
+      - "sample_id"
+      - "split"
+      - "stage"
+      - "round_idx"
+      - "txt_path"
+      - "image_path"
+      - "num_floors"
+      - "floor_mass"
+      - "floor_height"
+      - "k_base_1_4"
+      - "k_add"
+      - "Fy_add"
+      - "damper_layout"
+      - "frame_b"
+      - "frame_yield_drift_ratio"
+      - "period_1_sec"
+      - "period_limit_sec"
+      - "period_compliant"
+      - "period_check_status"
+      - "wave_cluster"
+      - "wave_dt"
+      - "wave_length"
+      - "wave_pga"
+      - "wave_rms"
+      - "wave_mean_abs"
+      - "wave_cav"
+      - "wave_arias_proxy"
+      - "wave_duration_5_95"
+      - "wave_zero_crossing_rate"
+      - "wave_dominant_freq"
+      - "wave_spectral_centroid"
+      - "wave_predominant_period"
+      - "wave_intensity_score"
+      - "max_drift_ratio_raw"
+      - "max_drift_ratio_q1e4"
+      - "steel01_yielded"
+      - "steel02_yielded"
+      - "peak_damper_force"
+      - "yield_margin"
+      - "peak_story_id"
+      - "analysis_status"
+      - "failure_reason"
+      - "failure_category"
+      - "analysis_return_code"
+      - "analysis_failed_step"
+      - "analysis_failed_time"
+      - "nonconvergence_flag"
+    target_column_present: true
+  test_csv_reserved_locked:
+    path: "C:\\Users\\jiaotong1\\5080train\\newdata\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258_test.csv"
+    exists: true
+    type: "file"
+    bytes: 1670258
+    last_modified: "2026-06-01T00:38:32"
+    sha256: "720f3b86d6f59a335af692ae6ec4e39dc360559da6a7bbd92569c7e9ac8d1edb"
+    rows_excluding_header: 3116
+    columns:
+      - "sample_id"
+      - "split"
+      - "stage"
+      - "round_idx"
+      - "txt_path"
+      - "image_path"
+      - "num_floors"
+      - "floor_mass"
+      - "floor_height"
+      - "k_base_1_4"
+      - "k_add"
+      - "Fy_add"
+      - "damper_layout"
+      - "frame_b"
+      - "frame_yield_drift_ratio"
+      - "period_1_sec"
+      - "period_limit_sec"
+      - "period_compliant"
+      - "period_check_status"
+      - "wave_cluster"
+      - "wave_dt"
+      - "wave_length"
+      - "wave_pga"
+      - "wave_rms"
+      - "wave_mean_abs"
+      - "wave_cav"
+      - "wave_arias_proxy"
+      - "wave_duration_5_95"
+      - "wave_zero_crossing_rate"
+      - "wave_dominant_freq"
+      - "wave_spectral_centroid"
+      - "wave_predominant_period"
+      - "wave_intensity_score"
+      - "max_drift_ratio_raw"
+      - "max_drift_ratio_q1e4"
+      - "steel01_yielded"
+      - "steel02_yielded"
+      - "peak_damper_force"
+      - "yield_margin"
+      - "peak_story_id"
+      - "analysis_status"
+      - "failure_reason"
+      - "failure_category"
+      - "analysis_return_code"
+      - "analysis_failed_step"
+      - "analysis_failed_time"
+      - "nonconvergence_flag"
+    target_column_present: true
+  wavelet_image_dir:
+    path: "C:\\Users\\jiaotong1\\5080train\\newdata\\Newdatabase\\Scalogram\\rare_waves-20260531-140353"
+    exists: true
+    type: "directory"
+    last_modified: "2026-05-31T20:12:52"
+    recursive_hash_skipped: true
+    reason: "Directory hashing is intentionally skipped to avoid heavy IO during active training."
+  filtering_rules_to_verify_in_todo2:
+    - "Check whether top drift samples were removed."
+    - "Check invalid analysis/status filtering rules."
+    - "Check whether group overlap exists across train/val/test."
+    - "Check high-drift/yield sample coverage before making safety claims."
+splits_and_usage_policy:
+  train: "Model fitting only."
+  validation: "Optuna HPO, early stopping, checkpoint selection only."
+  locked_test: "Final generalization evaluation only after models, metrics, seeds, and statistics are frozen."
+  test_set_prohibitions:
+    - "No hyperparameter selection."
+    - "No early stopping."
+    - "No model architecture selection."
+    - "No ablation selection."
+    - "No figure tuning based on test performance."
+hpo_protocol:
+  sampler: "Optuna TPE"
+  direction: "minimize"
+  objective_metric: "selection"
+  jobs:
+    -
+      model: "randomforest"
+      script: "update/randomforest/tune_optuna_tpe.py"
+      trials: 40
+      startup_trials: 8
+      extra_args:
+        - "--n-jobs"
+        - "8"
+      notes: ""
+      best_params_artifact:
+        path: "C:\\Users\\jiaotong1\\5080train\\update\\randomforest\\best_params.json"
+        exists: true
+        type: "file"
+        bytes: 158
+        last_modified: "2026-06-14T13:41:09"
+        sha256: "b360932490b2ddbad1b538d0b2da67c30685973f410db266600139f8f5bae062"
+    -
+      model: "xgboost"
+      script: "update/xgboost/tune_optuna_tpe.py"
+      trials: 50
+      startup_trials: 8
+      extra_args:
+        - "--n-jobs"
+        - "8"
+      notes: ""
+      best_params_artifact:
+        path: "C:\\Users\\jiaotong1\\5080train\\update\\xgboost\\best_params.json"
+        exists: true
+        type: "file"
+        bytes: 322
+        last_modified: "2026-06-14T13:41:09"
+        sha256: "1dde55cc29c1d94a5dbfcd0fc692d2051343b7af59fd42228e44f87e0cfca778"
+    -
+      model: "lightgbm"
+      script: "update/lightgbm/tune_optuna_tpe.py"
+      trials: 50
+      startup_trials: 8
+      extra_args:
+        - "--n-jobs"
+        - "8"
+      notes: ""
+      best_params_artifact:
+        path: "C:\\Users\\jiaotong1\\5080train\\update\\lightgbm\\best_params.json"
+        exists: true
+        type: "file"
+        bytes: 328
+        last_modified: "2026-06-14T13:41:09"
+        sha256: "39fcf3f20fbd83d1df7c750980e805fd7f185e2b6e76b689ec7104dd459b8bb8"
+    -
+      model: "catboost"
+      script: "update/catboost/tune_optuna_tpe.py"
+      trials: 50
+      startup_trials: 8
+      extra_args:
+        - "--n-jobs"
+        - "8"
+      notes: ""
+      best_params_artifact:
+        path: "C:\\Users\\jiaotong1\\5080train\\update\\catboost\\best_params.json"
+        exists: true
+        type: "file"
+        bytes: 190
+        last_modified: "2026-06-14T13:41:09"
+        sha256: "d865e55f7f11f9a8fcf90e471a0778b8fa5d9ea64b70e32b10e3660ba3eac8e0"
+    -
+      model: "mlp"
+      script: "update/mlp/tune_optuna_tpe.py"
+      trials: 30
+      startup_trials: 8
+      extra_args:
+        - "--num-epochs"
+        - "60"
+      notes: ""
+      best_params_artifact:
+        path: "C:\\Users\\jiaotong1\\5080train\\update\\mlp\\best_params.json"
+        exists: true
+        type: "file"
+        bytes: 319
+        last_modified: "2026-06-14T13:41:09"
+        sha256: "0fdc2a8af24789aa2570f7a85e9583046388dde3f59eaa0cefe80af4d3f2de9e"
+    -
+      model: "lstm"
+      script: "update/lstm/tune_optuna_tpe.py"
+      trials: 20
+      startup_trials: 8
+      extra_args:
+        - "--num-epochs"
+        - "40"
+        - "--batch-size"
+        - "128"
+        - "--num-workers"
+        - "0"
+        - "--device"
+        - "cuda"
+      notes: "CUDA profile from update/run_publication_hpo.py."
+      best_params_artifact:
+        path: "C:\\Users\\jiaotong1\\5080train\\update\\lstm\\best_params.json"
+        exists: true
+        type: "file"
+        bytes: 603
+        last_modified: "2026-06-14T13:41:09"
+        sha256: "bd370071497bce4930559b2b58d37a381eef53bd30f533370b24e8a984048c36"
+    -
+      model: "wavenet"
+      script: "update/wavenet/tune_optuna_tpe.py"
+      trials: 20
+      startup_trials: 8
+      extra_args:
+        - "--num-epochs"
+        - "40"
+        - "--batch-size"
+        - "96"
+        - "--num-workers"
+        - "0"
+        - "--device"
+        - "cuda"
+      notes: "CUDA profile from update/run_publication_hpo.py."
+      best_params_artifact:
+        path: "C:\\Users\\jiaotong1\\5080train\\update\\wavenet\\best_params.json"
+        exists: true
+        type: "file"
+        bytes: 695
+        last_modified: "2026-06-14T13:41:09"
+        sha256: "b69ec753eecaf2a393f41c273e74a51e916fbfa70591b6de701b48f4ff361b43"
+    -
+      model: "2dcnn"
+      script: "update/2dcnn/tune_optuna_tpe.py"
+      trials: 20
+      startup_trials: 8
+      extra_args:
+        - "--num-epochs"
+        - "40"
+        - "--batch-size"
+        - "32"
+        - "--num-workers"
+        - "0"
+      notes: "Uses the 2dcnnv11 tuning entry with the unified newdata split."
+      best_params_artifact:
+        path: "C:\\Users\\jiaotong1\\5080train\\update\\2dcnn\\best_params.json"
+        exists: true
+        type: "file"
+        bytes: 649
+        last_modified: "2026-06-14T13:41:09"
+        sha256: "54df4d2e0bbf370baa09dd4df4dcb5fbc3417513a547218ba87502b2340f6f9b"
+final_evaluation_protocol:
+  final_training_seeds:
+    - 20260614
+    - 20260615
+    - 20260616
+    - 20260617
+    - 20260618
+  minimum_independent_training_seeds: 5
+  preferred_independent_training_seeds: 10
+  seed_policy: "Each final model must be retrained from scratch with frozen best hyperparameters."
+  resampling_warning: "Test-set resampling metrics must not be reported as independent training seeds."
+  primary_metrics:
+    - "MAE"
+    - "RMSE"
+    - "R2"
+  secondary_metrics:
+    - "MAPE_or_SMAPE"
+    - "parameter_count"
+    - "training_time"
+    - "inference_latency"
+  safety_metrics:
+    - "tail_MAE"
+    - "tail_RMSE"
+    - "dangerous_underprediction_rate"
+    - "threshold_recall"
+    - "threshold_precision"
+    - "max_underprediction"
+  tail_thresholds:
+    - "p90"
+    - "p95"
+    - "0.005"
+    - "0.010"
+    - "0.015"
+    - "0.020"
+  statistical_tests:
+    - "grouped paired bootstrap confidence intervals"
+    - "Wilcoxon signed-rank test"
+    - "Friedman test with post-hoc correction when multiple folds/tasks exist"
+    - "Holm correction for multiple comparisons"
+model_registry:
+  -
+    name: "dummy_mean_median"
+    status: "planned_p0_baseline"
+    role: "sanity baseline"
+    reason: "Detect whether the task is solved by target central tendency."
+  -
+    name: "ridge_elasticnet"
+    status: "planned_p0_baseline"
+    role: "regularized linear baseline"
+    reason: "Quantify the gain from nonlinear models."
+  -
+    name: "extratrees_histgradientboosting"
+    status: "planned_p0_baseline"
+    role: "classical tabular baseline"
+    reason: "Add robust, low-cost tree baselines."
+  -
+    name: "randomforest"
+    status: "existing_hpo"
+    role: "classical tabular baseline"
+    script: "update/randomforest/tune_optuna_tpe.py"
+  -
+    name: "xgboost"
+    status: "existing_hpo"
+    role: "strong GBDT baseline"
+    script: "update/xgboost/tune_optuna_tpe.py"
+  -
+    name: "lightgbm"
+    status: "existing_hpo"
+    role: "strong GBDT baseline"
+    script: "update/lightgbm/tune_optuna_tpe.py"
+  -
+    name: "catboost"
+    status: "existing_hpo"
+    role: "strong GBDT baseline"
+    script: "update/catboost/tune_optuna_tpe.py"
+  -
+    name: "mlp"
+    status: "existing_hpo"
+    role: "neural tabular baseline"
+    script: "update/mlp/tune_optuna_tpe.py"
+  -
+    name: "realmlp_tabm"
+    status: "planned_2026_baseline"
+    role: "modern neural tabular baseline"
+    reason: "Align with 2025 tabular deep learning baselines."
+  -
+    name: "tabpfn_v2"
+    status: "conditional_2026_baseline"
+    role: "tabular foundation model baseline"
+    reason: "Include if data size, feature count, task type, license, and compute allow it; otherwise document exclusion."
+  -
+    name: "autogluon_or_ensembled_gbdt_mlp"
+    status: "planned_2026_baseline"
+    role: "AutoML/ensemble upper baseline"
+    reason: "Align with TabArena-style model comparison."
+  -
+    name: "lstm"
+    status: "existing_hpo"
+    role: "sequence baseline"
+    script: "update/lstm/tune_optuna_tpe.py"
+  -
+    name: "wavenet"
+    status: "existing_hpo"
+    role: "sequence baseline"
+    script: "update/wavenet/tune_optuna_tpe.py"
+  -
+    name: "2dcnn_v11_fusion"
+    status: "existing_hpo_candidate_main"
+    role: "proposed multimodal/time-frequency fusion model"
+    script: "update/2dcnn/tune_optuna_tpe.py"
+    train_script: "2dcnnv11/2dcnnv11.py"
+    test_script: "2dcnnv11/2dcnnv11test.py"
+claim_boundaries:
+  iid_interpolation: "Supported only by locked IID test metrics."
+  unseen_wave_generalization: "Requires a test split whose earthquake waves are absent from train/val."
+  unseen_structure_generalization: "Requires held-out structural configurations or parameter ranges."
+  high_drift_safety: "Requires sufficient high-drift/yield samples and dangerous-underprediction metrics."
+  uncertainty_claim: "Requires calibrated intervals or equivalent uncertainty evaluation."
+code_artifacts:
+  core_files:
+    -
+      path: "C:\\Users\\jiaotong1\\5080train\\update\\run_publication_hpo.py"
+      exists: true
+      type: "file"
+      bytes: 23566
+      last_modified: "2026-06-14T13:41:09"
+      sha256: "8de1e99c566956239cdf9980861859d12b3367fec243568d5d8b20592fd801bf"
+    -
+      path: "C:\\Users\\jiaotong1\\5080train\\update\\common\\optuna_tpe_common.py"
+      exists: true
+      type: "file"
+      bytes: 23913
+      last_modified: "2026-06-14T13:41:09"
+      sha256: "34178df78c1adafb68c8a42c65cadfc54a53919e8ff59249aafbbff8b3fd95ab"
+    -
+      path: "C:\\Users\\jiaotong1\\5080train\\tabular_model_common.py"
+      exists: true
+      type: "file"
+      bytes: 40224
+      last_modified: "2026-06-02T13:09:59"
+      sha256: "314b712abe5c9fef0f97a2825a370d883e557e1eabb57dd50c73bc2488a4695e"
+    -
+      path: "C:\\Users\\jiaotong1\\5080train\\sequence_model_common.py"
+      exists: true
+      type: "file"
+      bytes: 87885
+      last_modified: "2026-06-02T13:18:38"
+      sha256: "a69a4c0468f13db3bb1f2df5f8b9d8cb30f64ee1288437268d67cb1336d89af2"
+    -
+      path: "C:\\Users\\jiaotong1\\5080train\\2dcnnv11\\2dcnnv11.py"
+      exists: true
+      type: "file"
+      bytes: 109569
+      last_modified: "2026-06-01T12:29:16"
+      sha256: "dc84c85bb8c2ccc1f56ca4671bf4bd7d229adae2c8b78ee9e738a8ade40794ba"
+    -
+      path: "C:\\Users\\jiaotong1\\5080train\\2dcnnv11\\2dcnnv11test.py"
+      exists: true
+      type: "file"
+      bytes: 62440
+      last_modified: "2026-06-01T12:29:16"
+      sha256: "8cbbcaca646e172a7362c041c37968fd8f580e08ed70393a897c67b7bd3520f4"
+    -
+      path: "C:\\Users\\jiaotong1\\5080train\\floors_3_to_7_utils.py"
+      exists: true
+      type: "file"
+      bytes: 502
+      last_modified: "2026-05-28T20:31:51"
+      sha256: "6c854a0bdc9ee4d2ab150da4d03332a07de6ae1ad915df5da575c1abfb031126"
+  tuning_scripts:
+    -
+      path: "C:\\Users\\jiaotong1\\5080train\\update\\randomforest\\tune_optuna_tpe.py"
+      exists: true
+      type: "file"
+      bytes: 1233
+      last_modified: "2026-06-09T12:33:06"
+      sha256: "7fea3d238428d0cc023b8aa9d541659ae9f8395c932779881d25168925f7a867"
+    -
+      path: "C:\\Users\\jiaotong1\\5080train\\update\\xgboost\\tune_optuna_tpe.py"
+      exists: true
+      type: "file"
+      bytes: 1408
+      last_modified: "2026-06-09T12:33:06"
+      sha256: "2c3892e3ebd3290ed3e27d40da82c6f4ce5ecaa5091095fe3dae8215d68a2c26"
+    -
+      path: "C:\\Users\\jiaotong1\\5080train\\update\\lightgbm\\tune_optuna_tpe.py"
+      exists: true
+      type: "file"
+      bytes: 1503
+      last_modified: "2026-06-09T12:33:06"
+      sha256: "e06ce4f9e5a752e193cb6cdab2a852a26f3689405123157bba40c918db9b0360"
+    -
+      path: "C:\\Users\\jiaotong1\\5080train\\update\\catboost\\tune_optuna_tpe.py"
+      exists: true
+      type: "file"
+      bytes: 1147
+      last_modified: "2026-06-09T12:33:06"
+      sha256: "8d9baf87906e8d7e2a6a4c51424279c33d714746b7039a15da19ae643a5b9c32"
+    -
+      path: "C:\\Users\\jiaotong1\\5080train\\update\\mlp\\tune_optuna_tpe.py"
+      exists: true
+      type: "file"
+      bytes: 1607
+      last_modified: "2026-06-09T12:33:06"
+      sha256: "129844025bb1eac4cc81f760fe9d39c3620a4a530a059cadec9ecbda4cea2b3e"
+    -
+      path: "C:\\Users\\jiaotong1\\5080train\\update\\lstm\\tune_optuna_tpe.py"
+      exists: true
+      type: "file"
+      bytes: 2695
+      last_modified: "2026-06-09T12:33:06"
+      sha256: "04603887473fe11967b5135030bc932bc398b6ce736d65da7391a4f552cc994b"
+    -
+      path: "C:\\Users\\jiaotong1\\5080train\\update\\wavenet\\tune_optuna_tpe.py"
+      exists: true
+      type: "file"
+      bytes: 2939
+      last_modified: "2026-06-14T13:41:09"
+      sha256: "aeb1b62163ef97c8b664d7b871dcc2b920d2863a8386f2732541aa7503437e8a"
+    -
+      path: "C:\\Users\\jiaotong1\\5080train\\update\\2dcnn\\tune_optuna_tpe.py"
+      exists: true
+      type: "file"
+      bytes: 3063
+      last_modified: "2026-06-09T12:33:06"
+      sha256: "819fb5087b43b5b353e9358641f9ef8d5e3cddde1674711f8b9ab0ee6b240554"
+next_required_todos:
+  - "TODO2: dataset manifest, leakage, filtering, and distribution audit."
+  - "TODO3: HPO fairness audit."
+  - "TODO4: 2026 baseline inclusion/exclusion review."
+  - "TODO5: frozen-best-params multi-seed retraining."

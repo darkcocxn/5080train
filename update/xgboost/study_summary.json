@@ -1,0 +1,44 @@
+{
+  "algorithm": "xgboost",
+  "study_name": "xgboost_publication_hpo_publication-hpo-20260611-005517",
+  "objective_metric": "selection",
+  "trial_count": 50,
+  "complete_trial_count": 50,
+  "trials_csv": "C:\\Users\\jiaotong1\\5080train\\update\\xgboost\\optuna_trials.csv",
+  "updated_at": "2026-06-11 01:59:31",
+  "best_trial_number": 47,
+  "best_value": 0.002740337777118779,
+  "best_optuna_params": {
+    "N_ESTIMATORS": 3500,
+    "LEARNING_RATE": 0.0673838196615659,
+    "MAX_DEPTH": 5,
+    "MIN_CHILD_WEIGHT": 4.527917033282544,
+    "SUBSAMPLE": 0.9906438848791574,
+    "COLSAMPLE_BYTREE": 0.7670979788419384,
+    "REG_LAMBDA": 0.0045963207671804816,
+    "REG_ALPHA": 4.1383955997657895e-05,
+    "WAVEFORM_FEATURE_COUNT": 128
+  },
+  "best_config_params": {
+    "N_ESTIMATORS": 3500,
+    "LEARNING_RATE": 0.0673838196615659,
+    "MAX_DEPTH": 5,
+    "MIN_CHILD_WEIGHT": 4.527917033282544,
+    "SUBSAMPLE": 0.9906438848791574,
+    "COLSAMPLE_BYTREE": 0.7670979788419384,
+    "REG_LAMBDA": 0.0045963207671804816,
+    "REG_ALPHA": 4.1383955997657895e-05,
+    "WAVEFORM_FEATURE_COUNT": 128
+  },
+  "best_artifact_root": "C:\\Users\\jiaotong1\\5080train\\update\\run_logs\\publication-hpo-20260611-005517\\artifacts\\xgboost\\trial_0047",
+  "best_model_dir": "C:\\Users\\jiaotong1\\5080train\\update\\run_logs\\publication-hpo-20260611-005517\\artifacts\\xgboost\\trial_0047\\model-20260531-181258-99dfe0c9-train20260611-015850",
+  "best_metrics": {
+    "Samples": 3420,
+    "R2": 0.8442345085649721,
+    "MAE": 0.0006053183806563986,
+    "RMSE": 0.001061724596810041,
+    "MAPE": 26.727561738872172,
+    "Bias": -0.0003120894249561996,
+    "SelectionScore": 0.002740337777118779
+  }
+}

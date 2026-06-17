@@ -1,0 +1,17 @@
+﻿generation_command,id,kind,path,source
+python update/complete_remaining_todos.py,Table 1,table,C:\Users\jiaotong1\5080train\publication_eval_20260614\paper_tables\table1_dataset_statistics.csv,protocol CSVs
+python update/complete_todo6_publication_tables.py,Table 2,table,C:\Users\jiaotong1\5080train\publication_eval_20260614\paper_tables\table2_overall_test_metrics_paper_ready.csv,TODO6
+python update/complete_todo7_tail_safety.py,Table 3,table,C:\Users\jiaotong1\5080train\publication_eval_20260614\paper_tables\table3_tail_safety_metrics_paper_ready.csv,TODO7
+python update/compare_models_statistics.py,Table 4,table,C:\Users\jiaotong1\5080train\publication_eval_20260614\paper_tables\table4_statistical_comparison.csv,TODO8
+python update/complete_remaining_todos.py,Table 5,table,C:\Users\jiaotong1\5080train\publication_eval_20260614\paper_tables\table5_ablation_study.csv,TODO9 ablation
+python update/complete_todo10_ood_benchmark.py,Table 6,table,C:\Users\jiaotong1\5080train\publication_eval_20260614\paper_tables\table6_ood_generalization.csv,TODO10
+python update/complete_todo11_uncertainty.py,Table 7,table,C:\Users\jiaotong1\5080train\publication_eval_20260614\paper_tables\table7_uncertainty_calibration.csv,TODO11
+python update/complete_remaining_todos.py,Figure 1,figure,C:\Users\jiaotong1\5080train\publication_eval_20260614\paper_figures\figure1_task_model_schematic.png,protocol/workflow
+python update/complete_remaining_todos.py,Figure 2,figure,C:\Users\jiaotong1\5080train\publication_eval_20260614\paper_figures\figure2_target_distribution_by_split.png,C:\Users\jiaotong1\5080train\publication_eval_20260614\paper_tables\table1_dataset_statistics.csv
+python update/complete_todo6_publication_tables.py,Figure 3,figure,C:\Users\jiaotong1\5080train\publication_eval_20260614\paper_figures\model_performance_bar_ci.png,Table 2
+python update/complete_todo7_tail_safety.py,Figure 4a,figure,C:\Users\jiaotong1\5080train\publication_eval_20260614\paper_figures\tail_error_by_bin.png,TODO7 tail bins
+python update/complete_todo7_tail_safety.py,Figure 4b,figure,C:\Users\jiaotong1\5080train\publication_eval_20260614\paper_figures\dangerous_underprediction_rate.png,TODO7 thresholds
+python update/complete_remaining_todos.py,Figure 5,figure,C:\Users\jiaotong1\5080train\publication_eval_20260614\paper_figures\figure5_ablation_study.png,C:\Users\jiaotong1\5080train\publication_eval_20260614\paper_tables\table5_ablation_study.csv
+python update/complete_todo10_ood_benchmark.py,Figure 6,figure,C:\Users\jiaotong1\5080train\publication_eval_20260614\paper_figures\ood_performance_drop.png,TODO10
+python update/complete_todo11_uncertainty.py,Figure 7,figure,C:\Users\jiaotong1\5080train\publication_eval_20260614\paper_figures\calibration_curve.png,TODO11
+python update/complete_remaining_todos.py,Figure 8,figure,C:\Users\jiaotong1\5080train\publication_eval_20260614\paper_figures\case_study_panel.png,C:\Users\jiaotong1\5080train\publication_eval_20260614\interpretability\case_studies\case_study_index.csv

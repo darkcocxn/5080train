@@ -1,0 +1,393 @@
+{
+  "_meta": {
+    "format_version": 1,
+    "description": "三阶段主动采样数据集生成脚本（尾部增强版）的超参数定义文件。",
+    "comment": "标准 JSON 不支持真正的注释语法，因此本文件统一采用 value / unit / comment 或 build / unit / comment 的结构来保存参数值、单位和中文说明。"
+  },
+  "grid": {
+    "num_floor_options": {
+      "build": {
+        "type": "arange",
+        "start": 3,
+        "stop": 8,
+        "step": 1,
+        "dtype": "int"
+      },
+      "unit": "层",
+      "comment": "可采样的总层数候选。采用 numpy.arange 语义，stop 为开区间，因此实际生成 3, 4, 5, 6, 7 层。"
+    },
+    "floor_mass_values": {
+      "build": {
+        "type": "array",
+        "values": [
+          50.0,
+          70.0,
+          90.0,
+          110.0,
+          130.0,
+          140.0
+        ],
+        "dtype": "float"
+      },
+      "unit": "t",
+      "comment": "标准层楼面集中质量候选值，共 6 个，保持原上下限 50 到 140 t，不改变边界，仅对原 10 档网格做抽稀。按当前简化剪切模型，除顶层外各层采用相同质量，顶层再乘 top_floor_factor。"
+    },
+    "floor_height_values": {
+      "build": {
+        "type": "array",
+        "values": [
+          2.5,
+          2.8,
+          3.2,
+          3.5,
+          3.8,
+          4.0
+        ],
+        "dtype": "float"
+      },
+      "unit": "m",
+      "comment": "层高候选值，共 6 个，保持原上下限 2.5 到 4.0 m，不改变边界，仅对原 10 档网格做抽稀。当前模型假定各层层高一致。"
+    },
+    "frame_stiffness_scale": {
+      "value": 0.001,
+      "unit": "-",
+      "comment": "对基础层刚度网格施加的缩放系数。实际使用的 K_base_values 等于 k_base_grid_unscaled 乘以该系数。"
+    },
+    "k_base_grid_unscaled": {
+      "build": {
+        "type": "array",
+        "values": [
+          150000000.0,
+          210000000.0,
+          260000000.0,
+          320000000.0,
+          370000000.0,
+          400000000.0
+        ],
+        "dtype": "float"
+      },
+      "unit": "kN/m",
+      "comment": "未缩放的主体标准层层刚度候选值，共 6 个，保持原实际上下限 150000 到 400000 kN/m，不改变边界，仅对原 10 档刚度网格做抽稀。实际使用前会乘以 frame_stiffness_scale。"
+    },
+    "top_floor_factor": {
+      "value": 0.85,
+      "unit": "-",
+      "comment": "顶层质量和顶层刚度相对于标准层的折减系数。"
+    }
+  },
+  "frame_model": {
+    "frame_b": {
+      "value": 0.01,
+      "unit": "-",
+      "comment": "主体 Steel01 的屈后刚化系数 b。"
+    },
+    "frame_yield_drift_ratio": {
+      "value": 0.01,
+      "unit": "-",
+      "comment": "主体 Steel01 的层屈服位移角 theta_y。主体层屈服力按 Fy_story = K_story * h_story * theta_y 计算。"
+    },
+    "period_limit_sec": {
+      "value": 0.9,
+      "unit": "s",
+      "comment": "裸结构（不含 Steel02 阻尼器）一阶自振周期上限。超过该值的结构在采样阶段直接剔除。"
+    },
+    "damping_ratio": {
+      "value": 0.05,
+      "unit": "-",
+      "comment": "Rayleigh 阻尼目标阻尼比。"
+    },
+    "n_eigen": {
+      "value": 2,
+      "unit": "个模态",
+      "comment": "为计算 Rayleigh 阻尼系数而提取的模态数量。"
+    }
+  },
+  "damper_model": {
+    "k_add": {
+      "value": 2500000.0,
+      "unit": "kN/m",
+      "comment": "Steel02 阻尼器初始刚度。所有被安装阻尼器的楼层共用该值。"
+    },
+    "steel02_b": {
+      "value": 0.02,
+      "unit": "-",
+      "comment": "Steel02 阻尼器的屈后刚化系数 b。"
+    },
+    "r0": {
+      "value": 18.5,
+      "unit": "-",
+      "comment": "Steel02 滞回模型参数 R0，用于控制滞回过渡平滑程度。"
+    },
+    "cr1": {
+      "value": 0.925,
+      "unit": "-",
+      "comment": "Steel02 滞回模型参数 cR1。"
+    },
+    "cr2": {
+      "value": 0.15,
+      "unit": "-",
+      "comment": "Steel02 滞回模型参数 cR2。"
+    },
+    "fy_add_min_kn": {
+      "value": 500.0,
+      "unit": "kN",
+      "comment": "Steel02 阻尼器屈服力下限。采用固定绝对值范围采样。"
+    },
+    "fy_add_max_kn": {
+      "value": 2500.0,
+      "unit": "kN",
+      "comment": "Steel02 阻尼器屈服力上限。采用固定绝对值范围采样。"
+    },
+    "fy_add_num_options": {
+      "value": 5,
+      "unit": "个离散取值",
+      "comment": "在 fy_add_min_kn 和 fy_add_max_kn 之间按几何级数生成的离散阻尼器屈服力候选数。轻量版固定为 5 档。"
+    }
+  },
+  "time_history": {
+    "dt": {
+      "value": 0.02,
+      "unit": "s",
+      "comment": "固定步长分析时使用的时间步长。仅在关闭 use_wave_time_params_default 或环境变量强制关闭时生效。"
+    },
+    "num_steps": {
+      "value": 3000,
+      "unit": "步",
+      "comment": "固定步长分析时使用的总时间步数。"
+    },
+    "use_wave_time_params_default": {
+      "value": true,
+      "unit": "-",
+      "comment": "默认是否直接使用地震波文件自带的 dt 和长度。运行时仍可被环境变量 SURMOD_USE_WAVE_TIME_PARAMS 覆盖。"
+    },
+    "acceleration_factor": {
+      "value": 9.81,
+      "unit": "m/s^2 per g",
+      "comment": "地震波文件按 g 存储时，输入 OpenSees 前转换到 m/s^2 所乘的系数。"
+    }
+  },
+  "wave_split": {
+    "train_wave_ratio": {
+      "value": 0.7,
+      "unit": "-",
+      "comment": "地震波聚类后，分配到训练集波池的比例。"
+    },
+    "val_wave_ratio": {
+      "value": 0.15,
+      "unit": "-",
+      "comment": "地震波聚类后，分配到验证集波池的比例。"
+    },
+    "test_wave_ratio": {
+      "value": 0.15,
+      "unit": "-",
+      "comment": "地震波聚类后，分配到测试集波池的比例。"
+    },
+    "wave_cluster_count": {
+      "value": 8,
+      "unit": "个簇",
+      "comment": "地震波特征聚类数量，用于控制 train/val/test 波池划分的分层性。"
+    }
+  },
+  "sampling_budget": {
+    "dataset_size_scale_default": {
+      "value": 2.0,
+      "unit": "倍率",
+      "comment": "数据集容量放大倍数默认值。运行时仍可被环境变量 SURMOD_DATASET_SIZE_SCALE 覆盖。所有带 _base 后缀的样本预算都会乘以该倍率并向上取整。"
+    },
+    "stage_a_structures_per_floor_base": {
+      "value": 500,
+      "unit": "个结构/层数",
+      "comment": "Stage A 每个楼层数的基础结构样本量，放大前。"
+    },
+    "stage_a_waves_per_structure": {
+      "value": 8,
+      "unit": "条地震波/结构",
+      "comment": "Stage A 每个结构分配的地震波数量。"
+    },
+    "stage_b_rounds": {
+      "value": 3,
+      "unit": "轮",
+      "comment": "Stage B 主动学习迭代轮数。"
+    },
+    "stage_b_candidate_structures_per_floor_base": {
+      "value": 250,
+      "unit": "个候选结构/层数",
+      "comment": "Stage B 每轮每个楼层数生成的候选结构基础数量，放大前。"
+    },
+    "stage_b_waves_per_structure": {
+      "value": 8,
+      "unit": "条地震波/结构",
+      "comment": "Stage B 每个候选结构分配的地震波数量。"
+    },
+    "stage_b_select_per_round_base": {
+      "value": 1800,
+      "unit": "条高保真样本/轮",
+      "comment": "Stage B 每轮最终选中的高保真分析任务基础数量，放大前。"
+    },
+    "stage_c_candidate_structures_per_floor_base": {
+      "value": 360,
+      "unit": "个候选结构/层数",
+      "comment": "Stage C 每个楼层数生成的尾部强化候选结构基础数量，放大前。尾部增强版增加候选池，避免 0.01 / 0.02 附近样本过少。"
+    },
+    "stage_c_waves_per_structure": {
+      "value": 8,
+      "unit": "条地震波/结构",
+      "comment": "Stage C 每个候选结构分配的地震波数量。"
+    },
+    "stage_c_select_total_base": {
+      "value": 5200,
+      "unit": "条高保真样本",
+      "comment": "Stage C 最终选中的尾部强化高保真分析任务基础总量，放大前。尾部增强版提高训练集高位移尾部占比。"
+    },
+    "stage_c_strong_wave_top_ratio": {
+      "value": 0.4,
+      "unit": "-",
+      "comment": "Stage C 中仅保留波强度得分前多少比例的强震记录参与尾部强化。"
+    },
+    "val_structures_per_floor_base": {
+      "value": 80,
+      "unit": "个结构/层数",
+      "comment": "验证集每个楼层数的基础结构数量，放大前。"
+    },
+    "test_structures_per_floor_base": {
+      "value": 80,
+      "unit": "个结构/层数",
+      "comment": "测试集每个楼层数的基础结构数量，放大前。"
+    },
+    "holdout_waves_per_structure": {
+      "value": 4,
+      "unit": "条地震波/结构",
+      "comment": "验证集和测试集每个结构分配的地震波数量。"
+    },
+    "tail_topup_candidate_structures_per_floor_base": {
+      "value": 260,
+      "unit": "个候选结构/层数/轮",
+      "comment": "尾部补样每轮每个楼层数生成的高风险候选结构基础数量，放大前。用于补足 train / val / test 中 >=0.01、>=0.02 和主体屈服样本。"
+    },
+    "tail_topup_waves_per_structure": {
+      "value": 8,
+      "unit": "条地震波/结构",
+      "comment": "尾部补样时每个候选结构分配的强震波数量。"
+    },
+    "tail_topup_train_select_per_round_base": {
+      "value": 2400,
+      "unit": "条高保真样本/轮",
+      "comment": "训练集尾部补样每轮最多执行的高保真分析任务基础数量，放大前。"
+    },
+    "tail_topup_holdout_select_per_round_base": {
+      "value": 200,
+      "unit": "条高保真样本/轮/验证集",
+      "comment": "验证集尾部补样每轮最多执行的高保真分析任务基础数量，放大前。测试集使用 test_tail_topup_select_per_round_base 单独控制。"
+    },
+    "test_tail_topup_select_per_round_base": {
+      "value": 40,
+      "unit": "条高保真样本/轮/测试集",
+      "comment": "测试集尾部补样每轮最多执行的高保真分析任务基础数量，放大前。当前默认数据集倍率 2.0 下实际为 80 条，用于让测试集主体屈服比例接近训练集。"
+    },
+    "tail_topup_train_max_rounds": {
+      "value": 3,
+      "unit": "轮",
+      "comment": "训练集尾部补样最多迭代轮数。每轮会根据已落盘真实结果重新判断目标是否满足。"
+    },
+    "tail_topup_holdout_max_rounds": {
+      "value": 1,
+      "unit": "轮",
+      "comment": "验证集和测试集尾部补样最多迭代轮数。每轮会根据已落盘真实结果重新判断目标是否满足。"
+    },
+    "tail_strong_wave_top_ratio": {
+      "value": 0.55,
+      "unit": "-",
+      "comment": "尾部补样候选中保留波强度得分前多少比例的地震波任务。"
+    },
+    "tail_min_per_floor_ratio": {
+      "value": 0.08,
+      "unit": "-",
+      "comment": "尾部样本选择时为每个楼层数保留的最低软配额比例。其余名额全局按尾部风险得分排序，避免低楼层等比例配额稀释高位移尾部。"
+    },
+    "train_min_drift_ge_010": {
+      "value": 500,
+      "unit": "成功样本条数",
+      "comment": "训练集成功样本中 max_drift_ratio_raw >= 0.01 的建议最低数量。不满足时触发训练集尾部补样，直到达到目标或达到最大补样轮数。"
+    },
+    "train_min_drift_ge_020": {
+      "value": 80,
+      "unit": "成功样本条数",
+      "comment": "训练集成功样本中 max_drift_ratio_raw >= 0.02 的建议最低数量。不满足时触发训练集尾部补样。"
+    },
+    "train_min_steel01_yielded": {
+      "value": 500,
+      "unit": "成功样本条数",
+      "comment": "训练集主体 Steel01 屈服样本建议最低数量。主体屈服通常与 max_drift_ratio_raw >= 0.01 一致，但仍单独统计。"
+    },
+    "holdout_min_drift_ge_010": {
+      "value": 40,
+      "unit": "成功样本条数/验证或测试集",
+      "comment": "验证集和测试集成功样本中 max_drift_ratio_raw >= 0.01 的建议最低数量。不满足时触发对应 split 的尾部补样。"
+    },
+    "holdout_min_drift_ge_020": {
+      "value": 8,
+      "unit": "成功样本条数/验证或测试集",
+      "comment": "验证集和测试集成功样本中 max_drift_ratio_raw >= 0.02 的建议最低数量。不满足时触发对应 split 的尾部补样。"
+    },
+    "holdout_min_steel01_yielded": {
+      "value": 40,
+      "unit": "成功样本条数/验证或测试集",
+      "comment": "验证集和测试集主体 Steel01 屈服样本建议最低数量。用于避免测试图和尾部误差评估没有主体屈服样本。"
+    }
+  },
+  "postprocess": {
+    "active_target_scale": {
+      "value": 1000.0,
+      "unit": "缩放倍率",
+      "comment": "主动学习回归目标在取 log1p 前乘以的放大倍数，用于改善数值尺度。"
+    },
+    "drift_quantization_step": {
+      "value": 0.0001,
+      "unit": "层间位移角",
+      "comment": "用于生成量化层间位移角标签的步长。"
+    },
+    "drift_bins": {
+      "build": {
+        "type": "array",
+        "values": [
+          0.0,
+          0.001,
+          0.002,
+          0.005,
+          0.01,
+          0.02,
+          0.03,
+          0.05,
+          0.08,
+          0.12,
+          "inf"
+        ],
+        "dtype": "float"
+      },
+      "unit": "层间位移角",
+      "comment": "主动学习打分与尾部分箱时使用的层间位移角分箱边界。最后一个 inf 表示无穷上界。"
+    }
+  },
+  "runtime": {
+    "random_seed": {
+      "value": 42,
+      "unit": "-",
+      "comment": "全流程随机种子。"
+    },
+    "num_workers_mode": {
+      "value": "auto_cpu_count",
+      "unit": "-",
+      "comment": "并行 worker 数量模式。auto_cpu_count 表示自动取当前 CPU 核数，若改成 fixed 则脚本会读取 num_workers_value。"
+    },
+    "num_workers_value": {
+      "value": 8,
+      "unit": "个进程",
+      "comment": "当 num_workers_mode 不是 auto_cpu_count 时使用的固定并行 worker 数量。"
+    },
+    "write_flush_every": {
+      "value": 200,
+      "unit": "行",
+      "comment": "流式写盘时累计多少行结果后执行一次追加写入。"
+    }
+  }
+}
