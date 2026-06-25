@@ -14,8 +14,8 @@ from update.common.optuna_tpe_common import run_history_module_tpe_tuning  # noq
 
 
 def load_2dcnn_module():
-    script_path = PROJECT_ROOT / "2dcnnv11" / "2dcnnv11.py"
-    spec = importlib.util.spec_from_file_location("surmod_2dcnnv11_train", script_path)
+    script_path = PROJECT_ROOT / "2dcnnv1" / "2dcnnv1.py"
+    spec = importlib.util.spec_from_file_location("surmod_2dcnnv1_train", script_path)
     if spec is None or spec.loader is None:
         raise ImportError(f"Cannot load 2D-CNN script: {script_path}")
     module = importlib.util.module_from_spec(spec)

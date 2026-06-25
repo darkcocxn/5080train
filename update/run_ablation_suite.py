@@ -39,8 +39,8 @@ BEST_PARAMS_PATH = PROJECT_ROOT / "update" / "2dcnn" / "best_params.json"
 OUTPUT_ROOT = PROJECT_ROOT / "publication_eval_20260614"
 ABLATION_ROOT = OUTPUT_ROOT / "ablations"
 REPORT_DIR = PROJECT_ROOT / "md_files" / "02_research_and_paper" / "literature_reviews"
-TRAIN_SCRIPT = PROJECT_ROOT / "2dcnnv11" / "2dcnnv11.py"
-TEST_SCRIPT = PROJECT_ROOT / "2dcnnv11" / "2dcnnv11test.py"
+TRAIN_SCRIPT = PROJECT_ROOT / "2dcnnv1" / "2dcnnv1.py"
+TEST_SCRIPT = PROJECT_ROOT / "2dcnnv1" / "2dcnnv1test.py"
 THRESHOLDS = (0.005, 0.010, 0.015, 0.020)
 
 
@@ -155,10 +155,10 @@ def slug(value: str) -> str:
 
 def load_module(script_path: Path, module_name: str):
     if script_path == TRAIN_SCRIPT:
-        module = importlib.import_module("update._ablation_2dcnnv11_train_importable")
+        module = importlib.import_module("update._ablation_2dcnnv1_train_importable")
         return importlib.reload(module)
     if script_path == TEST_SCRIPT:
-        module = importlib.import_module("update._ablation_2dcnnv11_test_importable")
+        module = importlib.import_module("update._ablation_2dcnnv1_test_importable")
         return importlib.reload(module)
     spec = importlib.util.spec_from_file_location(module_name, script_path)
     if spec is None or spec.loader is None:
@@ -455,7 +455,7 @@ def train_one_run(
 
     last_error = None
     for batch_size in batch_candidates:
-        module_name = f"surmod_2dcnnv11_train_{slug(spec.name)}_{seed}_{batch_size}_{int(time.time())}"
+        module_name = f"surmod_2dcnnv1_train_{slug(spec.name)}_{seed}_{batch_size}_{int(time.time())}"
         start = time.time()
         gpu_before = gpu_snapshot()
         try:
@@ -566,7 +566,7 @@ def evaluate_one_run(
             "predictions_path": str(existing_result),
         }
 
-    module_name = f"surmod_2dcnnv11_test_{slug(spec.name)}_{int(time.time())}"
+    module_name = f"surmod_2dcnnv1_test_{slug(spec.name)}_{int(time.time())}"
     test_module = load_module(TEST_SCRIPT, module_name)
 
     class EvalConfig(test_module.Config):

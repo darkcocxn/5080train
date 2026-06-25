@@ -70,7 +70,7 @@ DEEP_MODELS: dict[str, DeepModelSpec] = {
     ),
     "2dcnn": DeepModelSpec(
         name="2dcnn",
-        module_name="update._ablation_2dcnnv11_train_importable",
+        module_name="update._ablation_2dcnnv1_train_importable",
         config_name="Config",
         build_model_name="",
         train_kind="2dcnn",
@@ -365,7 +365,7 @@ def evaluate_2dcnn_phase(
     eval_num_workers: int,
     device: str,
 ) -> tuple[Path, dict[str, Any]]:
-    test_module = import_fresh("update._ablation_2dcnnv11_test_importable")
+    test_module = import_fresh("update._ablation_2dcnnv1_test_importable")
     copy_missing_config_attrs(config, test_module.Config)
     test_module.Config = config
     set_eval_csv(test_module.Config, csv_path, eval_batch_size, eval_num_workers, device)

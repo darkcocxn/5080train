@@ -1,25 +1,25 @@
 protocol_name: "publication_evaluation_protocol_lock"
 protocol_status: "locked_candidate"
-generated_at: "2026-06-14T14:00:50"
+generated_at: "2026-06-25T22:08:18"
 generated_by:
-  script: "C:\\Users\\jiaotong1\\5080train\\update\\lock_publication_protocol.py"
-  project_root: "C:\\Users\\jiaotong1\\5080train"
-  output_root: "C:\\Users\\jiaotong1\\5080train\\publication_eval_20260614"
+  script: "X:\\pyproject\\5080train\\update\\lock_publication_protocol.py"
+  project_root: "X:\\pyproject\\5080train"
+  output_root: "X:\\pyproject\\5080train\\publication_eval_20260614"
   non_interference_policy:
     - "No training entrypoints are executed."
     - "No running Python processes are stopped or modified."
     - "Dataset/image directories are read-only; directory recursive hashing is skipped."
     - "Only protocol files under the output protocol directory are written."
 git:
-  commit: "7077b9ee424ddd24a2a08d9d97346244774db9b9"
+  commit: "cbec46baae9408e6ef12a65df5fd156020820414"
   branch: "master"
-  dirty_status_short: "?? \"md_files/02_research_and_paper/literature_reviews/TODO1_\\345\\215\\217\\350\\256\\256\\351\\224\\201\\345\\256\\232\\350\\204\\232\\346\\234\\254\\344\\270\\216\\345\\267\\245\\344\\275\\234\\346\\200\\273\\347\\273\\223_20260614.md\"\n?? \"md_files/02_research_and_paper/literature_reviews/TODO2_\\346\\225\\260\\346\\215\\256\\345\\256\\241\\350\\256\\241\\350\\204\\232\\346\\234\\254\\344\\270\\216\\345\\267\\245\\344\\275\\234\\346\\200\\273\\347\\273\\223_20260614.md\"\n?? publication_eval_20260614/\n?? update/audit_dataset_protocol.py\n?? update/lock_publication_protocol.py"
+  dirty_status_short: "M 2dcnnv1/2dcnnv1.py\n M 2dcnnv1/2dcnnv1test.py\n M \"2dcnnv1/\\345\\220\\257\\345\\212\\250\\346\\265\\213\\350\\257\\225.bat\"\n M \"2dcnnv1/\\345\\220\\257\\345\\212\\250\\350\\256\\255\\347\\273\\203.bat\"\n D 2dcnnv10/2dcnnv10.py\n D 2dcnnv10/2dcnnv10test.py\n D 2dcnnv10/surmod_v8_test_base_for_v10.py\n D 2dcnnv10/surmod_v8_train_base_for_v10.py\n D \"2dcnnv10/\\345\\220\\257\\345\\212\\250\\346\\265\\213\\350\\257\\225.bat\"\n D \"2dcnnv10/\\345\\220\\257\\345\\212\\250\\350\\256\\255\\347\\273\\203.bat\"\n D 2dcnnv11/2dcnnv11.py\n D 2dcnnv11/2dcnnv11test.py\n D \"2dcnnv11/\\345\\220\\257\\345\\212\\250\\346\\265\\213\\350\\257\\225.bat\"\n D \"2dcnnv11/\\345\\220\\257\\345\\212\\250\\350\\256\\255\\347\\273\\203.bat\"\n D 2dcnnv2/2dcnnv2.py\n D 2dcnnv2/2dcnnv2test.py\n D \"2dcnnv2/\\345\\220\\257\\345\\212\\250\\346\\265\\213\\350\\257\\225.bat\"\n D \"2dcnnv2/\\345\\220\\257\\345\\212\\250\\350\\256\\255\\347\\273\\203.bat\"\n D 2dcnnv3/2dcnnv3.py\n D 2dcnnv3/2dcnnv3test.py\n D \"2dcnnv3/\\345\\220\\257\\345\\212\\250\\346\\265\\213\\350\\257\\225.bat\"\n D \"2dcnnv3/\\345\\220\\257\\345\\212\\250\\350\\256\\255\\347\\273\\203.bat\"\n D 2dcnnv7/2dcnnv7.py\n D 2dcnnv7/2dcnnv7test.py\n D \"2dcnnv7/\\345\\220\\257\\345\\212\\250\\346\\265\\213\\350\\257\\225.bat\"\n D \"2dcnnv7/\\345\\220\\257\\345\\212\\250\\350\\256\\255\\347\\273\\203.bat\"\n D 2dcnnv8/2dcnnv8.py\n D 2dcnnv8/2dcnnv8test.py\n D \"2dcnnv8/\\345\\220\\257\\345\\212\\250\\346\\265\\213\\350\\257\\225.bat\"\n D \"2dcnnv8/\\345\\220\\257\\345\\212\\250\\350\\256\\255\\347\\273\\203.bat\"\n D 2dcnnv9/2dcnnv9.py\n D 2dcnnv9/2dcnnv9test.py\n D 2dcnnv9/surmod_v8_test_base_for_v9.py\n D 2dcnnv9/surmod_v8_train_base_for_v9.py\n D \"2dcnnv9/\\345\\220\\257\\345\\212\\250\\346\\265\\213\\350\\257\\225.bat\"\n D \"2dcnnv9/\\345\\220\\257\\345\\212\\250\\350\\256\\255\\347\\273\\203.bat\"\n M publication_eval_20260614/protocol/protocol_change_log.md\n M update/2dcnn/tune_optuna_tpe.py\n D update/_ablation_2dcnnv11_test_importable.py\n D update/_ablation_2dcnnv11_train_importable.py\n M update/lock_publication_protocol.py\n M update/run_ablation_suite.py\n M update/run_final_deep_multiseed_eval.py\n M update/run_publication_hpo.py\n D \"\\345\\237\\272\\344\\272\\216\\345\\244\\232\\346\\250\\241\\346\\200\\201\\346\\267\\261\\345\\272\\246\\345\\255\\246\\344\\271\\240\\347\\232\\204\\346\\266\\210\\350\\203\\275\\345\\207\\217\\351\\234\\207\\347\\273\\223\\346\\236\\204\\345\\234\\260\\351\\234\\207\\345\\223\\215\\345\\272\\224\\351\\242\\204\\346\\265\\213\\344\\273\\243\\347\\220\\206\\346\\250\\2412.docx\"\n M \"\\350\\215\\211\\347\\250\\277/8_\\347\\273\\223\\350\\256\\272.md\"\n M \"\\350\\215\\211\\347\\250\\277/\\346\\255\\243\\346\\226\\207/3_\\346\\225\\260\\346\\215\\256\\351\\233\\206\\344\\270\\216\\351\\227\\256\\351\\242\\230\\345\\256\\232\\344\\271\\211_\\346\\255\\243\\346\\226\\207\\347\\250\\277.md\"\n M \"\\350\\215\\211\\347\\250\\277/\\346\\255\\243\\346\\226\\207/8_\\347\\273\\223\\350\\256\\272_\\346\\255\\243\\346\\226\\207\\347\\250\\277.md\"\n M \"\\350\\215\\211\\347\\250\\277/\\350\\256\\272\\346\\226\\207\\346\\217\\222\\345\\233\\276/png/fig05_input_representations.png\"\n M \"\\350\\215\\211\\347\\250\\277/\\350\\256\\272\\346\\226\\207\\346\\217\\222\\345\\233\\276/svg/fig06_multimodal_2dcnn_architecture.svg\"\n?? Dategeneral/\n?? EarthquarkChoose/\n?? output/paper_render/\n?? outputs/\n?? tmp/\n?? update/_ablation_2dcnnv1_test_importable.py\n?? update/_ablation_2dcnnv1_train_importable.py\n?? update/update_paper_docx.py\n?? xiaobotu/\n?? \"\\350\\256\\272\\346\\226\\207/\""
 dataset:
   dataset_base: "opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258"
   target_column: "max_drift_ratio_raw"
-  data_dir: "C:\\Users\\jiaotong1\\5080train\\newdata"
+  data_dir: "X:\\pyproject\\5080train\\newdata"
   train_csv:
-    path: "C:\\Users\\jiaotong1\\5080train\\newdata\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258_train.csv"
+    path: "X:\\pyproject\\5080train\\newdata\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258_train.csv"
     exists: true
     type: "file"
     bytes: 35893289
@@ -76,7 +76,7 @@ dataset:
       - "nonconvergence_flag"
     target_column_present: true
   val_csv:
-    path: "C:\\Users\\jiaotong1\\5080train\\newdata\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258_val.csv"
+    path: "X:\\pyproject\\5080train\\newdata\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258_val.csv"
     exists: true
     type: "file"
     bytes: 1823552
@@ -133,7 +133,7 @@ dataset:
       - "nonconvergence_flag"
     target_column_present: true
   test_csv_reserved_locked:
-    path: "C:\\Users\\jiaotong1\\5080train\\newdata\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258_test.csv"
+    path: "X:\\pyproject\\5080train\\newdata\\opensees_surrogate_dataset_floors_3_to_7_3stage-tailfix-steel01main-steel02damper-light-grid6-fy5-fy500to2500-period09-m50to140-ydr1p0-20260531-181258_test.csv"
     exists: true
     type: "file"
     bytes: 1670258
@@ -190,7 +190,7 @@ dataset:
       - "nonconvergence_flag"
     target_column_present: true
   wavelet_image_dir:
-    path: "C:\\Users\\jiaotong1\\5080train\\newdata\\Newdatabase\\Scalogram\\rare_waves-20260531-140353"
+    path: "X:\\pyproject\\5080train\\newdata\\Newdatabase\\Scalogram\\rare_waves-20260531-140353"
     exists: true
     type: "directory"
     last_modified: "2026-05-31T20:12:52"
@@ -226,7 +226,7 @@ hpo_protocol:
         - "8"
       notes: ""
       best_params_artifact:
-        path: "C:\\Users\\jiaotong1\\5080train\\update\\randomforest\\best_params.json"
+        path: "X:\\pyproject\\5080train\\update\\randomforest\\best_params.json"
         exists: true
         type: "file"
         bytes: 158
@@ -242,7 +242,7 @@ hpo_protocol:
         - "8"
       notes: ""
       best_params_artifact:
-        path: "C:\\Users\\jiaotong1\\5080train\\update\\xgboost\\best_params.json"
+        path: "X:\\pyproject\\5080train\\update\\xgboost\\best_params.json"
         exists: true
         type: "file"
         bytes: 322
@@ -258,7 +258,7 @@ hpo_protocol:
         - "8"
       notes: ""
       best_params_artifact:
-        path: "C:\\Users\\jiaotong1\\5080train\\update\\lightgbm\\best_params.json"
+        path: "X:\\pyproject\\5080train\\update\\lightgbm\\best_params.json"
         exists: true
         type: "file"
         bytes: 328
@@ -274,7 +274,7 @@ hpo_protocol:
         - "8"
       notes: ""
       best_params_artifact:
-        path: "C:\\Users\\jiaotong1\\5080train\\update\\catboost\\best_params.json"
+        path: "X:\\pyproject\\5080train\\update\\catboost\\best_params.json"
         exists: true
         type: "file"
         bytes: 190
@@ -290,7 +290,7 @@ hpo_protocol:
         - "60"
       notes: ""
       best_params_artifact:
-        path: "C:\\Users\\jiaotong1\\5080train\\update\\mlp\\best_params.json"
+        path: "X:\\pyproject\\5080train\\update\\mlp\\best_params.json"
         exists: true
         type: "file"
         bytes: 319
@@ -312,7 +312,7 @@ hpo_protocol:
         - "cuda"
       notes: "CUDA profile from update/run_publication_hpo.py."
       best_params_artifact:
-        path: "C:\\Users\\jiaotong1\\5080train\\update\\lstm\\best_params.json"
+        path: "X:\\pyproject\\5080train\\update\\lstm\\best_params.json"
         exists: true
         type: "file"
         bytes: 603
@@ -334,7 +334,7 @@ hpo_protocol:
         - "cuda"
       notes: "CUDA profile from update/run_publication_hpo.py."
       best_params_artifact:
-        path: "C:\\Users\\jiaotong1\\5080train\\update\\wavenet\\best_params.json"
+        path: "X:\\pyproject\\5080train\\update\\wavenet\\best_params.json"
         exists: true
         type: "file"
         bytes: 695
@@ -352,9 +352,9 @@ hpo_protocol:
         - "32"
         - "--num-workers"
         - "0"
-      notes: "Uses the 2dcnnv11 tuning entry with the unified newdata split."
+      notes: "Uses the 2dcnnv1 tuning entry with the unified newdata split."
       best_params_artifact:
-        path: "C:\\Users\\jiaotong1\\5080train\\update\\2dcnn\\best_params.json"
+        path: "X:\\pyproject\\5080train\\update\\2dcnn\\best_params.json"
         exists: true
         type: "file"
         bytes: 649
@@ -466,12 +466,12 @@ model_registry:
     role: "sequence baseline"
     script: "update/wavenet/tune_optuna_tpe.py"
   -
-    name: "2dcnn_v11_fusion"
+    name: "2dcnn_v1_fusion"
     status: "existing_hpo_candidate_main"
     role: "proposed multimodal/time-frequency fusion model"
     script: "update/2dcnn/tune_optuna_tpe.py"
-    train_script: "2dcnnv11/2dcnnv11.py"
-    test_script: "2dcnnv11/2dcnnv11test.py"
+    train_script: "2dcnnv1/2dcnnv1.py"
+    test_script: "2dcnnv1/2dcnnv1test.py"
 claim_boundaries:
   iid_interpolation: "Supported only by locked IID test metrics."
   unseen_wave_generalization: "Requires a test split whose earthquake waves are absent from train/val."
@@ -481,49 +481,49 @@ claim_boundaries:
 code_artifacts:
   core_files:
     -
-      path: "C:\\Users\\jiaotong1\\5080train\\update\\run_publication_hpo.py"
+      path: "X:\\pyproject\\5080train\\update\\run_publication_hpo.py"
       exists: true
       type: "file"
-      bytes: 23566
-      last_modified: "2026-06-14T13:41:09"
-      sha256: "8de1e99c566956239cdf9980861859d12b3367fec243568d5d8b20592fd801bf"
+      bytes: 23564
+      last_modified: "2026-06-25T21:55:45"
+      sha256: "e3a867da78fc68878d3109ebda8022ed9395d9a280347a618aae01055cf27221"
     -
-      path: "C:\\Users\\jiaotong1\\5080train\\update\\common\\optuna_tpe_common.py"
+      path: "X:\\pyproject\\5080train\\update\\common\\optuna_tpe_common.py"
       exists: true
       type: "file"
       bytes: 23913
       last_modified: "2026-06-14T13:41:09"
       sha256: "34178df78c1adafb68c8a42c65cadfc54a53919e8ff59249aafbbff8b3fd95ab"
     -
-      path: "C:\\Users\\jiaotong1\\5080train\\tabular_model_common.py"
+      path: "X:\\pyproject\\5080train\\tabular_model_common.py"
       exists: true
       type: "file"
       bytes: 40224
       last_modified: "2026-06-02T13:09:59"
       sha256: "314b712abe5c9fef0f97a2825a370d883e557e1eabb57dd50c73bc2488a4695e"
     -
-      path: "C:\\Users\\jiaotong1\\5080train\\sequence_model_common.py"
+      path: "X:\\pyproject\\5080train\\sequence_model_common.py"
       exists: true
       type: "file"
       bytes: 87885
       last_modified: "2026-06-02T13:18:38"
       sha256: "a69a4c0468f13db3bb1f2df5f8b9d8cb30f64ee1288437268d67cb1336d89af2"
     -
-      path: "C:\\Users\\jiaotong1\\5080train\\2dcnnv11\\2dcnnv11.py"
+      path: "X:\\pyproject\\5080train\\2dcnnv1\\2dcnnv1.py"
       exists: true
       type: "file"
-      bytes: 109569
-      last_modified: "2026-06-01T12:29:16"
-      sha256: "dc84c85bb8c2ccc1f56ca4671bf4bd7d229adae2c8b78ee9e738a8ade40794ba"
+      bytes: 109567
+      last_modified: "2026-06-25T21:55:05"
+      sha256: "fc292cb359ee9a2fa1c3aedd9fa43dd75cfb0d1c7c34128c007f181c198fa096"
     -
-      path: "C:\\Users\\jiaotong1\\5080train\\2dcnnv11\\2dcnnv11test.py"
+      path: "X:\\pyproject\\5080train\\2dcnnv1\\2dcnnv1test.py"
       exists: true
       type: "file"
-      bytes: 62440
-      last_modified: "2026-06-01T12:29:16"
-      sha256: "8cbbcaca646e172a7362c041c37968fd8f580e08ed70393a897c67b7bd3520f4"
+      bytes: 62438
+      last_modified: "2026-06-25T21:55:05"
+      sha256: "6b9ead7a2f69a20e38a62f2467a6a66d6a5da611c72eb05912ce6bfea904ad35"
     -
-      path: "C:\\Users\\jiaotong1\\5080train\\floors_3_to_7_utils.py"
+      path: "X:\\pyproject\\5080train\\floors_3_to_7_utils.py"
       exists: true
       type: "file"
       bytes: 502
@@ -531,61 +531,61 @@ code_artifacts:
       sha256: "6c854a0bdc9ee4d2ab150da4d03332a07de6ae1ad915df5da575c1abfb031126"
   tuning_scripts:
     -
-      path: "C:\\Users\\jiaotong1\\5080train\\update\\randomforest\\tune_optuna_tpe.py"
+      path: "X:\\pyproject\\5080train\\update\\randomforest\\tune_optuna_tpe.py"
       exists: true
       type: "file"
       bytes: 1233
       last_modified: "2026-06-09T12:33:06"
       sha256: "7fea3d238428d0cc023b8aa9d541659ae9f8395c932779881d25168925f7a867"
     -
-      path: "C:\\Users\\jiaotong1\\5080train\\update\\xgboost\\tune_optuna_tpe.py"
+      path: "X:\\pyproject\\5080train\\update\\xgboost\\tune_optuna_tpe.py"
       exists: true
       type: "file"
       bytes: 1408
       last_modified: "2026-06-09T12:33:06"
       sha256: "2c3892e3ebd3290ed3e27d40da82c6f4ce5ecaa5091095fe3dae8215d68a2c26"
     -
-      path: "C:\\Users\\jiaotong1\\5080train\\update\\lightgbm\\tune_optuna_tpe.py"
+      path: "X:\\pyproject\\5080train\\update\\lightgbm\\tune_optuna_tpe.py"
       exists: true
       type: "file"
       bytes: 1503
       last_modified: "2026-06-09T12:33:06"
       sha256: "e06ce4f9e5a752e193cb6cdab2a852a26f3689405123157bba40c918db9b0360"
     -
-      path: "C:\\Users\\jiaotong1\\5080train\\update\\catboost\\tune_optuna_tpe.py"
+      path: "X:\\pyproject\\5080train\\update\\catboost\\tune_optuna_tpe.py"
       exists: true
       type: "file"
       bytes: 1147
       last_modified: "2026-06-09T12:33:06"
       sha256: "8d9baf87906e8d7e2a6a4c51424279c33d714746b7039a15da19ae643a5b9c32"
     -
-      path: "C:\\Users\\jiaotong1\\5080train\\update\\mlp\\tune_optuna_tpe.py"
+      path: "X:\\pyproject\\5080train\\update\\mlp\\tune_optuna_tpe.py"
       exists: true
       type: "file"
       bytes: 1607
       last_modified: "2026-06-09T12:33:06"
       sha256: "129844025bb1eac4cc81f760fe9d39c3620a4a530a059cadec9ecbda4cea2b3e"
     -
-      path: "C:\\Users\\jiaotong1\\5080train\\update\\lstm\\tune_optuna_tpe.py"
+      path: "X:\\pyproject\\5080train\\update\\lstm\\tune_optuna_tpe.py"
       exists: true
       type: "file"
       bytes: 2695
       last_modified: "2026-06-09T12:33:06"
       sha256: "04603887473fe11967b5135030bc932bc398b6ce736d65da7391a4f552cc994b"
     -
-      path: "C:\\Users\\jiaotong1\\5080train\\update\\wavenet\\tune_optuna_tpe.py"
+      path: "X:\\pyproject\\5080train\\update\\wavenet\\tune_optuna_tpe.py"
       exists: true
       type: "file"
       bytes: 2939
       last_modified: "2026-06-14T13:41:09"
       sha256: "aeb1b62163ef97c8b664d7b871dcc2b920d2863a8386f2732541aa7503437e8a"
     -
-      path: "C:\\Users\\jiaotong1\\5080train\\update\\2dcnn\\tune_optuna_tpe.py"
+      path: "X:\\pyproject\\5080train\\update\\2dcnn\\tune_optuna_tpe.py"
       exists: true
       type: "file"
-      bytes: 3063
-      last_modified: "2026-06-09T12:33:06"
-      sha256: "819fb5087b43b5b353e9358641f9ef8d5e3cddde1674711f8b9ab0ee6b240554"
+      bytes: 3058
+      last_modified: "2026-06-25T21:55:05"
+      sha256: "1b1c38dc292a7e90a08ab5b65500eae66bb3a00fa3c091f1673437c227cf073f"
 next_required_todos:
   - "TODO2: dataset manifest, leakage, filtering, and distribution audit."
   - "TODO3: HPO fairness audit."

@@ -139,24 +139,24 @@ class Config:
     IMAGE_NORMALIZE_MEAN = [0.5, 0.5, 0.5]
     IMAGE_NORMALIZE_STD = [0.5, 0.5, 0.5]
     BATCH_SIZE = 96
-    LEARNING_RATE = 1.5e-4
-    WEIGHT_DECAY = 3e-5
+    LEARNING_RATE = 1.0e-4
+    WEIGHT_DECAY = 1.0e-4
     NUM_EPOCHS = 160
 
     SCHEDULER_FACTOR = 0.5
-    SCHEDULER_PATIENCE = 6
-    MIN_LR = 5e-7
-    EARLY_STOPPING_PATIENCE = 28
+    SCHEDULER_PATIENCE = 5
+    MIN_LR = 3e-7
+    EARLY_STOPPING_PATIENCE = 24
     WARMUP_EPOCHS = 5
     WARMUP_START_FACTOR = 0.25
     GRAD_CLIP_NORM = 0.8
     SMOOTH_L1_BETA = 1.0
     USE_TARGET_WEIGHTED_LOSS = True
     USE_DENSITY_WEIGHTED_LOSS = True
-    LOSS_DENSITY_BIN_COUNT = 32
-    LOSS_DENSITY_SMOOTH_KERNEL_SIZE = 5
-    LOSS_DENSITY_SMOOTH_SIGMA = 1.0
-    LOSS_DENSITY_ALPHA = 0.50
+    LOSS_DENSITY_BIN_COUNT = 40
+    LOSS_DENSITY_SMOOTH_KERNEL_SIZE = 7
+    LOSS_DENSITY_SMOOTH_SIGMA = 1.35
+    LOSS_DENSITY_ALPHA = 0.58
     LOSS_WEIGHT_MIN = 0.5
     LOSS_WEIGHT_MAX = 14.0
     LOSS_WEIGHT_GE_005 = 1.5
@@ -165,13 +165,27 @@ class Config:
     USE_SMOOTH_TAIL_WEIGHTS = True
     TAIL_WEIGHT_TRANSITION_WIDTH = 0.003
     USE_TAIL_UNDERPREDICTION_LOSS = True
-    TAIL_UNDERPREDICTION_START_EPOCH = 5
-    TAIL_UNDERPREDICTION_RAMP_EPOCHS = 8
+    TAIL_UNDERPREDICTION_START_EPOCH = 6
+    TAIL_UNDERPREDICTION_RAMP_EPOCHS = 12
     TAIL_UNDERPREDICTION_THRESHOLD = 0.010
-    TAIL_UNDERPREDICTION_WEIGHT = 0.18
+    TAIL_UNDERPREDICTION_WEIGHT = 0.14
     EXTREME_TAIL_UNDERPREDICTION_THRESHOLD = 0.020
-    EXTREME_TAIL_UNDERPREDICTION_WEIGHT = 0.50
-    TAIL_UNDERPREDICTION_MAX_LOSS = 2.2
+    EXTREME_TAIL_UNDERPREDICTION_WEIGHT = 0.34
+    TAIL_UNDERPREDICTION_MAX_LOSS = 2.4
+    USE_TAIL_RELATIVE_UNDER_LOSS = True
+    TAIL_RELATIVE_UNDER_WEIGHT = 0.018
+    EXTREME_TAIL_RELATIVE_UNDER_WEIGHT = 0.040
+    USE_TAIL_PINBALL_LOSS = True
+    TAIL_PINBALL_TAU = 0.58
+    EXTREME_TAIL_PINBALL_TAU = 0.64
+    TAIL_PINBALL_WEIGHT = 0.008
+    EXTREME_TAIL_PINBALL_WEIGHT = 0.016
+    ADAPTIVE_TAIL_THRESHOLDS = True
+    ENGINEERING_TAIL_THRESHOLDS = [0.005, 0.010, 0.020]
+    FALLBACK_TAIL_THRESHOLDS = [0.003, 0.005, 0.007]
+    TAIL_MIN_POSITIVE_COUNT = 96
+    TAIL_LOSS_WEIGHTS = [1.20, 1.65, 2.40]
+    SAMPLER_TAIL_BOOSTS = [1.08, 1.35, 1.80]
     VAL_TAIL_THRESHOLD = 0.010
     VAL_EXTREME_TAIL_THRESHOLD = 0.020
     VAL_FOCUS_RMSE_WEIGHT = 0.18
@@ -179,8 +193,13 @@ class Config:
     VAL_FOCUS_EXTREME_TAIL_MAE_WEIGHT = 0.45
     VAL_FOCUS_TAIL_UNDER_WEIGHT = 0.10
     VAL_FOCUS_EXTREME_TAIL_UNDER_WEIGHT = 0.20
-    USE_EMA = False
-    EMA_DECAY = 0.98
+    VAL_MID_TAIL_LOW = 0.005
+    VAL_MID_TAIL_HIGH = 0.010
+    SELECTION_METRIC = "val_mae_plus_focus_blend"
+    SELECTION_FOCUS_WEIGHT = 0.022
+    SELECTION_MID_TAIL_WEIGHT = 0.055
+    USE_EMA = True
+    EMA_DECAY = 0.998
 
     USE_AMP = True
     CACHE_IMAGES = True
@@ -199,47 +218,106 @@ class Config:
     TARGET_BIN_COUNT = 8
     SAMPLER_POWER = 0.85
     SAMPLER_MIN_WEIGHT = 0.35
-    SAMPLER_MAX_WEIGHT = 15.0
+    SAMPLER_MAX_WEIGHT = 12.0
     SAMPLER_TAIL_BOOST_GE_005 = 1.0
     SAMPLER_TAIL_BOOST_GE_010 = 1.5
     SAMPLER_TAIL_BOOST_GE_020 = 4.0
-    SAMPLER_NUM_SAMPLES_MULTIPLIER = 1.10
+    SAMPLER_NUM_SAMPLES_MULTIPLIER = 1.12
 
     CNN_BACKBONE = "scalar_film_residual"
-    CNN_CHANNELS = [32, 64, 128, 192]
+    CNN_CHANNELS = [32, 72, 144, 224]
     CNN_KERNEL_SIZE = 3
     CNN_POOL_SIZES = [2, 2, 2, 2]
     CNN_NORM = "group"
     CNN_GROUP_NORM_MAX_GROUPS = 8
     CNN_DROPOUT = 0.08
     CNN_POOL_OUTPUT = (4, 4)
-    CNN_PROJECTOR_DIM = 256
-    CNN_PROJECTOR_DROPOUT = 0.10
+    CNN_PROJECTOR_DIM = 288
+    CNN_PROJECTOR_DROPOUT = 0.12
     CNN_FILM_IDENTITY_INIT = True
     CNN_FILM_GATE_INIT_BIAS = 3.0
 
-    MLP_HIDDEN_LAYERS = [64, 128]
+    SCALAR_ENCODER = "residual"
+    SCALAR_EMBED_DIM = 192
+    SCALAR_INPUT_DROPOUT = 0.09
+    SCALAR_RES_BLOCKS = 4
+    SCALAR_RES_HIDDEN_MULT = 2
+    SCALAR_RES_DROPOUT = 0.18
+    SCALAR_RESIDUAL_SCALE_INIT = 0.10
+    MLP_HIDDEN_LAYERS = [96, SCALAR_EMBED_DIM]
     SCALAR_NORM = "layer"
     MLP_DROPOUT = 0.1
 
-    HEAD_HIDDEN_DIMS = [256, 64]
-    HEAD_DROPOUT = 0.20
+    FUSION_MODE = "gated_bilinear"
+    FUSION_BILINEAR_DIM = 80
+    FUSION_OUTPUT_DIM = 384
+    FUSION_DROPOUT = 0.18
+    FUSION_INTERACTION_SCALE_INIT = 0.32
+
+    HEAD_HIDDEN_DIMS = [384, 128]
+    HEAD_DROPOUT = 0.25
     USE_TAIL_CORRECTION_HEAD = True
     USE_TAIL_CORRECTION_GATE = True
-    TAIL_CORRECTION_HIDDEN_DIM = 64
-    TAIL_CORRECTION_DROPOUT = 0.05
-    TAIL_CORRECTION_INIT_BIAS = -4.0
-    TAIL_CORRECTION_GATE_INIT_BIAS = -1.5
+    TAIL_CORRECTION_HIDDEN_DIM = 96
+    TAIL_CORRECTION_DROPOUT = 0.10
+    TAIL_CORRECTION_INIT_BIAS = -4.2
+    TAIL_CORRECTION_GATE_INIT_BIAS = -1.7
+    USE_TAIL_PROB_GATED_CORRECTION = True
+    TAIL_PROB_GATE_INDEX = 0
+    TAIL_PROB_GATE_DETACH = True
+    TAIL_PROB_GATE_POWER = 1.10
+    USE_EXTREME_PROB_GATE_BLEND = True
+    TAIL_EXTREME_PROB_GATE_INDEX = 1
+    TAIL_EXTREME_PROB_GATE_FLOOR = 0.65
     USE_TAIL_CLASSIFICATION_AUX = True
     TAIL_CLASSIFICATION_THRESHOLDS = [0.010, 0.020]
-    TAIL_CLASSIFICATION_LOSS_WEIGHTS = [0.025, 0.050]
-    TAIL_CLASSIFICATION_HIDDEN_DIM = 64
-    TAIL_CLASSIFICATION_DROPOUT = 0.05
+    TAIL_CLASSIFICATION_LOSS_WEIGHTS = [0.018, 0.048]
+    TAIL_CLASSIFICATION_HIDDEN_DIM = 96
+    TAIL_CLASSIFICATION_DROPOUT = 0.10
     TAIL_CLASSIFICATION_INIT_BIAS = -3.0
-    TAIL_CLASSIFICATION_POS_WEIGHT_MAX = 30.0
-    TAIL_CLASSIFICATION_RAMP_EPOCHS = 8
+    TAIL_CLASSIFICATION_POS_WEIGHT_MAX = 26.0
+    TAIL_CLASSIFICATION_RAMP_EPOCHS = 10
     OPTIMIZER_NO_DECAY_NORM_AND_BIAS = True
     SAVE_ALTERNATE_BEST_CHECKPOINTS = True
+
+
+def _parse_env_path_list(value: str | None) -> tuple[Path, ...]:
+    if not value:
+        return ()
+    parts = [item.strip() for item in value.split(os.pathsep)]
+    return tuple(Path(item).expanduser() for item in parts if item)
+
+
+def _apply_environment_overrides() -> None:
+    dataset_dirs = _parse_env_path_list(
+        os.environ.get("SURMOD_DATASET_DIRS") or os.environ.get("SURMOD_DATASET_DIR")
+    )
+    if dataset_dirs:
+        Config.CSV_DIR_CANDIDATES = dataset_dirs
+        Config.CSV_DIR = next((path for path in dataset_dirs if path.exists()), dataset_dirs[0])
+
+    train_csv_path = os.environ.get("SURMOD_TRAIN_CSV")
+    if train_csv_path:
+        Config.TRAIN_CSV_PATH = Path(train_csv_path).expanduser()
+
+    val_csv_path = os.environ.get("SURMOD_VAL_CSV")
+    if val_csv_path:
+        Config.VAL_CSV_PATH = Path(val_csv_path).expanduser()
+
+    wavelet_image_dir = os.environ.get("SURMOD_WAVELET_IMAGE_DIR")
+    if wavelet_image_dir:
+        Config.WAVELET_IMAGE_DIR = Path(wavelet_image_dir).expanduser()
+
+    model_root_dir = os.environ.get("SURMOD_MODEL_ROOT_DIR")
+    if model_root_dir:
+        model_root_path = Path(model_root_dir).expanduser()
+        Config.MODEL_ROOT_DIR = model_root_path
+        Config.MODEL_DIR = model_root_path
+        Config.SAVE_ROOT_DIR = model_root_path
+        Config.SAVE_DIR = model_root_path
+
+
+_apply_environment_overrides()
 
 
 Config.MODEL_ROOT_DIR.mkdir(parents=True, exist_ok=True)
@@ -480,24 +558,106 @@ class ConditionalResidualConvBlock2D(nn.Module):
         return out
 
 
+class ScalarResidualBlock(nn.Module):
+    def __init__(self, dim: int, hidden_mult: int, dropout: float):
+        super().__init__()
+        hidden_dim = int(dim * hidden_mult)
+        self.norm = build_scalar_norm(dim)
+        self.net = nn.Sequential(
+            nn.Linear(dim, hidden_dim),
+            nn.GELU(),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_dim, dim),
+            nn.Dropout(dropout),
+        )
+        self.residual_scale = nn.Parameter(torch.tensor(float(Config.SCALAR_RESIDUAL_SCALE_INIT)))
+
+    def forward(self, x):
+        return x + self.residual_scale * self.net(self.norm(x))
+
+
+class ScalarFeatureEncoder(nn.Module):
+    def __init__(self, num_scalars: int):
+        super().__init__()
+        if Config.SCALAR_ENCODER == "legacy_mlp":
+            mlp_h = Config.MLP_HIDDEN_LAYERS
+            self.encoder = nn.Sequential(
+                nn.Linear(num_scalars, mlp_h[0]),
+                build_scalar_norm(mlp_h[0]),
+                nn.ReLU(),
+                nn.Linear(mlp_h[0], mlp_h[1]),
+                build_scalar_norm(mlp_h[1]),
+                nn.ReLU(),
+                nn.Dropout(Config.MLP_DROPOUT),
+            )
+            self.out_dim = mlp_h[1]
+            return
+
+        dim = int(Config.SCALAR_EMBED_DIM)
+        blocks = [
+            nn.Linear(num_scalars, dim),
+            build_scalar_norm(dim),
+            nn.GELU(),
+            nn.Dropout(Config.SCALAR_INPUT_DROPOUT),
+        ]
+        blocks.extend(
+            ScalarResidualBlock(
+                dim=dim,
+                hidden_mult=Config.SCALAR_RES_HIDDEN_MULT,
+                dropout=Config.SCALAR_RES_DROPOUT,
+            )
+            for _ in range(Config.SCALAR_RES_BLOCKS)
+        )
+        blocks.append(build_scalar_norm(dim))
+        self.encoder = nn.Sequential(*blocks)
+        self.out_dim = dim
+
+    def forward(self, scalars):
+        return self.encoder(scalars)
+
+
+class GatedBilinearFusionBlock(nn.Module):
+    def __init__(self, img_dim: int, scalar_dim: int):
+        super().__init__()
+        bilinear_dim = int(Config.FUSION_BILINEAR_DIM)
+        output_dim = int(Config.FUSION_OUTPUT_DIM)
+        self.img_gate = nn.Linear(scalar_dim, img_dim)
+        self.scalar_gate = nn.Linear(img_dim, scalar_dim)
+        self.img_bilinear = nn.Linear(img_dim, bilinear_dim, bias=False)
+        self.scalar_bilinear = nn.Linear(scalar_dim, bilinear_dim, bias=False)
+        self.interaction_scale = nn.Parameter(torch.tensor(float(Config.FUSION_INTERACTION_SCALE_INIT)))
+        self.out = nn.Sequential(
+            nn.Linear(img_dim + scalar_dim + bilinear_dim, output_dim),
+            build_scalar_norm(output_dim),
+            nn.GELU(),
+            nn.Dropout(Config.FUSION_DROPOUT),
+        )
+
+        nn.init.zeros_(self.img_gate.weight)
+        nn.init.zeros_(self.img_gate.bias)
+        nn.init.zeros_(self.scalar_gate.weight)
+        nn.init.zeros_(self.scalar_gate.bias)
+
+    def forward(self, img_features, scalar_features):
+        img_factor = 1.0 + 0.5 * torch.tanh(self.img_gate(scalar_features))
+        scalar_factor = 1.0 + 0.5 * torch.tanh(self.scalar_gate(img_features))
+        img_gated = img_features * img_factor
+        scalar_gated = scalar_features * scalar_factor
+        bilinear = self.interaction_scale.clamp(0.0, 2.0) * (
+            self.img_bilinear(img_gated) * self.scalar_bilinear(scalar_gated)
+        )
+        return self.out(torch.cat((img_gated, scalar_gated, bilinear), dim=1))
+
+
 class MultimodalPredictor(nn.Module):
     def __init__(self, num_scalars):
         super(MultimodalPredictor, self).__init__()
 
         c_ch = Config.CNN_CHANNELS
-        mlp_h = Config.MLP_HIDDEN_LAYERS
         head_h = Config.HEAD_HIDDEN_DIMS
 
-        self.mlp = nn.Sequential(
-            nn.Linear(num_scalars, mlp_h[0]),
-            build_scalar_norm(mlp_h[0]),
-            nn.ReLU(),
-            nn.Linear(mlp_h[0], mlp_h[1]),
-            build_scalar_norm(mlp_h[1]),
-            nn.ReLU(),
-            nn.Dropout(Config.MLP_DROPOUT),
-        )
-        self.mlp_out_dim = mlp_h[1]
+        self.mlp = ScalarFeatureEncoder(num_scalars)
+        self.mlp_out_dim = self.mlp.out_dim
         self.uses_scalar_film = Config.CNN_BACKBONE == "scalar_film_residual"
 
         if Config.CNN_BACKBONE == "legacy":
@@ -583,20 +743,29 @@ class MultimodalPredictor(nn.Module):
             nn.Dropout(Config.CNN_PROJECTOR_DROPOUT),
         )
 
-        fusion_dim = Config.CNN_PROJECTOR_DIM + self.mlp_out_dim
+        fusion_input_dim = Config.CNN_PROJECTOR_DIM + self.mlp_out_dim
+        if Config.FUSION_MODE == "gated_bilinear":
+            self.fusion = GatedBilinearFusionBlock(Config.CNN_PROJECTOR_DIM, self.mlp_out_dim)
+            fusion_dim = Config.FUSION_OUTPUT_DIM
+        elif Config.FUSION_MODE == "concat":
+            self.fusion = None
+            fusion_dim = fusion_input_dim
+        else:
+            raise ValueError(f"不支持的融合模式: {Config.FUSION_MODE}")
+
         self.head = nn.Sequential(
             nn.Linear(fusion_dim, head_h[0]),
-            nn.ReLU(),
+            nn.GELU(),
             nn.Dropout(Config.HEAD_DROPOUT),
             nn.Linear(head_h[0], head_h[1]),
-            nn.ReLU(),
+            nn.GELU(),
             nn.Linear(head_h[1], 1),
         )
         self.use_tail_correction_head = Config.USE_TAIL_CORRECTION_HEAD
         if self.use_tail_correction_head:
             self.tail_correction_head = nn.Sequential(
                 nn.Linear(fusion_dim, Config.TAIL_CORRECTION_HIDDEN_DIM),
-                nn.ReLU(),
+                nn.GELU(),
                 nn.Dropout(Config.TAIL_CORRECTION_DROPOUT),
                 nn.Linear(Config.TAIL_CORRECTION_HIDDEN_DIM, 1),
             )
@@ -611,7 +780,7 @@ class MultimodalPredictor(nn.Module):
         if self.use_tail_classification_aux:
             self.tail_classifier_head = nn.Sequential(
                 nn.Linear(fusion_dim, Config.TAIL_CLASSIFICATION_HIDDEN_DIM),
-                nn.ReLU(),
+                nn.GELU(),
                 nn.Dropout(Config.TAIL_CLASSIFICATION_DROPOUT),
                 nn.Linear(Config.TAIL_CLASSIFICATION_HIDDEN_DIM, len(Config.TAIL_CLASSIFICATION_THRESHOLDS)),
             )
@@ -633,7 +802,10 @@ class MultimodalPredictor(nn.Module):
             max_features = self.max_pool(x_img).flatten(1)
             x_img = torch.cat((avg_features, max_features), dim=1)
         x_img = self.cnn_projector(x_img)
-        x_fused = torch.cat((x_img, x_scalar), dim=1)
+        if self.fusion is None:
+            x_fused = torch.cat((x_img, x_scalar), dim=1)
+        else:
+            x_fused = self.fusion(x_img, x_scalar)
         base_pred = self.head(x_fused)
         aux_outputs = {}
         if self.use_tail_classification_aux:
@@ -641,7 +813,31 @@ class MultimodalPredictor(nn.Module):
         if self.use_tail_correction_head:
             tail_correction = self.tail_correction_activation(self.tail_correction_head(x_fused))
             if self.use_tail_correction_gate:
-                tail_correction = tail_correction * torch.sigmoid(self.tail_correction_gate(x_fused))
+                correction_gate = torch.sigmoid(self.tail_correction_gate(x_fused))
+                if Config.USE_TAIL_PROB_GATED_CORRECTION and self.use_tail_classification_aux:
+                    gate_index = min(
+                        max(int(Config.TAIL_PROB_GATE_INDEX), 0),
+                        aux_outputs["tail_logits"].shape[1] - 1,
+                    )
+                    tail_prob_gate = torch.sigmoid(aux_outputs["tail_logits"][:, gate_index: gate_index + 1])
+                    if Config.TAIL_PROB_GATE_DETACH:
+                        tail_prob_gate = tail_prob_gate.detach()
+                    if Config.TAIL_PROB_GATE_POWER != 1.0:
+                        tail_prob_gate = tail_prob_gate.clamp_min(1e-6).pow(Config.TAIL_PROB_GATE_POWER)
+                    if Config.USE_EXTREME_PROB_GATE_BLEND and aux_outputs["tail_logits"].shape[1] > 1:
+                        extreme_gate_index = min(
+                            max(int(Config.TAIL_EXTREME_PROB_GATE_INDEX), 0),
+                            aux_outputs["tail_logits"].shape[1] - 1,
+                        )
+                        extreme_prob_gate = torch.sigmoid(
+                            aux_outputs["tail_logits"][:, extreme_gate_index: extreme_gate_index + 1]
+                        )
+                        if Config.TAIL_PROB_GATE_DETACH:
+                            extreme_prob_gate = extreme_prob_gate.detach()
+                        blend_floor = min(max(float(Config.TAIL_EXTREME_PROB_GATE_FLOOR), 0.0), 1.0)
+                        tail_prob_gate = tail_prob_gate * (blend_floor + (1.0 - blend_floor) * extreme_prob_gate)
+                    correction_gate = correction_gate * tail_prob_gate
+                tail_correction = tail_correction * correction_gate
             pred = base_pred + tail_correction
         else:
             pred = base_pred
@@ -934,8 +1130,39 @@ def validate_dataframe(df: pd.DataFrame, csv_path: Path) -> None:
         raise KeyError(f"CSV 文件缺少必要列: {missing_cols}，源文件: {csv_path}")
 
 
+def infer_image_reference(image_value, txt_value) -> str | None:
+    if pd.notna(image_value):
+        text = str(image_value).strip()
+        if text and text.lower() != "nan":
+            return text
+
+    if pd.isna(txt_value):
+        return None
+
+    text = str(txt_value).strip()
+    if not text:
+        return None
+
+    suffix = text.rsplit("|", 1)[-1].strip()
+    if suffix.lower().endswith((".png", ".jpg", ".jpeg", ".bmp", ".webp")):
+        return suffix
+    if suffix.isdigit():
+        return f"{suffix}.png"
+    return None
+
+
 def filter_valid_rows(df: pd.DataFrame) -> pd.DataFrame:
     filtered = df[df[Config.STATUS_COL] == "ok"].copy()
+    if Config.IMAGE_COL in filtered.columns and Config.TXT_COL in filtered.columns:
+        original_missing = int(filtered[Config.IMAGE_COL].isna().sum())
+        if original_missing > 0:
+            filtered[Config.IMAGE_COL] = [
+                infer_image_reference(image_value, txt_value)
+                for image_value, txt_value in zip(filtered[Config.IMAGE_COL], filtered[Config.TXT_COL])
+            ]
+            filled_count = max(original_missing - int(filtered[Config.IMAGE_COL].isna().sum()), 0)
+            if filled_count > 0:
+                print(f">>> Backfilled {filled_count} missing image_path values from txt_path")
     filtered = filtered.dropna(subset=Config.BASE_SCALAR_COLS + [Config.IMAGE_COL, Config.TXT_COL, Config.LABEL_COL])
     return filtered.reset_index(drop=True)
 
@@ -1183,6 +1410,60 @@ def _smooth_tail_boost_torch(labels_raw: torch.Tensor, threshold: float, target_
     return 1.0 + (float(target_weight) - 1.0) * progress
 
 
+def configure_adaptive_tail_policy(train_labels: np.ndarray, val_labels: np.ndarray | None = None) -> dict:
+    train_labels = np.asarray(train_labels, dtype=np.float64)
+    val_labels = np.asarray([] if val_labels is None else val_labels, dtype=np.float64)
+    engineering_thresholds = [float(value) for value in Config.ENGINEERING_TAIL_THRESHOLDS]
+    fallback_thresholds = [float(value) for value in Config.FALLBACK_TAIL_THRESHOLDS]
+
+    engineering_anchor = engineering_thresholds[1] if len(engineering_thresholds) >= 2 else engineering_thresholds[0]
+    engineering_anchor_count = int(np.sum(train_labels >= engineering_anchor))
+    use_fallback = bool(
+        Config.ADAPTIVE_TAIL_THRESHOLDS
+        and engineering_anchor_count < int(Config.TAIL_MIN_POSITIVE_COUNT)
+    )
+    thresholds = fallback_thresholds if use_fallback else engineering_thresholds
+    thresholds = sorted(float(value) for value in thresholds)
+    if len(thresholds) < 3:
+        raise ValueError("v11 需要至少 3 个 tail 阈值以支持 mid/tail/extreme 自适应选择")
+
+    Config.TAIL_CLASSIFICATION_THRESHOLDS = thresholds
+    Config.TAIL_CLASSIFICATION_LOSS_WEIGHTS = [0.010, 0.024, 0.044] if use_fallback else [0.014, 0.030, 0.058]
+    Config.TAIL_UNDERPREDICTION_THRESHOLD = thresholds[1]
+    Config.EXTREME_TAIL_UNDERPREDICTION_THRESHOLD = thresholds[2]
+    Config.VAL_MID_TAIL_LOW = thresholds[0]
+    Config.VAL_MID_TAIL_HIGH = thresholds[1]
+    Config.VAL_TAIL_THRESHOLD = thresholds[1]
+    Config.VAL_EXTREME_TAIL_THRESHOLD = thresholds[2]
+    Config.TAIL_PROB_GATE_INDEX = min(1, len(thresholds) - 1)
+    Config.TAIL_EXTREME_PROB_GATE_INDEX = min(2, len(thresholds) - 1)
+
+    train_counts = [int(np.sum(train_labels >= threshold)) for threshold in thresholds]
+    val_counts = [int(np.sum(val_labels >= threshold)) for threshold in thresholds] if val_labels.size else []
+    policy = {
+        "enabled": bool(Config.ADAPTIVE_TAIL_THRESHOLDS),
+        "mode": "fallback_mid_tail" if use_fallback else "engineering_tail",
+        "reason": (
+            f"train count >= {engineering_anchor:.4f} is {engineering_anchor_count}, "
+            f"min required {int(Config.TAIL_MIN_POSITIVE_COUNT)}"
+        ),
+        "engineering_thresholds": engineering_thresholds,
+        "fallback_thresholds": fallback_thresholds,
+        "active_thresholds": thresholds,
+        "train_counts": train_counts,
+        "val_counts": val_counts,
+        "classification_loss_weights": list(Config.TAIL_CLASSIFICATION_LOSS_WEIGHTS),
+        "tail_underprediction_threshold": float(Config.TAIL_UNDERPREDICTION_THRESHOLD),
+        "extreme_tail_underprediction_threshold": float(Config.EXTREME_TAIL_UNDERPREDICTION_THRESHOLD),
+        "val_mid_tail_range": [float(Config.VAL_MID_TAIL_LOW), float(Config.VAL_MID_TAIL_HIGH)],
+    }
+    print(
+        ">>> v11 adaptive tail policy: "
+        f"{policy['mode']} | thresholds={thresholds} | train_counts={train_counts} | val_counts={val_counts}"
+    )
+    return policy
+
+
 def build_train_sampler(train_df: pd.DataFrame):
     if not Config.USE_WEIGHTED_SAMPLER:
         return None, {"enabled": False}
@@ -1198,9 +1479,10 @@ def build_train_sampler(train_df: pd.DataFrame):
     weights = weights.to_numpy(dtype=np.float64).copy()
 
     label_values = labels.to_numpy(dtype=np.float64)
-    weights *= _smooth_tail_boost_np(label_values, 0.005, Config.SAMPLER_TAIL_BOOST_GE_005)
-    weights *= _smooth_tail_boost_np(label_values, 0.010, Config.SAMPLER_TAIL_BOOST_GE_010)
-    weights *= _smooth_tail_boost_np(label_values, 0.020, Config.SAMPLER_TAIL_BOOST_GE_020)
+    sampler_thresholds = [float(value) for value in Config.TAIL_CLASSIFICATION_THRESHOLDS]
+    sampler_boosts = [float(value) for value in Config.SAMPLER_TAIL_BOOSTS]
+    for threshold, boost in zip(sampler_thresholds, sampler_boosts):
+        weights *= _smooth_tail_boost_np(label_values, threshold, boost)
     weights = np.clip(weights, Config.SAMPLER_MIN_WEIGHT, Config.SAMPLER_MAX_WEIGHT)
     sampler_num_samples = max(1, int(round(len(weights) * Config.SAMPLER_NUM_SAMPLES_MULTIPLIER)))
 
@@ -1216,6 +1498,9 @@ def build_train_sampler(train_df: pd.DataFrame):
         "joint_group_count": int(balance_keys.nunique()),
         "num_samples": int(sampler_num_samples),
         "num_samples_multiplier": float(Config.SAMPLER_NUM_SAMPLES_MULTIPLIER),
+        "active_tail_thresholds": sampler_thresholds,
+        "active_tail_counts": [int(np.sum(label_values >= threshold)) for threshold in sampler_thresholds],
+        "active_tail_boosts": sampler_boosts,
         "tail_count_ge_0p005": int(np.sum(label_values >= 0.005)),
         "tail_count_ge_0p010": int(np.sum(label_values >= 0.010)),
         "tail_count_ge_0p020": int(np.sum(label_values >= 0.020)),
@@ -1289,9 +1574,10 @@ def apply_tail_loss_multipliers(labels_scaled: torch.Tensor, weights: torch.Tens
         return weights
 
     labels_raw = labels_scaled / float(Config.LABEL_SCALE) if Config.SCALE_TARGET else labels_scaled
-    weights = torch.maximum(weights, _smooth_tail_boost_torch(labels_raw, 0.005, Config.LOSS_WEIGHT_GE_005))
-    weights = torch.maximum(weights, _smooth_tail_boost_torch(labels_raw, 0.010, Config.LOSS_WEIGHT_GE_010))
-    weights = torch.maximum(weights, _smooth_tail_boost_torch(labels_raw, 0.020, Config.LOSS_WEIGHT_GE_020))
+    tail_thresholds = [float(value) for value in Config.TAIL_CLASSIFICATION_THRESHOLDS]
+    tail_weights = [float(value) for value in Config.TAIL_LOSS_WEIGHTS]
+    for threshold, target_weight in zip(tail_thresholds, tail_weights):
+        weights = torch.maximum(weights, _smooth_tail_boost_torch(labels_raw, threshold, target_weight))
     weights = torch.clamp(weights, min=Config.LOSS_WEIGHT_MIN, max=Config.LOSS_WEIGHT_MAX)
     return weights
 
@@ -1343,7 +1629,10 @@ def calculate_tail_underprediction_loss(
         return preds.new_zeros(())
 
     labels_raw = labels_scaled / float(Config.LABEL_SCALE) if Config.SCALE_TARGET else labels_scaled
+    preds_raw = preds / float(Config.LABEL_SCALE) if Config.SCALE_TARGET else preds
     under_error = torch.relu(labels_scaled - preds)
+    signed_error_scaled = labels_scaled - preds
+    relative_under_error = torch.relu(labels_raw - preds_raw) / torch.clamp(labels_raw.abs(), min=5e-4)
     total_loss = preds.new_zeros(())
     if epoch_num is None:
         ramp_factor = 1.0
@@ -1360,6 +1649,17 @@ def calculate_tail_underprediction_loss(
             beta=Config.SMOOTH_L1_BETA,
             reduction="mean",
         )
+        if Config.USE_TAIL_RELATIVE_UNDER_LOSS:
+            total_loss = total_loss + ramp_factor * Config.TAIL_RELATIVE_UNDER_WEIGHT * torch.mean(
+                relative_under_error[tail_mask]
+            )
+        if Config.USE_TAIL_PINBALL_LOSS:
+            tail_signed_error = signed_error_scaled[tail_mask]
+            tail_pinball = torch.maximum(
+                Config.TAIL_PINBALL_TAU * tail_signed_error,
+                (Config.TAIL_PINBALL_TAU - 1.0) * tail_signed_error,
+            )
+            total_loss = total_loss + ramp_factor * Config.TAIL_PINBALL_WEIGHT * torch.mean(tail_pinball)
 
     extreme_mask = labels_raw >= Config.EXTREME_TAIL_UNDERPREDICTION_THRESHOLD
     if torch.any(extreme_mask):
@@ -1370,6 +1670,17 @@ def calculate_tail_underprediction_loss(
             beta=Config.SMOOTH_L1_BETA,
             reduction="mean",
         )
+        if Config.USE_TAIL_RELATIVE_UNDER_LOSS:
+            total_loss = total_loss + ramp_factor * Config.EXTREME_TAIL_RELATIVE_UNDER_WEIGHT * torch.mean(
+                relative_under_error[extreme_mask]
+            )
+        if Config.USE_TAIL_PINBALL_LOSS:
+            extreme_signed_error = signed_error_scaled[extreme_mask]
+            extreme_pinball = torch.maximum(
+                Config.EXTREME_TAIL_PINBALL_TAU * extreme_signed_error,
+                (Config.EXTREME_TAIL_PINBALL_TAU - 1.0) * extreme_signed_error,
+            )
+            total_loss = total_loss + ramp_factor * Config.EXTREME_TAIL_PINBALL_WEIGHT * torch.mean(extreme_pinball)
 
     return torch.clamp(total_loss, max=Config.TAIL_UNDERPREDICTION_MAX_LOSS)
 
@@ -1387,8 +1698,19 @@ def calculate_regression_metrics(y_true_raw: np.ndarray, y_pred_raw: np.ndarray)
 def calculate_validation_focus_metrics(y_true_raw: np.ndarray, y_pred_raw: np.ndarray) -> dict[str, float]:
     errors = y_pred_raw - y_true_raw
     under_errors = np.maximum(y_true_raw - y_pred_raw, 0.0)
+    mid_tail_mask = (y_true_raw >= Config.VAL_MID_TAIL_LOW) & (y_true_raw < Config.VAL_MID_TAIL_HIGH)
     tail_mask = y_true_raw >= Config.VAL_TAIL_THRESHOLD
     extreme_tail_mask = y_true_raw >= Config.VAL_EXTREME_TAIL_THRESHOLD
+    if np.any(mid_tail_mask):
+        mid_tail_errors = errors[mid_tail_mask]
+        mid_tail_mae = float(np.mean(np.abs(mid_tail_errors)))
+        mid_tail_bias = float(np.mean(mid_tail_errors))
+        mid_tail_under_mae = float(np.mean(under_errors[mid_tail_mask]))
+    else:
+        mid_tail_mae = float(np.mean(np.abs(errors)))
+        mid_tail_bias = float(np.mean(errors))
+        mid_tail_under_mae = float(np.mean(under_errors))
+
     if np.any(tail_mask):
         tail_errors = errors[tail_mask]
         tail_mae = float(np.mean(np.abs(tail_errors)))
@@ -1420,6 +1742,10 @@ def calculate_validation_focus_metrics(y_true_raw: np.ndarray, y_pred_raw: np.nd
     )
     return {
         "focus_score": float(focus_score),
+        "mid_tail_mae": float(mid_tail_mae),
+        "mid_tail_bias": float(mid_tail_bias),
+        "mid_tail_under_mae": float(mid_tail_under_mae),
+        "mid_tail_count": int(np.sum(mid_tail_mask)),
         "tail_mae": float(tail_mae),
         "tail_bias": float(tail_bias),
         "tail_under_mae": float(tail_under_mae),
@@ -1429,6 +1755,14 @@ def calculate_validation_focus_metrics(y_true_raw: np.ndarray, y_pred_raw: np.nd
         "extreme_tail_under_mae": float(extreme_tail_under_mae),
         "extreme_tail_count": int(np.sum(extreme_tail_mask)),
     }
+
+
+def calculate_selection_score(metrics: dict[str, float], focus_metrics: dict[str, float]) -> float:
+    return float(
+        metrics["mae"]
+        + Config.SELECTION_FOCUS_WEIGHT * focus_metrics["focus_score"]
+        + Config.SELECTION_MID_TAIL_WEIGHT * focus_metrics["mid_tail_mae"]
+    )
 
 
 def prepare_data():
@@ -1464,6 +1798,7 @@ def prepare_data():
     val_paths = build_image_paths(val_df[Config.IMAGE_COL].values)
     train_labels = train_df[Config.LABEL_COL].values.astype(np.float32)
     val_labels = val_df[Config.LABEL_COL].values.astype(np.float32)
+    adaptive_tail_policy = configure_adaptive_tail_policy(train_labels, val_labels)
     train_loss_weights = build_label_density_weights(train_labels)
     val_loss_weights = np.ones_like(val_labels, dtype=np.float32)
     tail_classification_summary = build_tail_classification_summary(train_labels)
@@ -1535,6 +1870,7 @@ def prepare_data():
             "max": float(train_loss_weights.max()),
             "mean": float(train_loss_weights.mean()),
         },
+        "adaptive_tail_policy": adaptive_tail_policy,
         "tail_classification": tail_classification_summary,
     }
 
@@ -1602,11 +1938,12 @@ def train():
 
     metadata.update(
         {
-            "model_family": "multimodal_2dcnn",
+            "model_family": "multimodal_2dcnn_calibrated_scalar_fusion",
+            "architecture_revision": "v11_adaptive_midtail_capacity_v2_base",
             "best_weights_name": "best_2dcnn_model.pth",
-            "best_weights_metric": "val_mae_raw",
+            "best_weights_metric": Config.SELECTION_METRIC,
             "best_weights_are_ema": Config.USE_EMA,
-            "selection_weights_name": "best_2dcnn_focus_model.pth",
+            "selection_weights_name": "best_2dcnn_model.pth",
             "last_weights_name": "multimodal_2dcnn_model.pth",
             "ema_weights_name": "ema_2dcnn_model.pth" if Config.USE_EMA else None,
             "total_params": int(total_params),
@@ -1634,6 +1971,8 @@ def train():
                 "ge_0p005": Config.LOSS_WEIGHT_GE_005,
                 "ge_0p010": Config.LOSS_WEIGHT_GE_010,
                 "ge_0p020": Config.LOSS_WEIGHT_GE_020,
+                "active_tail_thresholds": list(Config.TAIL_CLASSIFICATION_THRESHOLDS),
+                "active_tail_weights": list(Config.TAIL_LOSS_WEIGHTS),
                 "smooth_tail_weights": Config.USE_SMOOTH_TAIL_WEIGHTS,
                 "tail_weight_transition_width": Config.TAIL_WEIGHT_TRANSITION_WIDTH,
             },
@@ -1645,11 +1984,25 @@ def train():
                 "tail_weight": Config.TAIL_UNDERPREDICTION_WEIGHT,
                 "extreme_tail_threshold": Config.EXTREME_TAIL_UNDERPREDICTION_THRESHOLD,
                 "extreme_tail_weight": Config.EXTREME_TAIL_UNDERPREDICTION_WEIGHT,
+                "relative_under_loss": Config.USE_TAIL_RELATIVE_UNDER_LOSS,
+                "tail_relative_under_weight": Config.TAIL_RELATIVE_UNDER_WEIGHT,
+                "extreme_tail_relative_under_weight": Config.EXTREME_TAIL_RELATIVE_UNDER_WEIGHT,
+                "pinball_loss": Config.USE_TAIL_PINBALL_LOSS,
+                "tail_pinball_tau": Config.TAIL_PINBALL_TAU,
+                "extreme_tail_pinball_tau": Config.EXTREME_TAIL_PINBALL_TAU,
+                "tail_pinball_weight": Config.TAIL_PINBALL_WEIGHT,
+                "extreme_tail_pinball_weight": Config.EXTREME_TAIL_PINBALL_WEIGHT,
                 "max_loss": Config.TAIL_UNDERPREDICTION_MAX_LOSS,
             },
             "validation_selection": {
-                "metric": "val_mae_raw",
-                "tie_breaker": "focus_score",
+                "metric": Config.SELECTION_METRIC,
+                "mae_component": "val_mae_raw",
+                "focus_component": "focus_score",
+                "focus_blend_weight": Config.SELECTION_FOCUS_WEIGHT,
+                "mid_tail_component": "mid_tail_mae",
+                "mid_tail_blend_weight": Config.SELECTION_MID_TAIL_WEIGHT,
+                "mid_tail_low": Config.VAL_MID_TAIL_LOW,
+                "mid_tail_high": Config.VAL_MID_TAIL_HIGH,
                 "tail_threshold": Config.VAL_TAIL_THRESHOLD,
                 "extreme_tail_threshold": Config.VAL_EXTREME_TAIL_THRESHOLD,
                 "rmse_weight": Config.VAL_FOCUS_RMSE_WEIGHT,
@@ -1673,7 +2026,7 @@ def train():
             },
             "scheduler": {
                 "type": "ReduceLROnPlateau",
-                "monitor": "val_mae_raw",
+                "monitor": Config.SELECTION_METRIC,
                 "factor": Config.SCHEDULER_FACTOR,
                 "patience": Config.SCHEDULER_PATIENCE,
                 "min_lr": Config.MIN_LR,
@@ -1686,6 +2039,8 @@ def train():
                 "tail_boost_ge_0p005": Config.SAMPLER_TAIL_BOOST_GE_005,
                 "tail_boost_ge_0p010": Config.SAMPLER_TAIL_BOOST_GE_010,
                 "tail_boost_ge_0p020": Config.SAMPLER_TAIL_BOOST_GE_020,
+                "active_tail_thresholds": list(Config.TAIL_CLASSIFICATION_THRESHOLDS),
+                "active_tail_boosts": list(Config.SAMPLER_TAIL_BOOSTS),
                 "num_samples_multiplier": Config.SAMPLER_NUM_SAMPLES_MULTIPLIER,
                 "smooth_tail_weights": Config.USE_SMOOTH_TAIL_WEIGHTS,
                 "tail_weight_transition_width": Config.TAIL_WEIGHT_TRANSITION_WIDTH,
@@ -1703,9 +2058,21 @@ def train():
                 "projector_dropout": Config.CNN_PROJECTOR_DROPOUT,
                 "film_identity_init": Config.CNN_FILM_IDENTITY_INIT,
                 "film_gate_init_bias": Config.CNN_FILM_GATE_INIT_BIAS,
+                "scalar_encoder": Config.SCALAR_ENCODER,
+                "scalar_embed_dim": Config.SCALAR_EMBED_DIM,
                 "scalar_layers": Config.MLP_HIDDEN_LAYERS,
                 "scalar_norm": Config.SCALAR_NORM,
                 "scalar_dropout": Config.MLP_DROPOUT,
+                "scalar_input_dropout": Config.SCALAR_INPUT_DROPOUT,
+                "scalar_res_blocks": Config.SCALAR_RES_BLOCKS,
+                "scalar_res_hidden_mult": Config.SCALAR_RES_HIDDEN_MULT,
+                "scalar_res_dropout": Config.SCALAR_RES_DROPOUT,
+                "scalar_residual_scale_init": Config.SCALAR_RESIDUAL_SCALE_INIT,
+                "fusion_mode": Config.FUSION_MODE,
+                "fusion_bilinear_dim": Config.FUSION_BILINEAR_DIM,
+                "fusion_output_dim": Config.FUSION_OUTPUT_DIM,
+                "fusion_dropout": Config.FUSION_DROPOUT,
+                "fusion_interaction_scale_init": Config.FUSION_INTERACTION_SCALE_INIT,
                 "head_hidden_dims": Config.HEAD_HIDDEN_DIMS,
                 "head_dropout": Config.HEAD_DROPOUT,
                 "tail_correction_head": Config.USE_TAIL_CORRECTION_HEAD,
@@ -1714,11 +2081,21 @@ def train():
                 "tail_correction_dropout": Config.TAIL_CORRECTION_DROPOUT,
                 "tail_correction_init_bias": Config.TAIL_CORRECTION_INIT_BIAS,
                 "tail_correction_gate_init_bias": Config.TAIL_CORRECTION_GATE_INIT_BIAS,
+                "tail_prob_gated_correction": Config.USE_TAIL_PROB_GATED_CORRECTION,
+                "tail_prob_gate_index": Config.TAIL_PROB_GATE_INDEX,
+                "tail_prob_gate_detach": Config.TAIL_PROB_GATE_DETACH,
+                "tail_prob_gate_power": Config.TAIL_PROB_GATE_POWER,
+                "extreme_prob_gate_blend": Config.USE_EXTREME_PROB_GATE_BLEND,
+                "tail_extreme_prob_gate_index": Config.TAIL_EXTREME_PROB_GATE_INDEX,
+                "tail_extreme_prob_gate_floor": Config.TAIL_EXTREME_PROB_GATE_FLOOR,
                 "tail_classification_aux": Config.USE_TAIL_CLASSIFICATION_AUX,
                 "tail_classification_thresholds": list(Config.TAIL_CLASSIFICATION_THRESHOLDS),
+                "tail_classification_loss_weights": list(Config.TAIL_CLASSIFICATION_LOSS_WEIGHTS),
                 "tail_classification_hidden_dim": Config.TAIL_CLASSIFICATION_HIDDEN_DIM,
                 "tail_classification_dropout": Config.TAIL_CLASSIFICATION_DROPOUT,
                 "tail_classification_init_bias": Config.TAIL_CLASSIFICATION_INIT_BIAS,
+                "tail_classification_pos_weight_max": Config.TAIL_CLASSIFICATION_POS_WEIGHT_MAX,
+                "tail_classification_ramp_epochs": Config.TAIL_CLASSIFICATION_RAMP_EPOCHS,
             },
         }
     )
@@ -1751,6 +2128,7 @@ def train():
     best_val_extreme_tail_mae_raw = float("inf")
     best_val_tail_under_mae_raw = float("inf")
     best_val_extreme_tail_under_mae_raw = float("inf")
+    best_val_selection_score = float("inf")
     best_raw_focus_score = float("inf")
     best_raw_focus_epoch = 0
     best_mae_checkpoint = float("inf")
@@ -1766,6 +2144,10 @@ def train():
         "val_rmse_raw": [],
         "val_r2": [],
         "val_focus_score": [],
+        "val_mid_tail_mae_raw": [],
+        "val_mid_tail_bias_raw": [],
+        "val_mid_tail_under_mae_raw": [],
+        "val_mid_tail_count": [],
         "val_tail_mae_raw": [],
         "val_tail_bias_raw": [],
         "val_tail_under_mae_raw": [],
@@ -1867,7 +2249,7 @@ def train():
         if ema is not None:
             ema.restore(model)
 
-        selection_score = float(metrics["mae"])
+        selection_score = calculate_selection_score(metrics, focus_metrics)
         if epoch + 1 > Config.WARMUP_EPOCHS:
             scheduler.step(selection_score)
 
@@ -1877,6 +2259,10 @@ def train():
         history["val_rmse_raw"].append(metrics["rmse"])
         history["val_r2"].append(metrics["r2"])
         history["val_focus_score"].append(focus_metrics["focus_score"])
+        history["val_mid_tail_mae_raw"].append(focus_metrics["mid_tail_mae"])
+        history["val_mid_tail_bias_raw"].append(focus_metrics["mid_tail_bias"])
+        history["val_mid_tail_under_mae_raw"].append(focus_metrics["mid_tail_under_mae"])
+        history["val_mid_tail_count"].append(focus_metrics["mid_tail_count"])
         history["val_tail_mae_raw"].append(focus_metrics["tail_mae"])
         history["val_tail_bias_raw"].append(focus_metrics["tail_bias"])
         history["val_tail_under_mae_raw"].append(focus_metrics["tail_under_mae"])
@@ -1888,9 +2274,9 @@ def train():
         history["val_selection_score"].append(float(selection_score))
         history["lr"].append(current_lr)
 
-        improved = (metrics["mae"] < best_val_mae_raw) or (
-            np.isclose(metrics["mae"], best_val_mae_raw)
-            and focus_metrics["focus_score"] < best_val_focus_score
+        improved = (selection_score < best_val_selection_score) or (
+            np.isclose(selection_score, best_val_selection_score)
+            and metrics["mae"] < best_val_mae_raw
         )
         if Config.SAVE_ALTERNATE_BEST_CHECKPOINTS:
             if focus_metrics["focus_score"] < best_raw_focus_score:
@@ -1907,6 +2293,7 @@ def train():
                 torch.save(checkpoint_state, Config.SAVE_DIR / "best_2dcnn_extreme_under_model.pth")
 
         if improved:
+            best_val_selection_score = selection_score
             best_val_focus_score = focus_metrics["focus_score"]
             best_val_mae_raw = metrics["mae"]
             best_val_loss = epoch_val_loss
@@ -1919,9 +2306,10 @@ def train():
             torch.save(checkpoint_state, Config.SAVE_DIR / "best_2dcnn_model.pth")
             tqdm.write(
                 "  >> Best model saved "
-                f"(Selection MAE: {selection_score:.6f}, "
+                f"(Selection score: {selection_score:.6f}, "
                 f"Focus score: {focus_metrics['focus_score']:.6f}, "
                 f"MAE: {best_val_mae_raw:.6f}, "
+                f"mid-tail MAE: {focus_metrics['mid_tail_mae']:.6f}, "
                 f"tail MAE: {best_val_tail_mae_raw:.6f}, "
                 f"tail under: {best_val_tail_under_mae_raw:.6f}, "
                 f"extreme tail MAE: {focus_metrics['extreme_tail_mae']:.6f}, "
@@ -1938,7 +2326,8 @@ def train():
             f"Val RMSE={metrics['rmse']:.6f} | "
             f"Val R2={metrics['r2']:.4f} | "
             f"Val Score={focus_metrics['focus_score']:.6f} | "
-            f"Selection MAE={selection_score:.6f} | "
+            f"Selection={selection_score:.6f} | "
+                f"MidTail MAE={focus_metrics['mid_tail_mae']:.6f} | "
                 f"Tail MAE={focus_metrics['tail_mae']:.6f} | "
                 f"Tail Bias={focus_metrics['tail_bias']:.6f} | "
                 f"Tail Under={focus_metrics['tail_under_mae']:.6f} | "
@@ -1962,6 +2351,7 @@ def train():
     metadata.update(
         {
             "best_epoch": int(best_epoch),
+            "best_val_selection_score": float(best_val_selection_score),
             "best_val_mae_raw": float(best_val_mae_raw),
             "best_val_loss": float(best_val_loss),
             "best_val_focus_score": float(best_val_focus_score),
@@ -2000,7 +2390,8 @@ def train():
 
     print(f"\n>>> Training Complete. Model saved to {final_model_path}")
     print(
-        f">>> Best model saved with Val MAE: {best_val_mae_raw:.6f}, "
+        f">>> Best model saved with Selection score: {best_val_selection_score:.6f}, "
+        f"Val MAE: {best_val_mae_raw:.6f}, "
         f"Focus score: {best_val_focus_score:.6f}, "
         f"Tail MAE: {best_val_tail_mae_raw:.6f}, "
         f"Tail Under: {best_val_tail_under_mae_raw:.6f}, "
@@ -2027,7 +2418,9 @@ def plot_results(history):
     if "val_focus_score" in history:
         plt.plot(history["val_focus_score"], label="Val Focus Score", color="green", alpha=0.8)
     if "val_selection_score" in history:
-        plt.plot(history["val_selection_score"], label="Selection MAE", color="black", alpha=0.65)
+        plt.plot(history["val_selection_score"], label="Selection Score", color="black", alpha=0.65)
+    if "val_mid_tail_mae_raw" in history:
+        plt.plot(history["val_mid_tail_mae_raw"], label="Mid-Tail MAE", color="blue", alpha=0.75)
     if "val_tail_mae_raw" in history:
         plt.plot(history["val_tail_mae_raw"], label="Tail MAE", color="red", alpha=0.8)
     if "val_extreme_tail_mae_raw" in history:

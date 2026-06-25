@@ -74,7 +74,7 @@ HPO_JOBS = (
         20,
         8,
         ("--num-epochs", "40", "--batch-size", "32", "--num-workers", "0"),
-        "Uses the 2dcnnv11 tuning entry with the unified newdata split.",
+        "Uses the 2dcnnv1 tuning entry with the unified newdata split.",
     ),
 )
 
@@ -84,8 +84,8 @@ CODE_FILES = (
     "update/common/optuna_tpe_common.py",
     "tabular_model_common.py",
     "sequence_model_common.py",
-    "2dcnnv11/2dcnnv11.py",
-    "2dcnnv11/2dcnnv11test.py",
+    "2dcnnv1/2dcnnv1.py",
+    "2dcnnv1/2dcnnv1test.py",
     "floors_3_to_7_utils.py",
 )
 
@@ -170,12 +170,12 @@ MODEL_REGISTRY = (
         "script": "update/wavenet/tune_optuna_tpe.py",
     },
     {
-        "name": "2dcnn_v11_fusion",
+        "name": "2dcnn_v1_fusion",
         "status": "existing_hpo_candidate_main",
         "role": "proposed multimodal/time-frequency fusion model",
         "script": "update/2dcnn/tune_optuna_tpe.py",
-        "train_script": "2dcnnv11/2dcnnv11.py",
-        "test_script": "2dcnnv11/2dcnnv11test.py",
+        "train_script": "2dcnnv1/2dcnnv1.py",
+        "test_script": "2dcnnv1/2dcnnv1test.py",
     },
 )
 

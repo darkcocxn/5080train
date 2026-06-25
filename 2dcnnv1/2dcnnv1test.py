@@ -127,40 +127,62 @@ class Config:
     TEST_SAMPLE_RATIO = 0.8
     TEST_SAMPLE_WITH_REPLACEMENT = False
 
-    IMAGE_SIZE = (128, 128)
-    IMAGE_NORMALIZE_MEAN = [0.485, 0.456, 0.406]
-    IMAGE_NORMALIZE_STD = [0.229, 0.224, 0.225]
+    IMAGE_SIZE = (160, 160)
+    IMAGE_NORMALIZE_MEAN = [0.5, 0.5, 0.5]
+    IMAGE_NORMALIZE_STD = [0.5, 0.5, 0.5]
     BATCH_SIZE = 64
     DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     NUM_WORKERS = 4
 
-    CNN_BACKBONE = "legacy"
-    CNN_CHANNELS = [32, 64, 128]
+    CNN_BACKBONE = "scalar_film_residual"
+    CNN_CHANNELS = [32, 72, 144, 224]
     CNN_KERNEL_SIZE = 3
-    CNN_POOL_SIZES = [2, 2, 2]
-    CNN_NORM = "batch"
+    CNN_POOL_SIZES = [2, 2, 2, 2]
+    CNN_NORM = "group"
     CNN_GROUP_NORM_MAX_GROUPS = 8
-    CNN_DROPOUT = 0.2
+    CNN_DROPOUT = 0.08
     CNN_POOL_OUTPUT = (4, 4)
-    CNN_PROJECTOR_DIM = 256
-    CNN_PROJECTOR_DROPOUT = 0.3
+    CNN_PROJECTOR_DIM = 288
+    CNN_PROJECTOR_DROPOUT = 0.12
     CNN_FILM_IDENTITY_INIT = True
     CNN_FILM_GATE_INIT_BIAS = 3.0
-    MLP_HIDDEN_LAYERS = [64, 128]
-    SCALAR_NORM = "batch"
+
+    SCALAR_ENCODER = "residual"
+    SCALAR_EMBED_DIM = 192
+    SCALAR_INPUT_DROPOUT = 0.09
+    SCALAR_RES_BLOCKS = 4
+    SCALAR_RES_HIDDEN_MULT = 2
+    SCALAR_RES_DROPOUT = 0.18
+    SCALAR_RESIDUAL_SCALE_INIT = 0.10
+    MLP_HIDDEN_LAYERS = [96, SCALAR_EMBED_DIM]
+    SCALAR_NORM = "layer"
     MLP_DROPOUT = 0.1
-    HEAD_HIDDEN_DIMS = [256, 64]
-    HEAD_DROPOUT = 0.4
-    USE_TAIL_CORRECTION_HEAD = False
-    USE_TAIL_CORRECTION_GATE = False
-    TAIL_CORRECTION_HIDDEN_DIM = 64
-    TAIL_CORRECTION_DROPOUT = 0.05
-    TAIL_CORRECTION_INIT_BIAS = -4.0
-    TAIL_CORRECTION_GATE_INIT_BIAS = -1.5
-    USE_TAIL_CLASSIFICATION_AUX = False
-    TAIL_CLASSIFICATION_THRESHOLDS = [0.010, 0.020]
-    TAIL_CLASSIFICATION_HIDDEN_DIM = 64
-    TAIL_CLASSIFICATION_DROPOUT = 0.05
+
+    FUSION_MODE = "gated_bilinear"
+    FUSION_BILINEAR_DIM = 80
+    FUSION_OUTPUT_DIM = 384
+    FUSION_DROPOUT = 0.18
+    FUSION_INTERACTION_SCALE_INIT = 0.32
+
+    HEAD_HIDDEN_DIMS = [384, 128]
+    HEAD_DROPOUT = 0.25
+    USE_TAIL_CORRECTION_HEAD = True
+    USE_TAIL_CORRECTION_GATE = True
+    TAIL_CORRECTION_HIDDEN_DIM = 96
+    TAIL_CORRECTION_DROPOUT = 0.10
+    TAIL_CORRECTION_INIT_BIAS = -4.2
+    TAIL_CORRECTION_GATE_INIT_BIAS = -1.7
+    USE_TAIL_PROB_GATED_CORRECTION = True
+    TAIL_PROB_GATE_INDEX = 0
+    TAIL_PROB_GATE_DETACH = True
+    TAIL_PROB_GATE_POWER = 1.10
+    USE_EXTREME_PROB_GATE_BLEND = True
+    TAIL_EXTREME_PROB_GATE_INDEX = 1
+    TAIL_EXTREME_PROB_GATE_FLOOR = 0.65
+    USE_TAIL_CLASSIFICATION_AUX = True
+    TAIL_CLASSIFICATION_THRESHOLDS = [0.003, 0.005, 0.007]
+    TAIL_CLASSIFICATION_HIDDEN_DIM = 96
+    TAIL_CLASSIFICATION_DROPOUT = 0.10
     TAIL_CLASSIFICATION_INIT_BIAS = -3.0
 
 
@@ -350,24 +372,106 @@ class ConditionalResidualConvBlock2D(nn.Module):
         return out
 
 
+class ScalarResidualBlock(nn.Module):
+    def __init__(self, dim: int, hidden_mult: int, dropout: float):
+        super().__init__()
+        hidden_dim = int(dim * hidden_mult)
+        self.norm = build_scalar_norm(dim)
+        self.net = nn.Sequential(
+            nn.Linear(dim, hidden_dim),
+            nn.GELU(),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_dim, dim),
+            nn.Dropout(dropout),
+        )
+        self.residual_scale = nn.Parameter(torch.tensor(float(Config.SCALAR_RESIDUAL_SCALE_INIT)))
+
+    def forward(self, x):
+        return x + self.residual_scale * self.net(self.norm(x))
+
+
+class ScalarFeatureEncoder(nn.Module):
+    def __init__(self, num_scalars: int):
+        super().__init__()
+        if Config.SCALAR_ENCODER == "legacy_mlp":
+            mlp_h = Config.MLP_HIDDEN_LAYERS
+            self.encoder = nn.Sequential(
+                nn.Linear(num_scalars, mlp_h[0]),
+                build_scalar_norm(mlp_h[0]),
+                nn.ReLU(),
+                nn.Linear(mlp_h[0], mlp_h[1]),
+                build_scalar_norm(mlp_h[1]),
+                nn.ReLU(),
+                nn.Dropout(Config.MLP_DROPOUT),
+            )
+            self.out_dim = mlp_h[1]
+            return
+
+        dim = int(Config.SCALAR_EMBED_DIM)
+        blocks = [
+            nn.Linear(num_scalars, dim),
+            build_scalar_norm(dim),
+            nn.GELU(),
+            nn.Dropout(Config.SCALAR_INPUT_DROPOUT),
+        ]
+        blocks.extend(
+            ScalarResidualBlock(
+                dim=dim,
+                hidden_mult=Config.SCALAR_RES_HIDDEN_MULT,
+                dropout=Config.SCALAR_RES_DROPOUT,
+            )
+            for _ in range(Config.SCALAR_RES_BLOCKS)
+        )
+        blocks.append(build_scalar_norm(dim))
+        self.encoder = nn.Sequential(*blocks)
+        self.out_dim = dim
+
+    def forward(self, scalars):
+        return self.encoder(scalars)
+
+
+class GatedBilinearFusionBlock(nn.Module):
+    def __init__(self, img_dim: int, scalar_dim: int):
+        super().__init__()
+        bilinear_dim = int(Config.FUSION_BILINEAR_DIM)
+        output_dim = int(Config.FUSION_OUTPUT_DIM)
+        self.img_gate = nn.Linear(scalar_dim, img_dim)
+        self.scalar_gate = nn.Linear(img_dim, scalar_dim)
+        self.img_bilinear = nn.Linear(img_dim, bilinear_dim, bias=False)
+        self.scalar_bilinear = nn.Linear(scalar_dim, bilinear_dim, bias=False)
+        self.interaction_scale = nn.Parameter(torch.tensor(float(Config.FUSION_INTERACTION_SCALE_INIT)))
+        self.out = nn.Sequential(
+            nn.Linear(img_dim + scalar_dim + bilinear_dim, output_dim),
+            build_scalar_norm(output_dim),
+            nn.GELU(),
+            nn.Dropout(Config.FUSION_DROPOUT),
+        )
+
+        nn.init.zeros_(self.img_gate.weight)
+        nn.init.zeros_(self.img_gate.bias)
+        nn.init.zeros_(self.scalar_gate.weight)
+        nn.init.zeros_(self.scalar_gate.bias)
+
+    def forward(self, img_features, scalar_features):
+        img_factor = 1.0 + 0.5 * torch.tanh(self.img_gate(scalar_features))
+        scalar_factor = 1.0 + 0.5 * torch.tanh(self.scalar_gate(img_features))
+        img_gated = img_features * img_factor
+        scalar_gated = scalar_features * scalar_factor
+        bilinear = self.interaction_scale.clamp(0.0, 2.0) * (
+            self.img_bilinear(img_gated) * self.scalar_bilinear(scalar_gated)
+        )
+        return self.out(torch.cat((img_gated, scalar_gated, bilinear), dim=1))
+
+
 class MultimodalPredictor(nn.Module):
     def __init__(self, num_scalars):
         super(MultimodalPredictor, self).__init__()
 
         c_ch = Config.CNN_CHANNELS
-        mlp_h = Config.MLP_HIDDEN_LAYERS
         head_h = Config.HEAD_HIDDEN_DIMS
 
-        self.mlp = nn.Sequential(
-            nn.Linear(num_scalars, mlp_h[0]),
-            build_scalar_norm(mlp_h[0]),
-            nn.ReLU(),
-            nn.Linear(mlp_h[0], mlp_h[1]),
-            build_scalar_norm(mlp_h[1]),
-            nn.ReLU(),
-            nn.Dropout(Config.MLP_DROPOUT),
-        )
-        self.mlp_out_dim = mlp_h[1]
+        self.mlp = ScalarFeatureEncoder(num_scalars)
+        self.mlp_out_dim = self.mlp.out_dim
         self.uses_scalar_film = Config.CNN_BACKBONE == "scalar_film_residual"
 
         if Config.CNN_BACKBONE == "legacy":
@@ -453,20 +557,29 @@ class MultimodalPredictor(nn.Module):
             nn.Dropout(Config.CNN_PROJECTOR_DROPOUT),
         )
 
-        fusion_dim = Config.CNN_PROJECTOR_DIM + self.mlp_out_dim
+        fusion_input_dim = Config.CNN_PROJECTOR_DIM + self.mlp_out_dim
+        if Config.FUSION_MODE == "gated_bilinear":
+            self.fusion = GatedBilinearFusionBlock(Config.CNN_PROJECTOR_DIM, self.mlp_out_dim)
+            fusion_dim = Config.FUSION_OUTPUT_DIM
+        elif Config.FUSION_MODE == "concat":
+            self.fusion = None
+            fusion_dim = fusion_input_dim
+        else:
+            raise ValueError(f"不支持的融合模式: {Config.FUSION_MODE}")
+
         self.head = nn.Sequential(
             nn.Linear(fusion_dim, head_h[0]),
-            nn.ReLU(),
+            nn.GELU(),
             nn.Dropout(Config.HEAD_DROPOUT),
             nn.Linear(head_h[0], head_h[1]),
-            nn.ReLU(),
+            nn.GELU(),
             nn.Linear(head_h[1], 1),
         )
         self.use_tail_correction_head = Config.USE_TAIL_CORRECTION_HEAD
         if self.use_tail_correction_head:
             self.tail_correction_head = nn.Sequential(
                 nn.Linear(fusion_dim, Config.TAIL_CORRECTION_HIDDEN_DIM),
-                nn.ReLU(),
+                nn.GELU(),
                 nn.Dropout(Config.TAIL_CORRECTION_DROPOUT),
                 nn.Linear(Config.TAIL_CORRECTION_HIDDEN_DIM, 1),
             )
@@ -481,7 +594,7 @@ class MultimodalPredictor(nn.Module):
         if self.use_tail_classification_aux:
             self.tail_classifier_head = nn.Sequential(
                 nn.Linear(fusion_dim, Config.TAIL_CLASSIFICATION_HIDDEN_DIM),
-                nn.ReLU(),
+                nn.GELU(),
                 nn.Dropout(Config.TAIL_CLASSIFICATION_DROPOUT),
                 nn.Linear(Config.TAIL_CLASSIFICATION_HIDDEN_DIM, len(Config.TAIL_CLASSIFICATION_THRESHOLDS)),
             )
@@ -503,7 +616,10 @@ class MultimodalPredictor(nn.Module):
             max_features = self.max_pool(x_img).flatten(1)
             x_img = torch.cat((avg_features, max_features), dim=1)
         x_img = self.cnn_projector(x_img)
-        x_fused = torch.cat((x_img, x_scalar), dim=1)
+        if self.fusion is None:
+            x_fused = torch.cat((x_img, x_scalar), dim=1)
+        else:
+            x_fused = self.fusion(x_img, x_scalar)
         base_pred = self.head(x_fused)
         aux_outputs = {}
         if self.use_tail_classification_aux:
@@ -511,7 +627,31 @@ class MultimodalPredictor(nn.Module):
         if self.use_tail_correction_head:
             tail_correction = self.tail_correction_activation(self.tail_correction_head(x_fused))
             if self.use_tail_correction_gate:
-                tail_correction = tail_correction * torch.sigmoid(self.tail_correction_gate(x_fused))
+                correction_gate = torch.sigmoid(self.tail_correction_gate(x_fused))
+                if Config.USE_TAIL_PROB_GATED_CORRECTION and self.use_tail_classification_aux:
+                    gate_index = min(
+                        max(int(Config.TAIL_PROB_GATE_INDEX), 0),
+                        aux_outputs["tail_logits"].shape[1] - 1,
+                    )
+                    tail_prob_gate = torch.sigmoid(aux_outputs["tail_logits"][:, gate_index: gate_index + 1])
+                    if Config.TAIL_PROB_GATE_DETACH:
+                        tail_prob_gate = tail_prob_gate.detach()
+                    if Config.TAIL_PROB_GATE_POWER != 1.0:
+                        tail_prob_gate = tail_prob_gate.clamp_min(1e-6).pow(Config.TAIL_PROB_GATE_POWER)
+                    if Config.USE_EXTREME_PROB_GATE_BLEND and aux_outputs["tail_logits"].shape[1] > 1:
+                        extreme_gate_index = min(
+                            max(int(Config.TAIL_EXTREME_PROB_GATE_INDEX), 0),
+                            aux_outputs["tail_logits"].shape[1] - 1,
+                        )
+                        extreme_prob_gate = torch.sigmoid(
+                            aux_outputs["tail_logits"][:, extreme_gate_index: extreme_gate_index + 1]
+                        )
+                        if Config.TAIL_PROB_GATE_DETACH:
+                            extreme_prob_gate = extreme_prob_gate.detach()
+                        blend_floor = min(max(float(Config.TAIL_EXTREME_PROB_GATE_FLOOR), 0.0), 1.0)
+                        tail_prob_gate = tail_prob_gate * (blend_floor + (1.0 - blend_floor) * extreme_prob_gate)
+                    correction_gate = correction_gate * tail_prob_gate
+                tail_correction = tail_correction * correction_gate
             pred = base_pred + tail_correction
         else:
             pred = base_pred
@@ -667,9 +807,30 @@ def load_training_metadata() -> dict:
         Config.CNN_FILM_GATE_INIT_BIAS = float(
             architecture.get("film_gate_init_bias", Config.CNN_FILM_GATE_INIT_BIAS)
         )
+        Config.SCALAR_ENCODER = str(architecture.get("scalar_encoder", Config.SCALAR_ENCODER))
+        Config.SCALAR_EMBED_DIM = int(architecture.get("scalar_embed_dim", Config.SCALAR_EMBED_DIM))
         Config.MLP_HIDDEN_LAYERS = list(architecture.get("scalar_layers", Config.MLP_HIDDEN_LAYERS))
         Config.SCALAR_NORM = str(architecture.get("scalar_norm", Config.SCALAR_NORM))
         Config.MLP_DROPOUT = float(architecture.get("scalar_dropout", Config.MLP_DROPOUT))
+        Config.SCALAR_INPUT_DROPOUT = float(
+            architecture.get("scalar_input_dropout", Config.SCALAR_INPUT_DROPOUT)
+        )
+        Config.SCALAR_RES_BLOCKS = int(architecture.get("scalar_res_blocks", Config.SCALAR_RES_BLOCKS))
+        Config.SCALAR_RES_HIDDEN_MULT = int(
+            architecture.get("scalar_res_hidden_mult", Config.SCALAR_RES_HIDDEN_MULT)
+        )
+        Config.SCALAR_RES_DROPOUT = float(architecture.get("scalar_res_dropout", Config.SCALAR_RES_DROPOUT))
+        Config.SCALAR_RESIDUAL_SCALE_INIT = float(
+            architecture.get("scalar_residual_scale_init", Config.SCALAR_RESIDUAL_SCALE_INIT)
+        )
+        Config.FUSION_MODE = str(architecture.get("fusion_mode", Config.FUSION_MODE))
+        Config.FUSION_BILINEAR_DIM = int(architecture.get("fusion_bilinear_dim", Config.FUSION_BILINEAR_DIM))
+        Config.FUSION_OUTPUT_DIM = int(architecture.get("fusion_output_dim", Config.FUSION_OUTPUT_DIM))
+        Config.FUSION_DROPOUT = float(architecture.get("fusion_dropout", Config.FUSION_DROPOUT))
+        if "fusion_interaction_scale_init" in architecture:
+            Config.FUSION_INTERACTION_SCALE_INIT = float(architecture["fusion_interaction_scale_init"])
+        else:
+            Config.FUSION_INTERACTION_SCALE_INIT = 1.0
         Config.HEAD_HIDDEN_DIMS = list(architecture.get("head_hidden_dims", Config.HEAD_HIDDEN_DIMS))
         Config.HEAD_DROPOUT = float(architecture.get("head_dropout", Config.HEAD_DROPOUT))
         Config.USE_TAIL_CORRECTION_HEAD = bool(
@@ -689,6 +850,25 @@ def load_training_metadata() -> dict:
         )
         Config.TAIL_CORRECTION_GATE_INIT_BIAS = float(
             architecture.get("tail_correction_gate_init_bias", Config.TAIL_CORRECTION_GATE_INIT_BIAS)
+        )
+        Config.USE_TAIL_PROB_GATED_CORRECTION = bool(architecture.get("tail_prob_gated_correction", False))
+        Config.TAIL_PROB_GATE_INDEX = int(
+            architecture.get("tail_prob_gate_index", Config.TAIL_PROB_GATE_INDEX)
+        )
+        Config.TAIL_PROB_GATE_DETACH = bool(
+            architecture.get("tail_prob_gate_detach", Config.TAIL_PROB_GATE_DETACH)
+        )
+        Config.TAIL_PROB_GATE_POWER = float(
+            architecture.get("tail_prob_gate_power", Config.TAIL_PROB_GATE_POWER)
+        )
+        Config.USE_EXTREME_PROB_GATE_BLEND = bool(
+            architecture.get("extreme_prob_gate_blend", False)
+        )
+        Config.TAIL_EXTREME_PROB_GATE_INDEX = int(
+            architecture.get("tail_extreme_prob_gate_index", Config.TAIL_EXTREME_PROB_GATE_INDEX)
+        )
+        Config.TAIL_EXTREME_PROB_GATE_FLOOR = float(
+            architecture.get("tail_extreme_prob_gate_floor", Config.TAIL_EXTREME_PROB_GATE_FLOOR)
         )
         Config.USE_TAIL_CLASSIFICATION_AUX = bool(
             architecture.get("tail_classification_aux", Config.USE_TAIL_CLASSIFICATION_AUX)
@@ -740,8 +920,39 @@ def validate_dataframe(df: pd.DataFrame, csv_path: Path) -> None:
         raise KeyError(f"CSV 文件缺少必要列: {missing_cols}，源文件: {csv_path}")
 
 
+def infer_image_reference(image_value, txt_value) -> str | None:
+    if pd.notna(image_value):
+        text = str(image_value).strip()
+        if text and text.lower() != "nan":
+            return text
+
+    if pd.isna(txt_value):
+        return None
+
+    text = str(txt_value).strip()
+    if not text:
+        return None
+
+    suffix = text.rsplit("|", 1)[-1].strip()
+    if suffix.lower().endswith((".png", ".jpg", ".jpeg", ".bmp", ".webp")):
+        return suffix
+    if suffix.isdigit():
+        return f"{suffix}.png"
+    return None
+
+
 def filter_valid_rows(df: pd.DataFrame) -> pd.DataFrame:
     filtered = df[df[Config.STATUS_COL] == "ok"].copy()
+    if Config.IMAGE_COL in filtered.columns and Config.TXT_COL in filtered.columns:
+        original_missing = int(filtered[Config.IMAGE_COL].isna().sum())
+        if original_missing > 0:
+            filtered[Config.IMAGE_COL] = [
+                infer_image_reference(image_value, txt_value)
+                for image_value, txt_value in zip(filtered[Config.IMAGE_COL], filtered[Config.TXT_COL])
+            ]
+            filled_count = max(original_missing - int(filtered[Config.IMAGE_COL].isna().sum()), 0)
+            if filled_count > 0:
+                print(f">>> Backfilled {filled_count} missing image_path values from txt_path")
     filtered = filtered.dropna(subset=Config.BASE_SCALAR_COLS + [Config.IMAGE_COL, Config.TXT_COL, Config.LABEL_COL])
     return filtered.reset_index(drop=True)
 
@@ -1096,7 +1307,17 @@ def evaluate():
     print(f"\n>>> Loading model weights from: {Config.MODEL_WEIGHTS_PATH}")
     model = MultimodalPredictor(num_scalars=len(Config.SCALAR_COLS)).to(Config.DEVICE)
     try:
-        model.load_state_dict(torch.load(Config.MODEL_WEIGHTS_PATH, map_location=Config.DEVICE))
+        state_dict = torch.load(Config.MODEL_WEIGHTS_PATH, map_location=Config.DEVICE)
+        try:
+            model.load_state_dict(state_dict)
+        except RuntimeError:
+            incompatible = model.load_state_dict(state_dict, strict=False)
+            allowed_missing = {"fusion.interaction_scale"}
+            missing = set(incompatible.missing_keys)
+            unexpected = set(incompatible.unexpected_keys)
+            if not missing.issubset(allowed_missing) or unexpected:
+                raise
+            print(">>> Compatibility: using default fusion interaction scale for older checkpoints.")
         print(">>> Weights loaded successfully.")
     except FileNotFoundError:
         print("Error: .pth weight file not found!")

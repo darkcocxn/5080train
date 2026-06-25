@@ -74,7 +74,7 @@ MODEL_JOBS: tuple[ModelJob, ...] = (
         20,
         8,
         ("--num-epochs", "40", "--batch-size", "32", "--num-workers", "0"),
-        "Uses the 2dcnnv11 tuning entry with the unified newdata split.",
+        "Uses the 2dcnnv1 tuning entry with the unified newdata split.",
     ),
 )
 
